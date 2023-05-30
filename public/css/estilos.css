@@ -1,0 +1,91 @@
+body {
+  font-family: Poppins, sans-serif;
+}
+
+.navMega ul li a {
+  font-family: Poppins, sans-serif;
+  color: #484848;
+  font-weight: bold;
+}
+
+.megaMenu {
+  border-bottom: 1px dashed grey;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.carousel-caption h5 {
+  color: #fff;
+  font-weight: bold;
+  font-family: Poppins;
+  font-size: 70px;
+}
+
+.prev {
+  font-size: 30px;
+  color: #08e5e5;
+  border-radius: 50%;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  transition: 0.4s;
+}
+.prev:hover {
+  color: #fff;
+  background: #08e5e5;
+  transition: 0.4s;
+}
+
+.next {
+  font-size: 30px;
+  color: #08e5e5;
+  border-radius: 50%;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  transition: 0.4s;
+}
+.next:hover {
+  color: #fff;
+  background: #08e5e5;
+  transition: 0.4s;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.zoom-in-image {
+  animation-name: zoom-in;
+  animation-duration: 9s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+.btn-slide {
+  color: rgba(8, 229, 229, 0.3098039216);
+}
+.btn-slide:active {
+  color: #08e5e5;
+}
+.btn-slide:hover {
+  color: #08e5e5;
+}
+
+.cursiva {
+  font-family: Satisfy, cursive;
+  text-align: center;
+  color: #08e5e5;
+}
+
+@keyframes zoom-in {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+/*# sourceMappingURL=estilos.css.map */

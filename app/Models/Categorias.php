@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorias extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nombre', 'slug'];
+    public static function rules()
+    {
+        return [
+            'nombre' => 'required|unique:categorias',
+            'slug' => 'required|unique:categorias',
+        ];
+    }
+    public function tours()
+    {
+        return $this->belongsToMany(Tour::class, 'tour_categoria');
+    }
 }

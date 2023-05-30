@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('nombre', 120)->unique();
             $table->string('descripcion', 250);
-            $table->text('contenido');
-            $table->text('resumen');
+            $table->text('contenido'); 
+            $table->text('resumen'); 
             $table->text('detallado');
             $table->text('incluidos');
             $table->text('importante')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('categoria');
             $table->string('keywords');
             $table->string('slug')->unique();
-            $table->string('clase');
+            $table->string('galeria')->nullable();
             $table->timestamps();
         });
     }

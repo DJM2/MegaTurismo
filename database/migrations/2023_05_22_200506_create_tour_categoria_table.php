@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('tour_categoria', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tour_id');
+            $table->unsignedBigInteger('categoria_id');
+            
             $table->timestamps();
+
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            $table->unique(['tour_id', 'categoria_id']);
         });
     }
 

@@ -3,63 +3,69 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorias;
+use App\Models\Tours;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $categorias = Categorias::all();
+        return view('admin.tours.categorias.index', compact('categorias'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categoria = new Categorias;
+        return view('admin.tours.categorias.create', compact('categoria'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+            'slug' => 'required',
+        ]);
+
+        $categoria = new Categorias;
+        $categoria->nombre = $validatedData['nombre'];
+        $categoria->slug = $validatedData['slug'];
+        $categoria->save();
+
+        return redirect()->route('cats.index')->with('success', 'Categoria creada con éxito.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categorias $categorias)
+    public function show($slug)
     {
-        //
+        $categorias = Tours::all();
+        return view('admin.tours.categorias.show', compact('categorias'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categorias $categorias)
+    public function edit($id)
     {
-        //
+        $categoria = Categorias::query()->find($id);
+        return view('admin.tours.categorias.edit', compact('categoria'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Categorias $categorias)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(Categorias::rules());
+
+        $categoria = Categorias::findOrFail($id);
+        $categoria->nombre = $request->input('nombre');
+        $categoria->slug = $request->input('slug');
+        $categoria->save();
+
+        return redirect()->route('cats.index')
+            ->with('success', 'Categoria actualizado correctamente!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Categorias $categorias)
+    public function destroy($id)
     {
-        //
+        $categoria = Categorias::query()->find($id);
+        $categoria->delete();
+
+        return redirect()->route('cats.index')
+            ->with('success', 'Categoria eliminada correctamente!');
     }
 }

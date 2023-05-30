@@ -1,0 +1,91 @@
+$colorPrincipal:#08e5e5;
+body{
+    font-family: Poppins,sans-serif;
+}
+.navMega{
+    ul{
+        li{
+          a{
+            font-family: Poppins, sans-serif;
+            color: #484848;
+            font-weight: bold;
+            
+          }
+        }
+    }
+}
+.megaMenu{
+    border-bottom: 1px dashed grey;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.carousel-caption h5{
+  color:#fff;
+  font-weight: bold;
+  font-family: Poppins;
+  font-size: 70px;
+}
+.prev{
+  font-size: 30px;
+  color: $colorPrincipal;
+  border-radius: 50%;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  transition: 0.4s;
+  &:hover{
+    color: #fff;
+    background: $colorPrincipal;
+    transition: 0.4s;
+  }
+}
+.next{
+  font-size: 30px;
+  color: $colorPrincipal;
+  border-radius: 50%;
+  background: #fff;
+  width: 50px;
+  height: 50px;
+  transition: 0.4s;
+  &:hover{
+    color: #fff;
+    background: $colorPrincipal;
+    transition: 0.4s;
+  }
+}
+.carousel {
+  overflow: hidden;
+}
+
+.zoom-in-image {
+  animation-name: zoom-in;
+  animation-duration: 9s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+.btn-slide{
+  color: #08e5e54f;
+  &:active{
+    color: $colorPrincipal;
+  }
+  &:hover{
+    color: $colorPrincipal;
+  }
+}
+.cursiva{
+  font-family: Satisfy,cursive;
+  text-align: center;
+  color: $colorPrincipal;
+}
+
+@keyframes zoom-in {
+  0% {
+      transform: scale(1);
+  }
+
+  100% {
+      transform: scale(1.2);
+  }
+}
