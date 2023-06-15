@@ -63,8 +63,9 @@
                                 <form action="{{ route('tours.destroy', $tour->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="/tours/{{ $tour->id }}/edit" class="btn btn-info btn-sm" title="Editar">
-                                        <i class="fa fa-edit"></i> </a>
+                                    <a href="{{ route('tours.edit', $tour->id) }}" class="btn btn-info btn-sm" title="Editar">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
                                     <a href="{{ route('tour.show', ['slug' => $tour->slug]) }}"
                                         class="btn btn-success btn-sm" title="Ver tour">
                                         <i class="fa fa-eye"></i>

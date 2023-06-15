@@ -2,6 +2,129 @@ body {
   font-family: Poppins, sans-serif;
 }
 
+.sticky-top {
+  background: #fff;
+}
+
+.navbar-toggler span {
+  color: #000 !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  color: #000;
+  transition: 0.8s;
+  position: relative;
+}
+.navbar-expand-lg .navbar-nav .nav-link .caret {
+  color: #000;
+  transition: 0.8s;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover .caret {
+  color: #08e5e5;
+  transition: 0.8s;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+  color: #08e5e5;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+.navbar-expand-lg .navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #08e5e5;
+  transition: width 0.8s;
+}
+
+.searchMenu input {
+  border: 1px solid #9f9f9f !important;
+  border-radius: 4px;
+  margin: 0em 0em 0em 1em;
+}
+.searchMenu input:focus-visible {
+  border: 1px solid #08e5e5 !important;
+}
+.searchMenu button {
+  border: none;
+  padding: 0.4em;
+  border-radius: 5px;
+  transition: 0.4s;
+  background: transparent;
+}
+.searchMenu button:hover {
+  background: #15c9c9;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.custom-container {
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+.custom-container img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+}
+.custom-container h1 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+  color: white;
+  /* background: rgb(21 201 201 / 40%); */
+  text-shadow: 3px 3px 1px rgb(0, 0, 0);
+  font-weight: bold;
+  padding: 0.2em;
+  border-radius: 11px;
+}
+
+.bg-dark {
+  color: #fff;
+  padding-top: 3em;
+  padding-bottom: 1em;
+}
+.bg-dark h4 {
+  color: #fff;
+}
+.bg-dark h4:after {
+  content: "";
+  display: block;
+  width: 10%;
+  height: 2px;
+  background-color: #15c9c9;
+}
+.bg-dark .links {
+  padding-bottom: 3em;
+}
+.bg-dark .links ul {
+  list-style: none;
+  margin-left: -2em;
+}
+.bg-dark .links a {
+  color: #fff;
+  transition: 0.6s;
+}
+.bg-dark .links a:hover {
+  color: #08e5e5;
+  transition: 0.6s;
+}
+.bg-dark .links .sociales a {
+  margin-right: 0.6em;
+  font-size: 24px;
+}
+.bg-dark .links .sociales .contact a {
+  font-size: 14px;
+}
+.bg-dark .derechos {
+  font-size: 12px;
+}
+
 .navMega ul li a {
   font-family: Poppins, sans-serif;
   color: #484848;
@@ -13,6 +136,24 @@ body {
   padding-bottom: 1em;
   margin-bottom: 1em;
   font-weight: bold;
+}
+
+.info {
+  background: #15c9c9;
+  color: #fff;
+}
+.info .infoMail {
+  margin-left: 6em;
+}
+.info span {
+  font-size: 14px;
+}
+.info .redesContent {
+  padding-right: 8em;
+}
+.info .redesContent .redes {
+  float: right;
+  margin-left: 1em;
 }
 
 .carousel-caption h5 {
@@ -85,6 +226,144 @@ body {
   }
   100% {
     transform: scale(1.2);
+  }
+}
+.custom {
+  width: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.custom .custom-col {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.custom .custom-col img {
+  width: 100%;
+  height: 470px;
+  object-fit: cover;
+}
+
+.cardMin {
+  width: 100%;
+  height: 50px;
+  background: #15c9c9;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cardMin span {
+  margin-right: 1em;
+  font-size: 14px;
+}
+
+.mensaje {
+  width: 100%;
+  background: #f24a6e;
+  height: auto;
+  text-align: center;
+  color: #fff;
+}
+.mensaje p {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.toursDetails {
+  background: #F6F4F0;
+  color: #000;
+  padding-left: 4em;
+  padding-right: 4em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toursDetails span {
+  font-size: 18px;
+  margin-right: 4em;
+}
+.toursDetails .resaltado {
+  font-size: 22px;
+  font-weight: bold;
+}
+.toursDetails a {
+  display: block;
+  text-align: center;
+}
+.toursDetails .dates {
+  background: #000;
+  color: #fff;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.toursDetails .book {
+  background: #fff;
+  color: #000;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-weight: bold !important;
+  margin-top: 0.5em;
+  border: 1px solid #000;
+}
+
+.card .card-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.card a {
+  font-size: 14px;
+  text-align: center;
+  background: #15c9c9;
+  border: 1px solid #15c9c9;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0.2em 1em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.card a:hover {
+  color: #fff;
+  background: linear-gradient(to left, #15c9c9 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position 0.3s ease-in-out;
+  border: none;
+}
+.card a:active {
+  color: #fff !important;
+  background-color: #15c9c9 !important;
+  border-color: #15c9c9 !important;
+}
+.card a:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.djm2 {
+  color: #15c9c9;
+}
+.djm2:hover {
+  color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+  .info .infoMail {
+    margin-left: 0px;
+  }
+  .info .infoMail2 {
+    text-align: center;
+  }
+  .redesContent {
+    margin-bottom: 0.6em;
+  }
+  .responsive {
+    display: none;
   }
 }
 

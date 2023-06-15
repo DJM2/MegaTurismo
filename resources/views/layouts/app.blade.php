@@ -20,27 +20,80 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light sticky-top" id="ftco-navbar">
+    <div class="container-fluid">
+        <div class="row info align-items-center">
+            <div class="col-lg-6 text-center">
+                <span class="infoMail">info@megaturismo.com</span> <span class="responsive">|</span> <span
+                    class="infoMail2">reserve@megatusimo.com</span>
+            </div>
+            <div class="col-lg-6 redesContent">
+                <span class="fa fa-whatsapp redes"></span>
+                <span class="fa fa-pinterest redes"></span>
+                <span class="fa fa-tripadvisor redes"></span>
+                <span class=" fa fa-instagram redes"></span>
+                <span class="fa fa-facebook redes"></span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('index') }}">
+                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="" id="logo-image">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle-split" href="#" id="dropdownDestinations"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations <span
+                                class="fa fa-caret-down caret"></span></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownDestinations">
+                            <a class="dropdown-item" href="#">Page 1</a>
+                            <a class="dropdown-item" href="#">Page 2</a>
+                            <a class="dropdown-item" href="#">Page 3</a>
+                            <a class="dropdown-item" href="#">Page 4</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Peru Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Peru Adventure</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Peru Gastronomy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Spiritual</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                </ul>
+                <form action="#" class="searchMenu">
+                    <input type="text" placeholder="Search">
+                    <button class="fa fa-search " type="submit">
+                    </button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+    {{-- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light sticky-top" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand logo-scroll" href="index.html">
-                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="80px" alt="" id="logo-image">
+                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="" id="logo-image">
             </a>
             <form action="#" class="searchform order-sm-start order-lg-last">
                 <div class="form-group d-flex">
-                    <input type="text" class="form-control pl-3" placeholder="Search">
                     <button type="submit" placeholder="" class="form-control search"><span
                             class="fa fa-search"></span></button>
                 </div>
             </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span> Menu
+                <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse navMega">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item active dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Destinies</a>
+                            aria-haspopup="true" aria-expanded="false">Destinations</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
                             <a class="dropdown-item" href="#">Page 1</a>
                             <a class="dropdown-item" href="#">Page 2</a>
@@ -56,22 +109,84 @@
                 </ul>
             </div>
         </div>
-    </nav>
-
-
+    </nav> --}}
 
     @yield('contenido')
+
+    <div class="container-fluid bg-dark">
+        <div class="container">
+            <div class="row links">
+                <div class="col-lg-3">
+                    <img src="{{ asset('img/logo-mega-turismo-blanco.png') }}" width="120px"
+                        alt="Logo Mega Turismo blanco" loading="lazy">
+                    <ul class="mt-3">
+                        <li><a href="">● About Us</a></li>
+                        <li><a href="">● Terms And Conditions</a></li>
+                        <li><a href="">● Contact Us</a></li>
+                        <li><a href="">● Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Perú Tours</h4>
+                    <ul>
+                        <li>Cusco 4 dias</li>
+                        <li>Peru for 9 days</li>
+                        <li>Peru opackage 6 days</li>
+                        <li>Peru and Machu Picchu</li>
+                        <li>Peru for 9 days</li>
+                        <li>Peru opackage 6 days</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Inca trail Tours</h4>
+                    <ul>
+                        <li>Cusco 4 dias</li>
+                        <li>Peru for 9 days</li>
+                        <li>Peru opackage 6 days</li>
+                        <li>Peru and Machu Picchu</li>
+                        <li>Cusco 4 dias</li>
+                        <li>Peru for 9 days</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 sociales">
+                    <h4>Follow Us</h4>
+                    <a href=""><span class="fa fa-whatsapp redes"></span></a>
+                    <a href=""><span class="fa fa-pinterest redes"></span></a>
+                    <a href=""><span class="fa fa-tripadvisor redes"></span></a>
+                    <a href=""><span class=" fa fa-instagram redes"></span></a>
+                    <a href=""><span class="fa fa-facebook redes"></span></a>
+                    <h4 class="mt-3">Contact Us</h4>
+                    <ul class="contact">
+                        <li> <a href=""><i class="fa fa-envelope"></i> info@megaturismo.com </a> </li>
+                        <li> <a href=""><i class="fa fa-whatsapp"></i> +51 958 986 458 </a> </li>
+                        <li> <a href=""><i class="fa fa-map-marker"></i> Dirección A4-2, Cusco - Perú</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center derechos">
+                    <p>Todos los derechos reservados © | MegaTurismo 2023 | Creado por <a href="#"
+                            class="djm2">DJM2</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(window).scroll(function() {
-            if ($(this).scrollTop() > 100) {
-                $('#logo-image').attr('src',
-                    'https://media.revistagq.com/photos/5d5d383031110c000879872d/1:1/w_1080,h_1080,c_limit/logo-starbucks.jpg'
-                    ).css('width', '60px').css('transition', 'width 0.4s');
+            if ($(this).scrollTop() > 160) {
+                $('#logo-image').attr('src', '{{ asset('img/logo-mega-Turismo-2.png') }}')
+                    .css({
+                        'width': '100px',
+                        'transition': 'width 0.6s'
+                    });
             } else {
-                $('#logo-image').attr('src', '{{ asset('img/logo-mega-turismo.png') }}').css('width', '80px').css(
-                    'transition', 'width 0.4s');
+                $('#logo-image').attr('src', '{{ asset('img/logo-mega-Turismo.png') }}')
+                    .css({
+                        'width': '90px',
+                        'transition': 'width 0.6s'
+                    });
             }
         });
     </script>

@@ -5,15 +5,16 @@ use App\Http\Controllers\ToursController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+Route::get('/', [ToursController::class, 'mostrar'])->name('index');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/tour/{slug}', [TourController::class, 'show'])->name('tour.show');
+Route::get('/tour/{slug}', [ToursController::class, 'show'])->name('tour.show');
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('tours', ToursController::class)->names('tours');
