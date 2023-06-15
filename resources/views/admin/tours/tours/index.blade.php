@@ -44,7 +44,7 @@
                         <tr>
                             <td>{{ $tour->id }}</td>
                             <td>{{ $tour->nombre }}</td>
-                            <td><img src="{{ asset($tour->img) }}" width="120px"></td>
+                            <td><img src="{{ asset($tour->imgThumb) }}" width="120px"></td>
                             <td>
                                 - USD{{ $tour->precioReal }}<br>
                                 - USD{{ $tour->precioPublicado }}
@@ -54,7 +54,7 @@
                             <td>{{ $tour->lugarInicio }} → {{$tour->lugarFin}}</td>
                             <td>{{ $tour->slug }}</td>
                             <td>{{ $tour->clase }}</td>
-                            <td>
+                            <td style="width: 160px">
                                 @foreach (explode(',', $tour->galeria) as $imagen)
                                     <img src="{{ asset($imagen) }}" alt="Galería" width="30px">
                                 @endforeach
@@ -67,7 +67,7 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="{{ route('tour.show', ['slug' => $tour->slug]) }}"
-                                        class="btn btn-success btn-sm" title="Ver tour">
+                                        class="btn btn-success btn-sm" title="Ver tour" target="_blank">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     <button type="submit" class="btn btn-danger btn-sm" title="Eliminar"><i

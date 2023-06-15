@@ -285,15 +285,31 @@ body {
   width: 100%;
   padding-left: 0px !important;
   padding-right: 0px !important;
+  
 
   .custom-col {
     padding-left: 0px !important;
     padding-right: 0px !important;
-
+    overflow: hidden!important;
+    position: relative;
+    height: 476px;
     img {
       width: 100%;
       height: 470px;
       object-fit: cover;
+    }
+    .card-hover{
+      text-align: center;
+      background: #fff!important;
+      position: inherit;
+      padding-bottom: 0.7em;
+      transition: 1s;
+    }
+    &:hover .card-hover{
+      margin-top: -8em;
+      transition: 1s;
+      background: #fff;
+      position: inherit;
     }
   }
 }
@@ -331,8 +347,8 @@ body {
   color: #000;
   padding-left: 4em;
   padding-right: 4em;
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   flex-direction: column;
 
   display: flex;
@@ -341,7 +357,7 @@ body {
 
   span {
     font-size: 18px;
-    margin-right: 4em;
+    margin-right: 3em;
   }
 
   .resaltado {
@@ -373,6 +389,7 @@ body {
     border: 1px solid #000;
   }
 }
+
 
 .card {
   .card-title {

@@ -11,16 +11,16 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block zoom-in-image"
-                    src="{{asset('img/Qeswachaka-inca-bridge-Cusco.webp')}}" alt="Third slide">
+                <img class="d-block zoom-in-image" src="{{ asset('img/Qeswachaka-inca-bridge-Cusco.webp') }}"
+                    alt="Third slide">
                 <div class="carousel-caption d-md-block">
                     <h5>h5 de ejemplo</h5>
                     <p>Parrafo de ejemplo</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block zoom-in-image"
-                    src="{{asset('img/panoramic-view-of-machu-picchu.webp')}}" alt="Third slide">
+                <img class="d-block zoom-in-image" src="{{ asset('img/panoramic-view-of-machu-picchu.webp') }}"
+                    alt="Third slide">
                 <div class="carousel-caption d-md-block">
                     <h5>h5 de ejemplo</h5>
                     <p>Parrafo de ejemplo</p>
@@ -169,22 +169,23 @@
                     <p class="text-center">Our tour packages include the essentials for an unforgettable trip.</p>
                     <div class="row">
                         <div class="col-3 text-center">
-                            <img src="{{asset('img/restaurant.png')}}" width="100px" alt="Peruvian restaurants">
+                            <img src="{{ asset('img/restaurant.PNG') }}" width="100px" alt="Peruvian restaurants">
                             <h4 class="text-center">Restaurants</h4>
                             <p class="text-center">The best options for enjoy peruvian food.</p>
                         </div>
                         <div class="col-3 text-center">
-                            <img src="{{asset('img/Tour-guide.png')}}" width="100px" alt="Peruvian tour guides">
+                            <img src="{{ asset('img/Tour-guide.png') }}" width="100px" alt="Peruvian tour guides">
                             <h4 class="text-center">Tour guides</h4>
                             <p class="text-center">We offer experienced and professional tour guides.</p>
                         </div>
                         <div class="col-3 text-center">
-                            <img src="{{asset('img/transport-mega-turismo.png')}}" width="100px" alt="Peruvian restaurants">
+                            <img src="{{ asset('img/transport-mega-turismo.png') }}" width="100px"
+                                alt="Peruvian restaurants">
                             <h4 class="text-center">Transport</h4>
                             <p class="text-center">All transfers and transportation available during your trip</p>
                         </div>
                         <div class="col-3 text-center">
-                            <img src="{{asset('img/hotel-service.png')}}" width="100px" alt="Peruvian tour guides">
+                            <img src="{{ asset('img/hotel-service.png') }}" width="100px" alt="Peruvian tour guides">
                             <h4 class="text-center">Hotel</h4>
                             <p class="text-center">Option of including accommodation.</p>
                         </div>
@@ -195,7 +196,7 @@
         <div class="custom mt-5">
             <div class="row" style="margin-left:0px; margin-right:0px">
                 <div class="col-lg-3 custom-col">
-                    <img src="{{asset('img/tour-cusco-peru.jpg')}}" alt="" width="100%">
+                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
                     <div class="card-hover">
                         <h4>Muestra</h4>
                         <p>Texto de muestra dirigido</p>
@@ -203,13 +204,13 @@
                     </div>
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{asset('img/tour-cusco-peru.jpg')}}" alt="" width="100%">
+                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{asset('img/tour-cusco-peru.jpg')}}" alt="" width="100%">
+                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{asset('img/tour-cusco-peru.jpg')}}" alt="" width="100%">
+                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
                 </div>
             </div>
         </div>

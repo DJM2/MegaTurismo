@@ -27,8 +27,22 @@
                 <a href="" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
             <a href="" class="book"><i class="fa fa-pencil"> Book</i></a>
             </span>
+        </div>        
+    </div>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-3">
+                <img src="{{ asset($tour->mapa) }}" alt="{{ $tour->nombre }}" width="100%">
+            </div>
+            <div class="col-lg-9">
+                <span><a href="">Home</a></span>
+                <span><a href="">→ categoria de tour</a></span>
+                <span><a href="">→ {{ $tour->nombre }}</a></span>
+                <p class="mt-4">{{ $tour->descripcion }}</p>
+            </div>
         </div>
     </div>
+
 
     <section>
         <div class="container-fluid">
