@@ -8,6 +8,7 @@
     <meta name="robots" content="nofollow">
     <title>@yield('titulo')</title>
     <link rel="shortcut icon" href="#">
+    <link rel="icon" href="{{asset('img/icono-mega-turismo.png')}}" type="image/png">
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/thumb/favicon-admin.png') }}" />

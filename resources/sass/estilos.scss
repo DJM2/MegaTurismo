@@ -285,31 +285,117 @@ body {
   width: 100%;
   padding-left: 0px !important;
   padding-right: 0px !important;
-  
+
 
   .custom-col {
     padding-left: 0px !important;
     padding-right: 0px !important;
-    overflow: hidden!important;
+    overflow: hidden !important;
     position: relative;
-    height: 476px;
+    height: 470px;
+
     img {
       width: 100%;
       height: 470px;
       object-fit: cover;
     }
-    .card-hover{
+
+    .card-hover {
       text-align: center;
-      background: #fff!important;
+      background: $colorPrincipal;
+      color: #fff;
       position: inherit;
-      padding-bottom: 0.7em;
-      transition: 1s;
+      padding-bottom: 1.8em;
+      transition: 0.6s ease;
+
+      h4 {
+        padding-top: 0.8em;
+        color: #fff;
+      }
+
+      a {
+        background: #fff;
+        color: #08e5e5;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 0.4em 1em;
+        border-radius: 2px;
+        border: 1px solid #fff;
+        transition: 0.6s ease;
+
+        &:hover {
+          box-shadow: rgba(15, 167, 191, 0.35) 0px 5px 15px;
+          transition: 0.6s ease;
+        }
+      }
     }
-    &:hover .card-hover{
-      margin-top: -8em;
-      transition: 1s;
-      background: #fff;
+
+    &:hover .card-hover {
+      margin-top: -10em;
+      transition: 0.6s ease;
       position: inherit;
+    }
+  }
+}
+
+.circulares {
+  .circular {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 330px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    &:hover{
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+      transition: 0.6s ease;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 92%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.274);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border-radius: 50%;
+      margin-left: 15px;
+      transition: 1s ease;
+    }
+
+    &:hover::before {
+      opacity: 1;
+      transition: 1s ease;      
+    }
+    img {
+      display: block;
+      width: 142%;
+      height: auto;
+      transition: 1s ease;
+    }
+
+    &:hover img {
+      width: 150%;
+      height: auto;
+      transition: 1s ease;
+    }
+
+    h3 {
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-family: Satisfy, cursive;
+      font-size: 35px;
     }
   }
 }

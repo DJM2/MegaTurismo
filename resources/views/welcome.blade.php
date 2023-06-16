@@ -168,23 +168,23 @@
                     <h3 class="text-center" style="font-size:2.5em; font-weight:bold">Vacations in Peru</h3>
                     <p class="text-center">Our tour packages include the essentials for an unforgettable trip.</p>
                     <div class="row">
-                        <div class="col-3 text-center">
+                        <div class="col-lg-3 text-center">
                             <img src="{{ asset('img/restaurant.PNG') }}" width="100px" alt="Peruvian restaurants">
                             <h4 class="text-center">Restaurants</h4>
                             <p class="text-center">The best options for enjoy peruvian food.</p>
                         </div>
-                        <div class="col-3 text-center">
+                        <div class="col-lg-3 text-center">
                             <img src="{{ asset('img/Tour-guide.png') }}" width="100px" alt="Peruvian tour guides">
                             <h4 class="text-center">Tour guides</h4>
                             <p class="text-center">We offer experienced and professional tour guides.</p>
                         </div>
-                        <div class="col-3 text-center">
+                        <div class="col-lg-3 text-center">
                             <img src="{{ asset('img/transport-mega-turismo.png') }}" width="100px"
                                 alt="Peruvian restaurants">
                             <h4 class="text-center">Transport</h4>
                             <p class="text-center">All transfers and transportation available during your trip</p>
                         </div>
-                        <div class="col-3 text-center">
+                        <div class="col-lg-3 text-center">
                             <img src="{{ asset('img/hotel-service.png') }}" width="100px" alt="Peruvian tour guides">
                             <h4 class="text-center">Hotel</h4>
                             <p class="text-center">Option of including accommodation.</p>
@@ -204,21 +204,63 @@
                     </div>
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
+                    <img src="{{ asset('img/chica-01.jpg') }}" alt="" width="100%">
+                    <div class="card-hover">
+                        <h4>Muestra</h4>
+                        <p>Texto de muestra dirigido</p>
+                        <a href="">Boton de muestra</a>
+                    </div>
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
+                    <img src="{{ asset('img/chica-02.jpg') }}" alt="" width="100%">
+                    <div class="card-hover">
+                        <h4>Muestra</h4>
+                        <p>Texto de muestra dirigido</p>
+                        <a href="">Boton de muestra</a>
+                    </div>
                 </div>
                 <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
+                    <img src="{{ asset('img/chica-03.jpg') }}" alt="" width="100%">
+                    <div class="card-hover">
+                        <h4>Muestra</h4>
+                        <p>Texto de muestra dirigido</p>
+                        <a href="">Boton de muestra</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <section>
-        <div class="container-fluid">
+        <div class="container mt-5 mb-5">
             <div class="row">
-                <div style="height:80vh"></div>
+                <div class="col-lg-12">
+                    <h2 class="cursiva">Enjoy your</h2>
+                    <p class="text-center">Best places to visit in Perú</p>
+                </div>
+                <div class="col-lg-4 circulares mt-3">
+                    <a href="">
+                        <div class="circular">
+                            <img src="{{ asset('img/galeriaTours/condor-arequipa.webp') }}" alt="">
+                            <h3>Machu Picchu</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 circulares mt-3">
+                    <a href="">
+                        <div class="circular">
+                            <img src="{{ asset('img/galeria/arequipa-city-tour.webp') }}" alt="">
+                            <h3>Cusco</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 circulares mt-3">
+                    <a href="">
+                        <div class="circular">
+                            <img src="{{ asset('img/galeria/calle-sevilla-Arequipa.webp') }}" alt="">
+                            <h3>Camino Inca</h3>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
