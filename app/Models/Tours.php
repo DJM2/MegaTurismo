@@ -45,19 +45,19 @@ class Tours extends Model
             'precioReal' => 'required|integer',
             'precioPublicado' => 'required|integer',
             'dias' => 'required|integer',
+            'dificulidad' => 'required',
             'imgThumb' => 'required',
             'img' => 'required',
             'mapa' => 'nullable',
-            'categoria' => 'required',
             'keywords' => 'required',
             'slug' => 'required|unique:tours',
-            'galeria' => 'required',
+            'galeria' => 'required|max:10240',
         ];
     }
 
  
     public function categorias()
     {
-        return $this->belongsToMany(Categoria::class, 'tour_categoria');
+        return $this->belongsToMany(Categorias::class, 'tour_categoria', 'tour_id', 'categoria_id');
     }
 }

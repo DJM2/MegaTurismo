@@ -5,9 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('tours', function (Blueprint $table) {
@@ -16,6 +14,7 @@ return new class extends Migration {
             $table->string('descripcion', 250);
             $table->text('contenido'); 
             $table->text('resumen'); 
+            $table->string('dificultad');
             $table->text('detallado');
             $table->text('incluidos');
             $table->text('importante')->nullable();
@@ -27,17 +26,12 @@ return new class extends Migration {
             $table->string('imgThumb');
             $table->string('img');
             $table->string('mapa')->nullable();
-            $table->string('categoria');
             $table->string('keywords');
             $table->string('slug')->unique();
             $table->string('galeria')->nullable();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('tours');

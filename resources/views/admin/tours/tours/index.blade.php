@@ -3,7 +3,6 @@
 
 @section('contenido')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
-
     <div class="row">
         <div class="col-12 mt-2">
             <div class="row">
@@ -34,7 +33,7 @@
                         <th scope="col">Categoría</th>
                         <th scope="col">Ubicación</th>
                         <th scope="col">Slug</th>
-                        <th scope="col">Clase</th>
+                        <th scope="col">Dificultad</th>
                         <th>Galeria</th>
                         <th scope="col" class="text-center">Acciones</th>
                     </tr>
@@ -50,10 +49,14 @@
                                 - USD{{ $tour->precioPublicado }}
                             </td>
                             <td>{{ $tour->dias }}</td>
-                            <td>{{ $tour->categoria }}</td>
-                            <td>{{ $tour->lugarInicio }} → {{$tour->lugarFin}}</td>
+                            <td>
+                                @foreach ($tour->categorias as $categoria)
+                                    <li>{{ $categoria->nombre }}</li>
+                                @endforeach
+                            </td>
+                            <td>{{ $tour->lugarInicio }} → {{ $tour->lugarFin }}</td>
                             <td>{{ $tour->slug }}</td>
-                            <td>{{ $tour->clase }}</td>
+                            <td>{{ $tour->dificultad }}</td>
                             <td style="width: 160px">
                                 @foreach (explode(',', $tour->galeria) as $imagen)
                                     <img src="{{ asset($imagen) }}" alt="Galería" width="30px">
@@ -63,7 +66,8 @@
                                 <form action="{{ route('tours.destroy', $tour->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('tours.edit', $tour->id) }}" class="btn btn-info btn-sm" title="Editar">
+                                    <a href="{{ route('tours.edit', $tour->id) }}" class="btn btn-info btn-sm"
+                                        title="Editar">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="{{ route('tour.show', ['slug' => $tour->slug]) }}"
@@ -86,8 +90,8 @@
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script>
         /*  $(document).ready(function() {
-                    $('#tabladatos').DataTable();
-                }); */
+                        $('#tabladatos').DataTable();
+                    }); */
         var j = jQuery.noConflict();
         j(document).ready(function() {
             j('#tabladatos').DataTable();

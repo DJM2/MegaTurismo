@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('titulo', 'Inicio')
 @section('contenido')
-
     <div class="container-fluid custom-container">
         <img src="{{ asset($tour->img) }}" alt="{{ $tour->nombre }}">
         <h1 class="title">{{ $tour->nombre }}</h1>
@@ -9,25 +8,25 @@
     <div class="mensaje d-flex align-items-center justify-content-center">
         <p>Texto de muestra generado automaticametne</p>
     </div>
-    <div class="container-fluid toursDetails">        
+    <div class="container-fluid toursDetails">
         <div class="row">
             <span>Price: <br>
-               <span class="resaltado">USD{{ $tour->precioPublicado }}</span>
+                <span class="resaltado">USD{{ $tour->precioPublicado }}</span>
             </span>
-            <span>Days:<br> 
-            <span class="resaltado">{{ $tour->dias }}</span>
+            <span>Days:<br>
+                <span class="resaltado">{{ $tour->dias }}</span>
             </span>
             <span>Trip: <br>
                 <span class="resaltado">{{ $tour->lugarInicio }} → {{ $tour->lugarFin }}</span>
-                </span>
+            </span>
             <span>Category: <br>
-            <span class="resaltado">Machu Picchu</span>
+                <span class="resaltado">Machu Picchu</span>
             </span>
             <span>
                 <a href="" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
-            <a href="" class="book"><i class="fa fa-pencil"> Book</i></a>
+                <a href="" class="book"><i class="fa fa-pencil"> Book</i></a>
             </span>
-        </div>        
+        </div>
     </div>
     <div class="container">
         <div class="row mt-4">
@@ -37,13 +36,11 @@
             <div class="col-lg-9">
                 <span><a href="">Home</a></span>
                 <span><a href="">→ categoria de tour</a></span>
-                <span><a href="">→ {{ $tour->nombre }}</a></span>
+                <span><a href="">→ {{ $tour->categoria }}</a></span>
                 <p class="mt-4">{{ $tour->descripcion }}</p>
             </div>
         </div>
     </div>
-
-
     <section>
         <div class="container-fluid">
             <div class="row">
@@ -51,5 +48,4 @@
             </div>
         </div>
     </section>
-
 @endsection

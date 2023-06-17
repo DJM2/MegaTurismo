@@ -10,7 +10,7 @@ class ToursController extends Controller
 {
     public function index()
     {
-        $tours = Tours::all();
+        $tours = Tours::with('categorias')->get();
         return view('admin.tours.tours.index', compact('tours'));
     }
     public function mostrar()
@@ -29,41 +29,38 @@ class ToursController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nombre' => 'required|unique:tours',
+            'nombre' => 'required',
             'descripcion' => 'required',
+            'precioReal' => 'required',
+            'precioPublicado' => 'required',
+            'dias' => 'required',
+            'dificultad' => 'required',
+            'imgThumb' => 'required|image',
+            'img' => 'required|image',
+            'galeria' => 'nullable|array',
+            'galeria.*' => 'image',
             'contenido' => 'required',
             'resumen' => 'required',
             'detallado' => 'required',
             'incluidos' => 'required',
-            'importante' => 'nullable',
-            'lugarInicio' => 'nullable',
-            'lugarFin' => 'nullable',
-            'precioReal' => 'required|integer',
-            'precioPublicado' => 'required|integer',
-            'dias' => 'required|integer',
-            'imgThumb' => 'required',
-            'img' => 'required',
-            'mapa' => 'nullable',
-            'categoria' => 'required',
             'keywords' => 'required',
             'slug' => 'required|unique:tours',
-            'galeria' => 'required',
         ]);
 
         $tour = new Tours();
         $tour->nombre = $validated['nombre'];
         $tour->descripcion = $validated['descripcion'];
-        $tour->contenido = $validated['contenido'];
-        $tour->resumen = $validated['resumen'];
-        $tour->importante = $validated['importante'];
-        $tour->lugarInicio = $validated['lugarInicio'];
-        $tour->lugarFin = $validated['lugarFin'];
-        $tour->detallado = $validated['detallado'];
-        $tour->incluidos = $validated['incluidos'];
         $tour->precioReal = $validated['precioReal'];
         $tour->precioPublicado = $validated['precioPublicado'];
         $tour->dias = $validated['dias'];
-        $tour->categoria = $validated['categoria'];
+        $tour->dificultad = $validated['dificultad'];
+        $tour->lugarInicio = $request->input('lugarInicio');
+        $tour->lugarFin = $request->input('lugarFin');
+        $tour->contenido = $request->input('contenido');
+        $tour->resumen = $request->input('resumen');
+        $tour->detallado = $request->input('detallado');
+        $tour->incluidos = $request->input('incluidos');
+        $tour->importante = $request->input('importante');
         $tour->keywords = $validated['keywords'];
         $tour->slug = $validated['slug'];
 
@@ -76,8 +73,9 @@ class ToursController extends Controller
         $tour->img = 'img/galeria/' . $imgName;
 
         if ($request->has('mapa')) {
-            $mapaName = $validated['mapa']->getClientOriginalName();
-            $validated['mapa']->move('img/mapas/', $mapaName);
+            $mapa = $request->file('mapa');
+            $mapaName = $mapa->getClientOriginalName();
+            $mapa->move('img/mapas/', $mapaName);
             $tour->mapa = 'img/mapas/' . $mapaName;
         }
 
@@ -93,9 +91,8 @@ class ToursController extends Controller
 
             $tour->galeria = implode(',', $galeriaNames);
         }
-
         $tour->save();
-
+        $tour->categorias()->attach($request->input('categoria_id'));
         return redirect()->route('tours.index');
     }
 
@@ -112,11 +109,6 @@ class ToursController extends Controller
 
         return view('admin.tours.tours.edit', compact('tour', 'categorias'));
     }
-    /* public function edit($id)
-    {
-        $tour = Tours::findOrFail($id);
-        return view('admin.tours.tours.edit', compact('tour'));
-    } */
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -132,10 +124,10 @@ class ToursController extends Controller
             'precioReal' => 'required|integer',
             'precioPublicado' => 'required|integer',
             'dias' => 'required|integer',
+            'dificulidad' => 'required',
             'imgThumb' => 'nullable',
             'img' => 'nullable',
             'mapa' => 'nullable',
-            'categoria' => 'required',
             'keywords' => 'required',
             'slug' => 'required|unique:tours,slug,' . $id,
             'galeria' => 'nullable',
@@ -154,7 +146,7 @@ class ToursController extends Controller
         $tour->precioReal = $validated['precioReal'];
         $tour->precioPublicado = $validated['precioPublicado'];
         $tour->dias = $validated['dias'];
-        $tour->categoria = $validated['categoria'];
+        $tour->dificulidad = $validated['dificulidad'];
         $tour->keywords = $validated['keywords'];
         $tour->slug = $validated['slug'];
 

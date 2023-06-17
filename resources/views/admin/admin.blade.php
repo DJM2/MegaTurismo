@@ -17,7 +17,7 @@
 <body id="page-top">
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion mb-4" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/" target="_blank">
                 <img src="{{asset('img/logo-mega-turismo-blanco.png')}}" width="30%" alt="">
             </a>
             <hr class="sidebar-divider">
