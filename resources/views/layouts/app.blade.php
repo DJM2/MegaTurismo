@@ -16,8 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    {{--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
 </head>
 
@@ -178,13 +181,13 @@
     <script>
         $(window).scroll(function() {
             if ($(this).scrollTop() > 160) {
-                $('#logo-image').attr('src', '{{ asset('img/logo-mega-Turismo-2.png') }}')
+                $('#logo-image').attr('src', '{{ asset('img/logo-mega-turismo-2.png') }}')
                     .css({
                         'width': '100px',
                         'transition': 'width 0.6s'
                     });
             } else {
-                $('#logo-image').attr('src', '{{ asset('img/logo-mega-Turismo.png') }}')
+                $('#logo-image').attr('src', '{{ asset('img/logo-mega-turismo.png') }}')
                     .css({
                         'width': '90px',
                         'transition': 'width 0.6s'

@@ -62,7 +62,7 @@
                     </div>
                     <div class="submenu">
                         <a href="#overview"><i class="fa fa-list"></i> Overview</a>
-                        <a href="#galeria"><i class="fa fa-image"></i> Gallery</a>
+                        <a href="#galery"><i class="fa fa-image"></i> Gallery</a>
                         <a href="#itinerario"><i class="fa fa-map"></i> Itinerary</a>
                         <a href="#incluidos"><i class="fa fa-cart-plus"></i> Inclusions</a>
                         <a href=""><i class="fa fa-calendar"></i> Dates & Availability</a>
@@ -82,45 +82,68 @@
                     </span>
                     <span><a>→ {{ $tour->nombre }}</a></span>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="overview" style="padding-top: 2rem">
+                            <p class="mt-4">{!! $tour->contenido !!}</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h3 id="galery" class="mb-3" style="padding-top: 5rem">Gallery</h3>
+                        <div id="galeria" class="carousel slide" data-ride="carousel">
+                            <!-- Indicadores -->
+                            <ol class="carousel-indicators">
+                                @foreach (array_chunk(explode(',', $tour->galeria), 2) as $index => $imagenes)
+                                    <li data-target="#galeria" data-slide-to="{{ $index }}"
+                                        class="{{ $loop->first ? 'active' : '' }}"></li>
+                                @endforeach
+                            </ol>
 
-                <div id="overview" style="padding-top: 5rem">
-                    <p class="mt-4">{{ $tour->descripcion }}</p>
-                </div>
-                <div id="galeria" style="padding-top:5rem">
-                    <div class="carousel slide" data-ride="carousel" style="height: 300px;">
+                            <!-- Imágenes -->
+                            <div class="carousel-inner" style="height: 300px;">
+                                @foreach (array_chunk(explode(',', $tour->galeria), 2) as $index => $imagenes)
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                        <div class="row">
+                                            @foreach ($imagenes as $imagen)
+                                                <div class="col-md-6">
+                                                    <img src="{{ asset($imagen) }}" alt="Galería" width="100%"
+                                                        style="object-fit: cover">
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Controles -->
+                            <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next" href="#galeria" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </div>
+                    </div>
+
+                   {{--  <div id="galeria" class="carousel slide" data-ride="carousel">
                         <!-- Indicadores -->
                         <ol class="carousel-indicators">
-                            @php
-                                $imageCount = count(explode(',', $tour->galeria));
-                                $indicatorCount = ceil($imageCount / 2);
-                            @endphp
-                            @for ($i = 0; $i < $indicatorCount; $i++)
-                                <li data-target="#galeria" data-slide-to="{{ $i }}"
-                                    class="{{ $i === 0 ? 'active' : '' }}"></li>
-                            @endfor
+                            @foreach (explode(',', $tour->galeria) as $index => $imagen)
+                                <li data-target="#galeria" data-slide-to="{{ $index }}"
+                                    class="{{ $loop->first ? 'active' : '' }}"></li>
+                            @endforeach
                         </ol>
 
                         <!-- Imágenes -->
-                        <div class="carousel-inner" style="height: 100%;">
-                            @php
-                                $images = explode(',', $tour->galeria);
-                            @endphp
-                            @for ($i = 0; $i < $imageCount; $i += 2)
-                                <div class="carousel-item {{ $i === 0 ? 'active' : '' }}" style="height: 100%;">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="{{ asset($images[$i]) }}" alt="Galería" width="100%"
-                                                style="object-fit: cover; height: 100%;">
-                                        </div>
-                                        @if ($i + 1 < $imageCount)
-                                            <div class="col-md-6">
-                                                <img src="{{ asset($images[$i + 1]) }}" alt="Galería" width="100%"
-                                                    style="object-fit: cover; height: 100%;">
-                                            </div>
-                                        @endif
-                                    </div>
+                        <div class="carousel-inner" style="height:300px;">
+                            @foreach (explode(',', $tour->galeria) as $index => $imagen)
+                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                    <img src="{{ asset($imagen) }}" alt="Galería" width="100%"
+                                        style="object-fit: cover">
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
 
                         <!-- Controles -->
@@ -132,41 +155,18 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Siguiente</span>
                         </a>
+                    </div> --}}
+                    <div class="col-12">
+                        <div class="itinerario" style="padding-top: 5rem" id="itinerario">
+                            {!! $tour->detallado !!}
+                        </div>
                     </div>
-                </div>
-
-                {{-- <div id="galeria" class="carousel slide" data-ride="carousel">
-                    <!-- Indicadores -->
-                    <ol class="carousel-indicators">
-                        @foreach (explode(',', $tour->galeria) as $index => $imagen)
-                            <li data-target="#galeria" data-slide-to="{{ $index }}" class="{{ $loop->first ? 'active' : '' }}"></li>
-                        @endforeach
-                    </ol>
-                  
-                    <!-- Imágenes -->
-                    <div class="carousel-inner" style="height:300px;">
-                        @foreach (explode(',', $tour->galeria) as $index => $imagen)
-                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                <img src="{{ asset($imagen) }}" alt="Galería" width="100%" style="object-fit: cover"> 
-                            </div>
-                        @endforeach
+                    <div class="col-12">
+                        <div id="incluidos" style="padding-top: 5rem">
+                            <h3>Inclusions</h3>
+                            {!! $tour->incluidos !!}
+                        </div>
                     </div>
-                  
-                    <!-- Controles -->
-                    <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Anterior</span>
-                    </a>
-                    <a class="carousel-control-next" href="#galeria" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Siguiente</span>
-                    </a>
-                </div> --}}
-                <div class="itinerario" style="padding-top: 5rem" id="itinerario">
-                    {!! $tour->detallado !!}
-                </div>
-                <div id="incluidos" style="padding-top: 5rem">
-                    {!!$tour->incluidos!!}
                 </div>
 
 

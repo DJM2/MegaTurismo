@@ -54,7 +54,9 @@
                                         @foreach ($grupo as $tour)
                                             <div class="col-md-3 mb-3">
                                                 <div class="card">
-                                                    <img class="img-fluid" alt="100%x280" src="{{ $tour->imgThumb }}">
+                                                    <a href="{{ route('tour.show', $tour->slug) }}">
+                                                        <img alt="" src="{{ $tour->imgThumb }}">
+                                                    </a>
                                                     <div class="cardMin">
                                                         <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
                                                         <span><i class="fa fa-map-marker"></i> {{ $tour->lugarInicio }} →
@@ -64,7 +66,7 @@
                                                     <div class="card-body">
                                                         <h4 class="card-title">{{ $tour->nombre }}</h4>
                                                         <p class="card-text">{{ $tour->descripcion }}</p>
-                                                        <a href="{{ route('tour.show', $tour->slug) }}"
+                                                        <a class="cardBtn" href="{{ route('tour.show', $tour->slug) }}"
                                                             class="btn btn-primary">View details</a>
                                                     </div>
                                                 </div>

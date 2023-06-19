@@ -143,20 +143,71 @@
                         @enderror
                     </div>
                     <div class="separador"> </div>
-                    
+
                     <div class="col-lg-12 mt-3">
                         <label for="fechas">Cantidad de Fechas y Precios:</label>
-                        <input type="number" class="form-control form-control-sm" name="fechas" id="fechas" min="0">
+                        <input type="number" class="form-control form-control-sm" name="fechas" id="fechas"
+                            min="0">
                         @error('fechas')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <div id="fechas-container" class="mt-3 col-12">
-                        <div class="row"></div>
                     </div>
-                    
                     <script>
+                        document.getElementById('fechas').addEventListener('input', function() {
+                            var cantidadFechas = parseInt(this.value);
+                            var fechasContainer = document.getElementById('fechas-container');
+                            fechasContainer.innerHTML = '';
+
+                            for (var i = 1; i <= cantidadFechas; i++) {
+                                var row = document.createElement('div');
+                                row.classList.add('row', 'mb-3');
+
+                                var colWrapper = document.createElement('div');
+                                colWrapper.classList.add('col-2');
+
+                                var fechaParagraph = document.createElement('p');
+                                fechaParagraph.classList.add('font-weight-bold');
+                                fechaParagraph.textContent = 'Fecha ' + i + ':';
+                                colWrapper.appendChild(fechaParagraph);
+
+                                row.appendChild(colWrapper);
+
+                                var colWrapper2 = document.createElement('div');
+                                colWrapper2.classList.add('col-5');
+
+                                var fechaInput = document.createElement('input');
+                                fechaInput.type = 'date';
+                                fechaInput.name = 'fechas[' + i + '][fecha]';
+                                fechaInput.required = true;
+                                fechaInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper2.appendChild(fechaInput);
+
+                                row.appendChild(colWrapper2);
+
+                                var colWrapper3 = document.createElement('div');
+                                colWrapper3.classList.add('col-5');
+
+                                var precioInput = document.createElement('input');
+                                precioInput.type = 'number';
+                                precioInput.name = 'fechas[' + i + '][precio]';
+                                precioInput.step = '0.01';
+                                precioInput.required = true;
+                                precioInput.placeholder = 'Agregar precio ' + i;
+                                precioInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper3.appendChild(precioInput);
+
+                                row.appendChild(colWrapper3);
+
+                                fechasContainer.appendChild(row);
+                            }
+                        });
+                    </script>
+
+
+                    {{-- <script>
                         document.getElementById('fechas').addEventListener('input', function() {
                             var cantidadFechas = parseInt(this.value);
                             var fechasContainer = document.getElementById('fechas-container');
@@ -200,12 +251,12 @@
                                 row.appendChild(colWrapper2);
                             }
                         });
-                    </script>
-                    
-                    
-                                        
-                    
-                    
+                    </script> --}}
+
+
+
+
+
 
 
 
