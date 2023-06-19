@@ -85,7 +85,7 @@
 
                     <div class="col-lg-4 mt-3">
                         <label for="categoria">Categoría:</label>
-                        <select name="categoria" id="categoria" class="form-control form-control-sm" required>
+                        <select name="categoria_id" id="categoria" class="form-control form-control-sm" required>
                             @foreach ($categorias as $id => $nombre)
                                 <option value="{{ $id }}">{{ $nombre }}</option>
                             @endforeach
@@ -142,6 +142,73 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="separador"> </div>
+                    
+                    <div class="col-lg-12 mt-3">
+                        <label for="fechas">Cantidad de Fechas y Precios:</label>
+                        <input type="number" class="form-control form-control-sm" name="fechas" id="fechas" min="0">
+                        @error('fechas')
+                            <div>{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div id="fechas-container" class="mt-3 col-12">
+                        <div class="row"></div>
+                    </div>
+                    
+                    <script>
+                        document.getElementById('fechas').addEventListener('input', function() {
+                            var cantidadFechas = parseInt(this.value);
+                            var fechasContainer = document.getElementById('fechas-container');
+                            var row = fechasContainer.querySelector('.row');
+                            row.innerHTML = '';
+                    
+                            for (var i = 1; i <= cantidadFechas; i++) {
+                                var colWrapper = document.createElement('div');
+                                colWrapper.classList.add('col-6', 'mb-3');
+                    
+                                var fechaLabel = document.createElement('label');
+                                fechaLabel.setAttribute('for', 'fecha' + i);
+                                fechaLabel.textContent = 'Fecha ' + i + ':';
+                                colWrapper.appendChild(fechaLabel);
+                    
+                                var fechaInput = document.createElement('input');
+                                fechaInput.type = 'date';
+                                fechaInput.name = 'fechas[' + i + '][fecha]';
+                                fechaInput.required = true;
+                                fechaInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper.appendChild(fechaInput);
+                    
+                                row.appendChild(colWrapper);
+                    
+                                var colWrapper2 = document.createElement('div');
+                                colWrapper2.classList.add('col-6', 'mb-3');
+                    
+                                var precioLabel = document.createElement('label');
+                                precioLabel.setAttribute('for', 'precio' + i);
+                                precioLabel.textContent = 'Precio ' + i + ':';
+                                colWrapper2.appendChild(precioLabel);
+                    
+                                var precioInput = document.createElement('input');
+                                precioInput.type = 'number';
+                                precioInput.name = 'fechas[' + i + '][precio]';
+                                precioInput.step = '0.01';
+                                precioInput.required = true;
+                                precioInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper2.appendChild(precioInput);
+                    
+                                row.appendChild(colWrapper2);
+                            }
+                        });
+                    </script>
+                    
+                    
+                                        
+                    
+                    
+
+
+
                     <div class="col-lg-12 mt-3">
                         <label for="contenido">Contenido</label>
                         <textarea name="contenido" id="contenido" class="ckeditor form-control" required>{{ old('contenido', isset($tour) ? $tour->contenido : '') }}</textarea>

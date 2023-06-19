@@ -91,6 +91,7 @@ class ToursController extends Controller
 
             $tour->galeria = implode(',', $galeriaNames);
         }
+        $cantidadFechas = $request->input('fechas');
         $tour->save();
         $tour->categorias()->attach($request->input('categoria_id'));
         return redirect()->route('tours.index');
@@ -105,11 +106,87 @@ class ToursController extends Controller
     public function edit($id)
     {
         $tour = Tours::findOrFail($id);
-        $categorias = Categorias::all();
-
+        $categorias = Categorias::query()->pluck('nombre', 'id');
         return view('admin.tours.tours.edit', compact('tour', 'categorias'));
     }
+
     public function update(Request $request, $id)
+{
+    $validated = $request->validate([
+        'nombre' => 'required',
+        'descripcion' => 'required',
+        'precioReal' => 'required',
+        'precioPublicado' => 'required',
+        'dias' => 'required',
+        'dificultad' => 'required',
+        'imgThumb' => 'image',
+        'img' => 'image',
+        'galeria' => 'nullable|array',
+        'galeria.*' => 'image',
+        'contenido' => 'required',
+        'resumen' => 'required',
+        'detallado' => 'required',
+        'incluidos' => 'required',
+        'keywords' => 'required',
+        'slug' => 'required|unique:tours,slug,' . $id,
+    ]);
+
+    $tour = Tours::findOrFail($id);
+    $tour->nombre = $validated['nombre'];
+    $tour->descripcion = $validated['descripcion'];
+    $tour->precioReal = $validated['precioReal'];
+    $tour->precioPublicado = $validated['precioPublicado'];
+    $tour->dias = $validated['dias'];
+    $tour->dificultad = $validated['dificultad'];
+    $tour->lugarInicio = $request->input('lugarInicio');
+    $tour->lugarFin = $request->input('lugarFin');
+    $tour->contenido = $request->input('contenido');
+    $tour->resumen = $request->input('resumen');
+    $tour->detallado = $request->input('detallado');
+    $tour->incluidos = $request->input('incluidos');
+    $tour->importante = $request->input('importante');
+    $tour->keywords = $validated['keywords'];
+    $tour->slug = $validated['slug'];
+
+    if ($request->has('imgThumb')) {
+        $imgThumbName = $validated['imgThumb']->getClientOriginalName();
+        $validated['imgThumb']->move('img/thumb/', $imgThumbName);
+        $tour->imgThumb = 'img/thumb/' . $imgThumbName;
+    }
+
+    if ($request->has('img')) {
+        $imgName = $validated['img']->getClientOriginalName();
+        $validated['img']->move('img/galeria/', $imgName);
+        $tour->img = 'img/galeria/' . $imgName;
+    }
+
+    if ($request->has('mapa')) {
+        $mapa = $request->file('mapa');
+        $mapaName = $mapa->getClientOriginalName();
+        $mapa->move('img/mapas/', $mapaName);
+        $tour->mapa = 'img/mapas/' . $mapaName;
+    }
+
+    if ($request->has('galeria')) {
+        $galeriaFiles = $request->file('galeria');
+        $galeriaNames = [];
+
+        foreach ($galeriaFiles as $galeriaFile) {
+            $galeriaName = $galeriaFile->getClientOriginalName();
+            $galeriaFile->move('img/galeriaTours', $galeriaName);
+            $galeriaNames[] = 'img/galeriaTours/' . $galeriaName;
+        }
+
+        $tour->galeria = implode(',', $galeriaNames);
+    }
+
+    $tour->save();
+    $tour->categorias()->sync($request->input('categoria_id'));
+
+    return redirect()->route('tours.index');
+}
+
+    /* public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nombre' => 'required|unique:tours,nombre,' . $id,
@@ -184,7 +261,7 @@ class ToursController extends Controller
         $tour->save();
 
         return redirect()->route('tours.index');
-    }
+    } */
 
 
     public function destroy(Tours $tour)

@@ -60,4 +60,8 @@ class Tours extends Model
     {
         return $this->belongsToMany(Categorias::class, 'tour_categoria', 'tour_id', 'categoria_id');
     }
+    public function fechas()
+    {
+        return $this->hasMany(Fecha::class);
+    }
 }
