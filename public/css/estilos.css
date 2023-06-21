@@ -106,9 +106,23 @@ body {
   list-style: none;
   margin-left: -2em;
 }
+.bg-dark .links ul li {
+  font-size: 14px;
+}
+.bg-dark .links ul li:hover span {
+  visibility: visible;
+  transition: 0.2s ease;
+  color: #15c9c9;
+}
+.bg-dark .links ul li span {
+  visibility: hidden;
+  transition: 0.2s ease;
+  color: #15c9c9;
+}
 .bg-dark .links a {
   color: #fff;
   transition: 0.6s;
+  text-decoration: none;
 }
 .bg-dark .links a:hover {
   color: #08e5e5;
@@ -122,7 +136,30 @@ body {
   font-size: 14px;
 }
 .bg-dark .derechos {
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.btnReserva {
+  color: #fff;
+  border: 1px solid red;
+  padding: 0.4em 2em;
+  border-radius: 5px;
+  background: red;
+}
+.btnReserva:hover {
+  background: rgb(216, 23, 23);
+  text-decoration: none;
+  color: #fff;
+}
+
+.carousel-inner .col-md-6 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.carousel-inner img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
 .navMega ul li a {

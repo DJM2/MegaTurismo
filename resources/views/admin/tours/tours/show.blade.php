@@ -27,7 +27,7 @@
                 <span class="resaltado">USD{{ $tour->precioPublicado }}</span>
             </span>
             <span>
-                <a href="" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
+                <a href="#fechas" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
                 <a href="" class="book"><i class="fa fa-pencil"> Book</i></a>
             </span>
         </div>
@@ -65,7 +65,7 @@
                         <a href="#galery"><i class="fa fa-image"></i> Gallery</a>
                         <a href="#itinerario"><i class="fa fa-map"></i> Itinerary</a>
                         <a href="#incluidos"><i class="fa fa-cart-plus"></i> Inclusions</a>
-                        <a href=""><i class="fa fa-calendar"></i> Dates & Availability</a>
+                        <a href="#fechas"><i class="fa fa-calendar"></i> Dates & Availability</a>
                         <a href=""><i class="fa fa-hotel"></i> Hotels</a>
                         <a href=""><i class="fa fa-exclamation"></i> Essential trip info</a>
                     </div>
@@ -84,12 +84,12 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div id="overview" style="padding-top: 2rem">
+                        <div id="overview" style="padding-top: 3rem">
                             <p class="mt-4">{!! $tour->contenido !!}</p>
                         </div>
                     </div>
                     <div class="col-12">
-                        <h3 id="galery" class="mb-3" style="padding-top: 5rem">Gallery</h3>
+                        <h3 id="galery" class="mb-3" style="padding-top: 4rem">Gallery</h3>
                         <div id="galeria" class="carousel slide" data-ride="carousel">
                             <!-- Indicadores -->
                             <ol class="carousel-indicators">
@@ -98,7 +98,6 @@
                                         class="{{ $loop->first ? 'active' : '' }}"></li>
                                 @endforeach
                             </ol>
-
                             <!-- Imágenes -->
                             <div class="carousel-inner" style="height: 300px;">
                                 @foreach (array_chunk(explode(',', $tour->galeria), 2) as $index => $imagenes)
@@ -106,15 +105,13 @@
                                         <div class="row">
                                             @foreach ($imagenes as $imagen)
                                                 <div class="col-md-6">
-                                                    <img src="{{ asset($imagen) }}" alt="Galería" width="100%"
-                                                        style="object-fit: cover">
+                                                    <img src="{{ asset($imagen) }}" alt="Galería">
                                                 </div>
                                             @endforeach
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
-
                             <!-- Controles -->
                             <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -127,7 +124,7 @@
                         </div>
                     </div>
 
-                   {{--  <div id="galeria" class="carousel slide" data-ride="carousel">
+                    {{--  <div id="galeria" class="carousel slide" data-ride="carousel">
                         <!-- Indicadores -->
                         <ol class="carousel-indicators">
                             @foreach (explode(',', $tour->galeria) as $index => $imagen)
@@ -135,7 +132,6 @@
                                     class="{{ $loop->first ? 'active' : '' }}"></li>
                             @endforeach
                         </ol>
-
                         <!-- Imágenes -->
                         <div class="carousel-inner" style="height:300px;">
                             @foreach (explode(',', $tour->galeria) as $index => $imagen)
@@ -145,7 +141,6 @@
                                 </div>
                             @endforeach
                         </div>
-
                         <!-- Controles -->
                         <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -162,22 +157,52 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div id="incluidos" style="padding-top: 5rem">
+                        <div id="incluidos" style="padding-top: rem">
                             <h3>Inclusions</h3>
                             {!! $tour->incluidos !!}
                         </div>
                     </div>
-                </div>
+                    <div class="col-12">
+                        <div id="fechas" style="padding-top: 4rem">
+                            <h3>Next dates with offers:</h3>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="thead thead-dark">
+                                        <tr>
+                                            <th>Data de início</th>
+                                            <th>Data final</th>
+                                            <th>Preço</th>
+                                            <th>Reservar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($tour->fechas as $fecha)
+                                            <tr>
+                                                <td class="align-middle">{{ date('M d, Y', strtotime($fecha->fecha)) }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    <?php
+                                                    $fechaFinal = date('Y-m-d', strtotime($fecha->fecha . ' + ' . $tour->dias . ' days'));
+                                                    ?>
+                                                    {{ date('M d, Y', strtotime($fechaFinal)) }}
+                                                </td>
+                                                <td class="align-middle">
+                                                    <del>U${{ $tour->precioPublicado }}.00</del><br>U${{ $fecha->precio }}
+                                                </td>
+                                                <td class="align-middle"><a href="" class="btnReserva">Book</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-
-                <div class="container-fluid">
-                    <div class="row">
-                        <div style="height:80vh"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <section>
 
     </section>

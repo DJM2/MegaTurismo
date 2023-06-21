@@ -160,7 +160,6 @@
                             var cantidadFechas = parseInt(this.value);
                             var fechasContainer = document.getElementById('fechas-container');
                             fechasContainer.innerHTML = '';
-
                             for (var i = 1; i <= cantidadFechas; i++) {
                                 var row = document.createElement('div');
                                 row.classList.add('row', 'mb-3');
@@ -207,56 +206,84 @@
                     </script>
 
 
-                    {{-- <script>
-                        document.getElementById('fechas').addEventListener('input', function() {
-                            var cantidadFechas = parseInt(this.value);
-                            var fechasContainer = document.getElementById('fechas-container');
-                            var row = fechasContainer.querySelector('.row');
-                            row.innerHTML = '';
-                    
-                            for (var i = 1; i <= cantidadFechas; i++) {
+
+                    <!-----hoteles------------>
+                    <div class="col-lg-12 mt-3">
+                        <label for="hoteles">Cantidad de Hoteles:</label>
+                        <input type="number" class="form-control form-control-sm" name="hoteles" id="hoteles"
+                            min="0">
+                        @error('hoteles')
+                            <div>{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div id="hoteles-container" class="mt-3 col-12">
+                    </div>
+
+                    <script>
+                        document.getElementById('hoteles').addEventListener('input', function() {
+                            var cantidadHoteles = parseInt(this.value);
+                            var hotelesContainer = document.getElementById('hoteles-container');
+                            hotelesContainer.innerHTML = '';
+                            for (var i = 1; i <= cantidadHoteles; i++) {
+                                var hotelRow = document.createElement('div');
+                                hotelRow.classList.add('row', 'mb-3');
+
                                 var colWrapper = document.createElement('div');
-                                colWrapper.classList.add('col-6', 'mb-3');
-                    
-                                var fechaLabel = document.createElement('label');
-                                fechaLabel.setAttribute('for', 'fecha' + i);
-                                fechaLabel.textContent = 'Fecha ' + i + ':';
-                                colWrapper.appendChild(fechaLabel);
-                    
-                                var fechaInput = document.createElement('input');
-                                fechaInput.type = 'date';
-                                fechaInput.name = 'fechas[' + i + '][fecha]';
-                                fechaInput.required = true;
-                                fechaInput.classList.add('form-control', 'form-control-sm');
-                                colWrapper.appendChild(fechaInput);
-                    
-                                row.appendChild(colWrapper);
-                    
+                                colWrapper.classList.add('col-12');
+
+                                var hotelNameInput = document.createElement('input');
+                                hotelNameInput.type = 'text';
+                                hotelNameInput.name = 'hoteles[' + i + '][nombre]';
+                                hotelNameInput.required = true;
+                                hotelNameInput.placeholder = 'Nombre del hotel ' + i;
+                                hotelNameInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper.appendChild(hotelNameInput);
+
+                                hotelRow.appendChild(colWrapper);
+
                                 var colWrapper2 = document.createElement('div');
-                                colWrapper2.classList.add('col-6', 'mb-3');
-                    
-                                var precioLabel = document.createElement('label');
-                                precioLabel.setAttribute('for', 'precio' + i);
-                                precioLabel.textContent = 'Precio ' + i + ':';
-                                colWrapper2.appendChild(precioLabel);
-                    
-                                var precioInput = document.createElement('input');
-                                precioInput.type = 'number';
-                                precioInput.name = 'fechas[' + i + '][precio]';
-                                precioInput.step = '0.01';
-                                precioInput.required = true;
-                                precioInput.classList.add('form-control', 'form-control-sm');
-                                colWrapper2.appendChild(precioInput);
-                    
-                                row.appendChild(colWrapper2);
+                                colWrapper2.classList.add('col-12');
+
+                                var hotelLocationInput = document.createElement('input');
+                                hotelLocationInput.type = 'text';
+                                hotelLocationInput.name = 'hoteles[' + i + '][ubicacion]';
+                                hotelLocationInput.required = true;
+                                hotelLocationInput.placeholder = 'Ubicación del hotel ' + i;
+                                hotelLocationInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper2.appendChild(hotelLocationInput);
+
+                                hotelRow.appendChild(colWrapper2);
+
+                                var colWrapper3 = document.createElement('div');
+                                colWrapper3.classList.add('col-12');
+
+                                var hotelDescriptionInput = document.createElement('textarea');
+                                hotelDescriptionInput.name = 'hoteles[' + i + '][descripcion]';
+                                hotelDescriptionInput.required = true;
+                                hotelDescriptionInput.placeholder = 'Descripción del hotel ' + i;
+                                hotelDescriptionInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper3.appendChild(hotelDescriptionInput);
+
+                                hotelRow.appendChild(colWrapper3);
+
+                                var colWrapper4 = document.createElement('div');
+                                colWrapper4.classList.add('col-12');
+
+                                var hotelImageInput = document.createElement('input');
+                                hotelImageInput.type = 'file';
+                                hotelImageInput.name = 'hoteles[' + i + '][img]';
+                                hotelImageInput.required = true;
+                                hotelImageInput.accept = 'image/*';
+                                hotelImageInput.classList.add('form-control-file');
+                                colWrapper4.appendChild(hotelImageInput);
+
+                                hotelRow.appendChild(colWrapper4);
+
+                                hotelesContainer.appendChild(hotelRow);
                             }
                         });
-                    </script> --}}
-
-
-
-
-
+                    </script>
 
 
 

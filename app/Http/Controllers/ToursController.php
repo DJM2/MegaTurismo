@@ -99,6 +99,7 @@ class ToursController extends Controller
         $tour->save();
 
         $tour->categorias()->attach($request->input('categoria_id'));
+
         if ($request->has('fechas')) {
             $fechas = $request->input('fechas');
             foreach ($fechas as $fecha) {
@@ -118,13 +119,20 @@ class ToursController extends Controller
         $tour = Tours::where('slug', $slug)->firstOrFail();
         return view('admin.tours.tours.show', compact('tour'));
     }
-
     public function edit($id)
+    {
+        $tour = Tours::findOrFail($id);
+        $fechas = $tour->fechas; // Obtener las fechas asociadas al tour
+        $categorias = Categorias::pluck('nombre', 'id');
+        return view('admin.tours.tours.edit', compact('tour', 'fechas', 'categorias'));
+    }
+    
+    /* public function edit($id)
     {
         $tour = Tours::findOrFail($id);
         $categorias = Categorias::query()->pluck('nombre', 'id');
         return view('admin.tours.tours.edit', compact('tour', 'categorias'));
-    }
+    } */
 
     public function update(Request $request, $id)
     {
@@ -145,6 +153,10 @@ class ToursController extends Controller
             'incluidos' => 'required',
             'keywords' => 'required',
             'slug' => 'required|unique:tours,slug,' . $id,
+
+            'fechas' => 'nullable|array',
+            'fechas.*.fecha' => 'required|date',
+            'fechas.*.precio' => 'required|numeric',
         ]);
 
         $tour = Tours::findOrFail($id);
@@ -196,89 +208,19 @@ class ToursController extends Controller
             $tour->galeria = implode(',', $galeriaNames);
         }
 
-        $tour->save();
         $tour->categorias()->sync($request->input('categoria_id'));
 
+        $fechas = $request->input('fechas');
+        $tour->fechas()->delete();
+        foreach ($fechas as $fechaData) {
+            $fecha = new Fecha();
+            $fecha->fecha = $fechaData['fecha'];
+            $fecha->precio = $fechaData['precio'];
+            $tour->fechas()->save($fecha);
+        }
+        $tour->save();
         return redirect()->route('tours.index');
     }
-
-    /* public function update(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'nombre' => 'required|unique:tours,nombre,' . $id,
-            'descripcion' => 'required',
-            'contenido' => 'required',
-            'resumen' => 'required',
-            'detallado' => 'required',
-            'incluidos' => 'required',
-            'importante' => 'nullable',
-            'lugarInicio' => 'nullable',
-            'lugarFin' => 'nullable',
-            'precioReal' => 'required|integer',
-            'precioPublicado' => 'required|integer',
-            'dias' => 'required|integer',
-            'dificulidad' => 'required',
-            'imgThumb' => 'nullable',
-            'img' => 'nullable',
-            'mapa' => 'nullable',
-            'keywords' => 'required',
-            'slug' => 'required|unique:tours,slug,' . $id,
-            'galeria' => 'nullable',
-        ]);
-
-        $tour = Tours::findOrFail($id);
-        $tour->nombre = $validated['nombre'];
-        $tour->descripcion = $validated['descripcion'];
-        $tour->contenido = $validated['contenido'];
-        $tour->resumen = $validated['resumen'];
-        $tour->importante = $validated['importante'];
-        $tour->lugarInicio = $validated['lugarInicio'];
-        $tour->lugarFin = $validated['lugarFin'];
-        $tour->detallado = $validated['detallado'];
-        $tour->incluidos = $validated['incluidos'];
-        $tour->precioReal = $validated['precioReal'];
-        $tour->precioPublicado = $validated['precioPublicado'];
-        $tour->dias = $validated['dias'];
-        $tour->dificulidad = $validated['dificulidad'];
-        $tour->keywords = $validated['keywords'];
-        $tour->slug = $validated['slug'];
-
-        if ($request->hasFile('imgThumb')) {
-            $imgThumbName = $validated['imgThumb']->getClientOriginalName();
-            $validated['imgThumb']->move('img/thumb/', $imgThumbName);
-            $tour->imgThumb = 'img/thumb/' . $imgThumbName;
-        }
-
-        if ($request->hasFile('img')) {
-            $imgName = $validated['img']->getClientOriginalName();
-            $validated['img']->move('img/galeria/', $imgName);
-            $tour->img = 'img/galeria/' . $imgName;
-        }
-
-        if ($request->hasFile('mapa')) {
-            $mapaName = $validated['mapa']->getClientOriginalName();
-            $validated['mapa']->move('img/mapas/', $mapaName);
-            $tour->mapa = 'img/mapas/' . $mapaName;
-        }
-
-        if ($request->hasFile('galeria')) {
-            $galeriaFiles = $request->file('galeria');
-            $galeriaNames = [];
-
-            foreach ($galeriaFiles as $galeriaFile) {
-                $galeriaName = $galeriaFile->getClientOriginalName();
-                $galeriaFile->move('img/galeriaTours', $galeriaName);
-                $galeriaNames[] = url('img/galeriaTours/' . $galeriaName);
-            }
-
-            $tour->galeria = implode(',', $galeriaNames);
-        }
-
-        $tour->save();
-
-        return redirect()->route('tours.index');
-    } */
-
 
     public function destroy(Tours $tour)
     {

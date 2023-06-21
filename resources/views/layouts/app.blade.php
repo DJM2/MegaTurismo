@@ -134,23 +134,23 @@
                 <div class="col-lg-3">
                     <h4>Perú Tours</h4>
                     <ul>
-                        <li>Cusco 4 dias</li>
-                        <li>Peru for 9 days</li>
-                        <li>Peru opackage 6 days</li>
-                        <li>Peru and Machu Picchu</li>
-                        <li>Peru for 9 days</li>
-                        <li>Peru opackage 6 days</li>
+                        <li><span>➤</span><a href="">Cusco 4 dias</a></li>
+                        <li><span>➤</span><a href="">Peru for 9 days</a></li>
+                        <li><span>➤</span><a href="">Peru opackage 6 days</a> </li>
+                        <li><span>➤</span><a href="">Peru and Machu Picchu</a> </li>
+                        <li><span>➤</span><a href="">Peru for 9 days</a> </li>
+                        <li><span>➤</span><a href="">Peru opackage 6 days</a> </li>
                     </ul>
                 </div>
                 <div class="col-lg-3">
                     <h4>Inca trail Tours</h4>
                     <ul>
-                        <li>Cusco 4 dias</li>
-                        <li>Peru for 9 days</li>
-                        <li>Peru opackage 6 days</li>
-                        <li>Peru and Machu Picchu</li>
-                        <li>Cusco 4 dias</li>
-                        <li>Peru for 9 days</li>
+                        <li><span class="flechaPie">➤</span><a href="">Cusco 4 dias</a> </li>
+                        <li><span class="flechaPie">➤</span><a href="">Peru for 9 days</a> </li>
+                        <li><span class="flechaPie">➤</span><a href="">Peru opackage 6 days</a> </li>
+                        <li><span class="flechaPie">➤</span><a href="">Peru and Machu Picchu</a> </li>
+                        <li><span class="flechaPie">➤</span><a href="">Cusco 4 dias</a> </li>
+                        <li><span class="flechaPie">➤</span><a href="">Peru for 9 days</a> </li>
                     </ul>
                 </div>
                 <div class="col-lg-3 sociales">

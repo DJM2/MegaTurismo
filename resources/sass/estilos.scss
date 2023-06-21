@@ -127,11 +127,25 @@ body {
     ul {
       list-style: none;
       margin-left: -2em;
+      li{
+        font-size: 14px;
+        &:hover span{
+          visibility: visible;
+          transition: 0.2s ease;
+          color: $principal2;
+        }
+        span{
+          visibility: hidden;
+          transition: 0.2s ease;
+          color: $principal2;
+        }
+      }
     }
 
     a {
       color: #fff;
       transition: 0.6s;
+      text-decoration: none;
 
       &:hover {
         color: $colorPrincipal;
@@ -154,7 +168,31 @@ body {
   }
 
   .derechos {
-    font-size: 12px;
+    font-size: 13px;
+  }
+}
+.btnReserva{
+  color: #fff;
+    border: 1px solid red;
+    padding: 0.4em 2em;
+    border-radius: 5px;
+    background: red;
+    &:hover{
+      background: rgb(216, 23, 23);
+      text-decoration: none;
+      color: #fff;
+    }
+}
+
+.carousel-inner {
+  .col-md-6{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 }
 
@@ -402,38 +440,44 @@ body {
     }
   }
 }
-.migas{
-  a{
+
+.migas {
+  a {
     color: #545151;
     transition: 0.5s ease;
-    &:hover{
+
+    &:hover {
       color: $principal2;
       text-decoration: none;
       transition: 0.5s ease;
     }
   }
 }
-.sticky{
+
+.sticky {
   position: sticky;
   top: 3em;
-  .image-container {
-  position: relative;
-}
 
-.expand-icon {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  color: #fff;
-  padding: 8px;
-  background: $principal2;
-}
-  .submenu{
-    a{
+  .image-container {
+    position: relative;
+  }
+
+  .expand-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: #fff;
+    padding: 8px;
+    background: $principal2;
+  }
+
+  .submenu {
+    a {
       color: #000;
       display: block;
-      margin:0.5em 1.5em;
-      &:hover{
+      margin: 0.5em 1.5em;
+
+      &:hover {
         text-decoration: none;
         color: $principal2;
         transition: 0.4s;
@@ -527,7 +571,8 @@ body {
     font-size: 16px;
     font-weight: bold;
   }
-  img{
+
+  img {
     width: 100%;
     height: 200px;
     object-fit: cover;
