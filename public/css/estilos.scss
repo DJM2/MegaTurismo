@@ -75,7 +75,7 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  margin: 10px;
+  margin-left: 5em;
   color: white;
   /* background: rgb(21 201 201 / 40%); */
   text-shadow: 3px 3px 1px rgb(0, 0, 0);
@@ -106,9 +106,23 @@ body {
   list-style: none;
   margin-left: -2em;
 }
+.bg-dark .links ul li {
+  font-size: 14px;
+}
+.bg-dark .links ul li:hover span {
+  visibility: visible;
+  transition: 0.2s ease;
+  color: #15c9c9;
+}
+.bg-dark .links ul li span {
+  visibility: hidden;
+  transition: 0.2s ease;
+  color: #15c9c9;
+}
 .bg-dark .links a {
   color: #fff;
   transition: 0.6s;
+  text-decoration: none;
 }
 .bg-dark .links a:hover {
   color: #08e5e5;
@@ -122,7 +136,30 @@ body {
   font-size: 14px;
 }
 .bg-dark .derechos {
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.btnReserva {
+  color: #fff;
+  border: 1px solid red;
+  padding: 0.4em 2em;
+  border-radius: 5px;
+  background: red;
+}
+.btnReserva:hover {
+  background: rgb(216, 23, 23);
+  text-decoration: none;
+  color: #fff;
+}
+
+.carousel-inner .col-md-6 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.carousel-inner img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
 .navMega ul li a {
@@ -236,11 +273,138 @@ body {
 .custom .custom-col {
   padding-left: 0px !important;
   padding-right: 0px !important;
+  overflow: hidden !important;
+  position: relative;
+  height: 470px;
 }
 .custom .custom-col img {
   width: 100%;
   height: 470px;
   object-fit: cover;
+}
+.custom .custom-col .card-hover {
+  text-align: center;
+  background: #08e5e5;
+  color: #fff;
+  position: inherit;
+  padding-bottom: 1.8em;
+  transition: 0.6s ease;
+}
+.custom .custom-col .card-hover h4 {
+  padding-top: 0.8em;
+  color: #fff;
+}
+.custom .custom-col .card-hover a {
+  background: #fff;
+  color: #08e5e5;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0.4em 1em;
+  border-radius: 2px;
+  border: 1px solid #fff;
+  transition: 0.6s ease;
+}
+.custom .custom-col .card-hover a:hover {
+  box-shadow: rgba(15, 167, 191, 0.35) 0px 5px 15px;
+  transition: 0.6s ease;
+}
+.custom .custom-col:hover .card-hover {
+  margin-top: -10em;
+  transition: 0.6s ease;
+  position: inherit;
+}
+
+.circulares .circular {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 330px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+.circulares .circular:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  transition: 0.6s ease;
+}
+.circulares .circular::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.274);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 50%;
+  margin-left: 15px;
+  transition: 1s ease;
+}
+.circulares .circular:hover::before {
+  opacity: 1;
+  transition: 1s ease;
+}
+.circulares .circular img {
+  display: block;
+  width: 142%;
+  height: auto;
+  transition: 1s ease;
+}
+.circulares .circular:hover img {
+  width: 150%;
+  height: auto;
+  transition: 1s ease;
+}
+.circulares .circular h3 {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: Satisfy, cursive;
+  font-size: 35px;
+}
+
+.migas a {
+  color: #545151;
+  transition: 0.5s ease;
+}
+.migas a:hover {
+  color: #15c9c9;
+  text-decoration: none;
+  transition: 0.5s ease;
+}
+
+.sticky {
+  position: sticky;
+  top: 3em;
+}
+.sticky .image-container {
+  position: relative;
+}
+.sticky .expand-icon {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  color: #fff;
+  padding: 8px;
+  background: #15c9c9;
+}
+.sticky .submenu a {
+  color: #000;
+  display: block;
+  margin: 0.5em 1.5em;
+}
+.sticky .submenu a:hover {
+  text-decoration: none;
+  color: #15c9c9;
+  transition: 0.4s;
 }
 
 .cardMin {
@@ -288,6 +452,7 @@ body {
 .toursDetails .resaltado {
   font-size: 22px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 .toursDetails a {
   display: block;
@@ -311,15 +476,16 @@ body {
   border: 1px solid #000;
 }
 
-.card-hover {
-  text-align: center;
-}
-
 .card .card-title {
   font-size: 16px;
   font-weight: bold;
 }
-.card a {
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card .cardBtn {
   font-size: 14px;
   text-align: center;
   background: #15c9c9;
@@ -331,7 +497,7 @@ body {
   overflow: hidden;
   z-index: 1;
 }
-.card a:hover {
+.card .cardBtn:hover {
   color: #fff;
   background: linear-gradient(to left, #15c9c9 50%, transparent 50%);
   background-size: 200% 100%;
@@ -339,12 +505,12 @@ body {
   transition: background-position 0.3s ease-in-out;
   border: none;
 }
-.card a:active {
+.card .cardBtn:active {
   color: #fff !important;
   background-color: #15c9c9 !important;
   border-color: #15c9c9 !important;
 }
-.card a:focus {
+.card .cardBtn:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }

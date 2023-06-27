@@ -152,7 +152,6 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div id="fechas-container" class="mt-3 col-12">
                     </div>
                     <script>
@@ -171,9 +170,7 @@
                                 fechaParagraph.classList.add('font-weight-bold');
                                 fechaParagraph.textContent = 'Fecha ' + i + ':';
                                 colWrapper.appendChild(fechaParagraph);
-
                                 row.appendChild(colWrapper);
-
                                 var colWrapper2 = document.createElement('div');
                                 colWrapper2.classList.add('col-5');
 
@@ -183,12 +180,9 @@
                                 fechaInput.required = true;
                                 fechaInput.classList.add('form-control', 'form-control-sm');
                                 colWrapper2.appendChild(fechaInput);
-
                                 row.appendChild(colWrapper2);
-
                                 var colWrapper3 = document.createElement('div');
                                 colWrapper3.classList.add('col-5');
-
                                 var precioInput = document.createElement('input');
                                 precioInput.type = 'number';
                                 precioInput.name = 'fechas[' + i + '][precio]';
@@ -204,8 +198,6 @@
                             }
                         });
                     </script>
-
-
 
                     <!-----hoteles------------>
                     <div class="col-lg-12 mt-3">
@@ -229,8 +221,16 @@
                                 var hotelRow = document.createElement('div');
                                 hotelRow.classList.add('row', 'mb-3');
 
-                                var colWrapper = document.createElement('div');
-                                colWrapper.classList.add('col-12');
+                                var colWrapper1 = document.createElement('div');
+                                colWrapper1.classList.add('col-1');
+
+                                var label = document.createElement('label');
+                                label.textContent = 'Hotel ' + i + ':';
+                                label.classList.add('font-weight-bold','align-middle');
+                                colWrapper1.appendChild(label);
+                                hotelRow.appendChild(colWrapper1);
+                                var colWrapper2 = document.createElement('div');
+                                colWrapper2.classList.add('col-2');
 
                                 var hotelNameInput = document.createElement('input');
                                 hotelNameInput.type = 'text';
@@ -238,12 +238,12 @@
                                 hotelNameInput.required = true;
                                 hotelNameInput.placeholder = 'Nombre del hotel ' + i;
                                 hotelNameInput.classList.add('form-control', 'form-control-sm');
-                                colWrapper.appendChild(hotelNameInput);
+                                colWrapper2.appendChild(hotelNameInput);
 
-                                hotelRow.appendChild(colWrapper);
+                                hotelRow.appendChild(colWrapper2);
 
-                                var colWrapper2 = document.createElement('div');
-                                colWrapper2.classList.add('col-12');
+                                var colWrapper3 = document.createElement('div');
+                                colWrapper3.classList.add('col-2');
 
                                 var hotelLocationInput = document.createElement('input');
                                 hotelLocationInput.type = 'text';
@@ -251,41 +251,36 @@
                                 hotelLocationInput.required = true;
                                 hotelLocationInput.placeholder = 'Ubicación del hotel ' + i;
                                 hotelLocationInput.classList.add('form-control', 'form-control-sm');
-                                colWrapper2.appendChild(hotelLocationInput);
+                                colWrapper3.appendChild(hotelLocationInput);
 
-                                hotelRow.appendChild(colWrapper2);
+                                hotelRow.appendChild(colWrapper3);
 
-                                var colWrapper3 = document.createElement('div');
-                                colWrapper3.classList.add('col-12');
+                                var colWrapper4 = document.createElement('div');
+                                colWrapper4.classList.add('col-4');
 
                                 var hotelDescriptionInput = document.createElement('textarea');
                                 hotelDescriptionInput.name = 'hoteles[' + i + '][descripcion]';
                                 hotelDescriptionInput.required = true;
                                 hotelDescriptionInput.placeholder = 'Descripción del hotel ' + i;
                                 hotelDescriptionInput.classList.add('form-control', 'form-control-sm');
-                                colWrapper3.appendChild(hotelDescriptionInput);
-
-                                hotelRow.appendChild(colWrapper3);
-
-                                var colWrapper4 = document.createElement('div');
-                                colWrapper4.classList.add('col-12');
-
+                                colWrapper4.appendChild(hotelDescriptionInput);
+                                hotelRow.appendChild(colWrapper4);
+                                var colWrapper5 = document.createElement('div');
+                                colWrapper5.classList.add('col-2');
                                 var hotelImageInput = document.createElement('input');
                                 hotelImageInput.type = 'file';
                                 hotelImageInput.name = 'hoteles[' + i + '][img]';
                                 hotelImageInput.required = true;
                                 hotelImageInput.accept = 'image/*';
                                 hotelImageInput.classList.add('form-control-file');
-                                colWrapper4.appendChild(hotelImageInput);
+                                colWrapper5.appendChild(hotelImageInput);
 
-                                hotelRow.appendChild(colWrapper4);
+                                hotelRow.appendChild(colWrapper5);
 
                                 hotelesContainer.appendChild(hotelRow);
                             }
                         });
                     </script>
-
-
 
                     <div class="col-lg-12 mt-3">
                         <label for="contenido">Contenido</label>

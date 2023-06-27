@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorias;
 use App\Models\Fecha;
+use App\Models\Hotel;
 use App\Models\Tours;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,12 @@ class ToursController extends Controller
             'fechas' => 'nullable|array',
             'fechas.*.fecha' => 'required|date',
             'fechas.*.precio' => 'required|numeric',
+
+            'hoteles' => 'nullable|array',
+            'hoteles.*.nombre' => 'required',
+            'hoteles.*.ubicacion' => 'required',
+            'hoteles.*.descripcion' => 'required',
+            'hoteles.*.img' => 'required|image',
         ]);
 
         $tour = new Tours();
@@ -90,7 +97,7 @@ class ToursController extends Controller
 
             foreach ($galeriaFiles as $galeriaFile) {
                 $galeriaName = $galeriaFile->getClientOriginalName();
-                $galeriaFile->move('img/galeriaTours', $galeriaName);
+                $galeriaFile->move('img/galeriaTours/', $galeriaName);
                 $galeriaNames[] = url('img/galeriaTours/' . $galeriaName);
             }
 
@@ -111,9 +118,24 @@ class ToursController extends Controller
             }
         }
 
+        if ($request->has('hoteles')) {
+            foreach ($validated['hoteles'] as $hotelData) {
+                $hotel = new Hotel();
+                $hotel->nombre = $hotelData['nombre'];
+                $hotel->ubicacion = $hotelData['ubicacion'];
+                $hotel->descripcion = $hotelData['descripcion'];
+                if ($hotelData['img']) {
+                    $imgName = $hotelData['img']->getClientOriginalName();
+                    $hotelData['img']->move('img/hoteles/', $imgName);
+                    $hotel->img = 'img/hoteles/' . $imgName;
+                }
+                $hotel->tour_id = $tour->id;
+                $hotel->save();
+            }
+        }
+
         return redirect()->route('tours.index');
     }
-
     public function show($slug)
     {
         $tour = Tours::where('slug', $slug)->firstOrFail();
@@ -122,11 +144,12 @@ class ToursController extends Controller
     public function edit($id)
     {
         $tour = Tours::findOrFail($id);
-        $fechas = $tour->fechas; // Obtener las fechas asociadas al tour
+        $fechas = $tour->fechas;
+        $hoteles = $tour->hoteles;
         $categorias = Categorias::pluck('nombre', 'id');
-        return view('admin.tours.tours.edit', compact('tour', 'fechas', 'categorias'));
+        return view('admin.tours.tours.edit', compact('tour', 'fechas', 'hoteles', 'categorias'));
     }
-    
+
     /* public function edit($id)
     {
         $tour = Tours::findOrFail($id);
@@ -157,6 +180,12 @@ class ToursController extends Controller
             'fechas' => 'nullable|array',
             'fechas.*.fecha' => 'required|date',
             'fechas.*.precio' => 'required|numeric',
+
+            /* 'hoteles' => 'nullable|array',
+            'hoteles.*.nombre' => 'required',
+            'hoteles.*.ubicacion' => 'required',
+            'hoteles.*.descripcion' => 'required',
+            'hoteles.*.img' => 'nullable|image', */
         ]);
 
         $tour = Tours::findOrFail($id);
@@ -218,6 +247,31 @@ class ToursController extends Controller
             $fecha->precio = $fechaData['precio'];
             $tour->fechas()->save($fecha);
         }
+
+        /* $hotel = $request->input('hoteles');
+
+        $tour->hoteles()->delete();
+
+        if ($request->has('hoteles')) {
+            foreach ($validated['hoteles'] as $hotelData) {
+                $hotel = new Hotel();
+                $hotel->nombre = $hotelData['nombre'];
+                $hotel->ubicacion = $hotelData['ubicacion'];
+                $hotel->descripcion = $hotelData['descripcion'];
+
+                if (isset($hotelData['img']) && $hotelData['img']) {
+                    $imgName = $hotelData['img']->getClientOriginalName();
+                    $hotelData['img']->move('img/hoteles/', $imgName);
+                    $hotel->img = 'img/hoteles/' . $imgName;
+                }
+
+                $hotel->tour_id = $tour->id;
+                $hotel->save();
+            }
+        } */
+
+
+
         $tour->save();
         return redirect()->route('tours.index');
     }

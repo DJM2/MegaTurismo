@@ -66,6 +66,6 @@ class Tours extends Model
     }
     public function hoteles()
     {
-        return $this->hasMany(Hotel::class);
+        return $this->hasMany(Hotel::class, 'tour_id');
     }
 }

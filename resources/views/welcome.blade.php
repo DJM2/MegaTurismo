@@ -162,6 +162,155 @@
             </div>
         </div>
     </section>
+
+    <div class="container-fluid containerReviews">
+
+        <div class="row">
+            <div class="col-lg-12 mb-4">
+                <h2 class="text-center">Top Reviews</h2>
+                <p class="text-center">Esta es una lista de los comentarios de nuestros pasajeros del año 2023</p>
+            </div>
+            <div class="col-lg-12">
+                <div id="commentCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>Nombre Muestra</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>Nombre Muestra</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>Nombre Muestra</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>David Miranda</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>Gabriela Durand</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row cardReview ml-1 mr-1">
+                                        <div class="col-4">
+                                            <div class="circulo">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <h5>Kelly Pérez</h5>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <p>Texto de muestra del comentario...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Añade más "carousel-item" si tienes más comentarios -->
+                    </div>
+                    <!-- Controles de navegación -->
+                    <div class="col-12 text-center mt-4">
+                        <a class="btn-slide mb-3 mr-1" href="#commentCarousel" role="button" data-slide="prev">
+                            <i class="fa fa-circle"></i>
+                        </a>
+                        <a class="btn-slide mb-3" href="#commentCarousel" role="button" data-slide="next">
+                            <i class="fa fa-circle"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <section>
         <div class="container">
             <div class="row">

@@ -253,6 +253,69 @@
                         });
                     </script>
 
+                    <div class="col-lg-12 mt-3">
+                        <label for="hoteles">Cantidad de Hoteles:</label>
+                        <input type="number" class="form-control form-control-sm" name="hoteles" id="hoteles"
+                            min="0" value="{{ count($hoteles) }}">
+                        @error('hoteles')
+                            <div>{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div id="hoteles-container" class="mt-3 col-12">
+                        @foreach ($hoteles as $index => $hotel)
+                            <div class="row mb-3">
+                                <div class="col-1">
+                                    <p class="font-weight-bold">Hotel {{ $index + 1 }}:</p>
+                                </div>
+                                <div class="col-2">
+                                    <input type="text" name="hoteles[{{ $index }}][nombre]"
+                                        value="{{ $hotel['nombre'] }}" required class="form-control form-control-sm">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" name="hoteles[{{ $index }}][ubicacion]" step="0.01"
+                                        value="{{ $hotel['ubicacion'] }}" required
+                                        placeholder="Ubicación {{ $index + 1 }}" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" name="hoteles[{{ $index }}][descripcion]"
+                                        step="0.01" value="{{ $hotel['descripcion'] }}" required
+                                        placeholder="Descripción {{ $index + 1 }}"
+                                        class="form-control form-control-sm">
+                                </div>
+                                <div class="col-3">
+                                    <input type="file" name="hoteles[{{ $index }}][img]" accept="image/*" class="form-control-file"
+                                        onchange="prevImgHotel(this, 'imgPrevisualizacion{{ $index }}', 'imgInput{{ $index }}')">
+                                    <img id="imgPrevisualizacion{{ $index }}" src="{{ asset($hotel['img']) }}" style="width: 100%; height: 100px; object-fit: cover;">
+                                    <input id="imgInput{{ $index }}" type="hidden" name="hoteles[{{ $index }}][img_prev]"
+                                        value="{{ $hotel['img'] }}">
+                                    @if (!isset($hotel['img']))
+                                        <input type="hidden" name="hoteles[{{ $index }}][img]" value="default-image-url">
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <script>
+                        function prevImgHotel(input, imgId, inputId) {
+                            const archivo = input.files[0];
+                            const imagenPrevisualizacion = document.getElementById(imgId);
+                            const inputCampo = document.getElementById(inputId);      
+                            if (archivo) {
+                                const lector = new FileReader();
+                                lector.onload = function(e) {
+                                    imagenPrevisualizacion.src = e.target.result;
+                                    inputCampo.value = e.target.result;
+                                };
+                                lector.readAsDataURL(archivo);
+                            } else {
+                                imagenPrevisualizacion.src = "";
+                                inputCampo.value = "";
+                            }
+                        }
+                    </script>
+                    
+
+
                     <div class="col-lg-6 mt-3">
                         <label for="contenido">Contenido</label>
                         <textarea name="contenido" class="ckeditor form-control" id="contenido" required>{{ old('contenido', $tour->contenido) }}</textarea>

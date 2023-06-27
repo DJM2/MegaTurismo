@@ -13,10 +13,10 @@
             <span>Days:<br>
                 <span class="resaltado">{{ $tour->dias }}</span>
             </span>
-            <span>Trip: <br>
+            <span>Difficulty: <br>
                 <span class="resaltado">{{ $tour->dificultad }}</span>
             </span>
-            <span>Category: <br>
+            <span>Tour: <br>
                 <span class="resaltado">
                     @foreach ($tour->categorias as $categoria)
                         {{ $categoria->nombre }}
@@ -27,9 +27,74 @@
                 <span class="resaltado">USD{{ $tour->precioPublicado }}</span>
             </span>
             <span>
-                <a href="#fechas" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
-                <a href="" class="book"><i class="fa fa-pencil"> Book</i></a>
+                <a href="#dates" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
+                <a class="book" id="bookBtn"><i class="fa fa-pencil"></i> Book</a>
             </span>
+            <div class="popup" id="bookPopup">
+                <div class="popup-content container">
+                    <h3 class="text-center">Reserve trip</h3>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">Name:</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control form-control-sm"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="telefono">Phone:</label>
+                                    <input type="tel" id="telefono" name="telefono"
+                                        class="form-control form-control-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fechaViaje">Fecha de Viaje:</label>
+                                    <input type="date" id="fechaViaje" name="fechaViaje"
+                                        class="form-control form-control-sm" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cantidadAdultos">Adults:</label>
+                                    <input type="number" id="cantidadAdultos" name="cantidadAdultos"
+                                        class="form-control form-control-sm" min="1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cantidadAdultos">Children:</label>
+                                    <input type="number" id="cantidadAdultos" name="cantidadAdultos"
+                                        class="form-control form-control-sm" min="1" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tipoViaje">Trip kind:</label>
+                                    <select id="tipoViaje" name="tipoViaje" class="form-control form-control-sm" required>
+                                        <option value="familia">Familia</option>
+                                        <option value="enPareja">En Pareja</option>
+                                        <option value="amigos">Amigos</option>
+                                        <option value="enGrupo">En Grupo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje" class="form-control form-control-sm" rows="4" required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm">Enviar</button>
+                        </div>
+                    </form>
+                    <button class="close close-btn" id="closeBtn"><i class="fa fa-times"></i></button>
+                </div>
+            </div>            
         </div>
     </div>
     <!-- Modal -->
@@ -63,11 +128,11 @@
                     <div class="submenu">
                         <a href="#overview"><i class="fa fa-list"></i> Overview</a>
                         <a href="#galery"><i class="fa fa-image"></i> Gallery</a>
-                        <a href="#itinerario"><i class="fa fa-map"></i> Itinerary</a>
-                        <a href="#incluidos"><i class="fa fa-cart-plus"></i> Inclusions</a>
-                        <a href="#fechas"><i class="fa fa-calendar"></i> Dates & Availability</a>
-                        <a href=""><i class="fa fa-hotel"></i> Hotels</a>
-                        <a href=""><i class="fa fa-exclamation"></i> Essential trip info</a>
+                        <a href="#itinerary"><i class="fa fa-map"></i> Itinerary</a>
+                        <a href="#includes"><i class="fa fa-cart-plus"></i> Inclusions</a>
+                        <a href="#dates"><i class="fa fa-calendar"></i> Dates & Availability</a>
+                        <a href="#hotels"><i class="fa fa-hotel"></i> Hotels</a>
+                        <a href="#important"><i class="fa fa-exclamation"></i> Essential trip info</a>
                     </div>
                 </div>
             </div>
@@ -84,12 +149,13 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div id="overview" style="padding-top: 3rem">
+                        <div id="overview" style="padding-top: 4rem">
+                            <h3>Overview:</h3>
                             <p class="mt-4">{!! $tour->contenido !!}</p>
                         </div>
                     </div>
                     <div class="col-12">
-                        <h3 id="galery" class="mb-3" style="padding-top: 4rem">Gallery</h3>
+                        <h3 id="galery" class="mb-3" style="padding-top: 4rem">Gallery:</h3>
                         <div id="galeria" class="carousel slide" data-ride="carousel">
                             <!-- Indicadores -->
                             <ol class="carousel-indicators">
@@ -152,18 +218,19 @@
                         </a>
                     </div> --}}
                     <div class="col-12">
-                        <div class="itinerario" style="padding-top: 5rem" id="itinerario">
+                        <div class="itinerary" style="padding-top: 5rem" id="itinerary">
+                            <h3>Itinerary:</h3>
                             {!! $tour->detallado !!}
                         </div>
                     </div>
                     <div class="col-12">
-                        <div id="incluidos" style="padding-top: rem">
-                            <h3>Inclusions</h3>
+                        <div id="includes" style="padding-top: 4rem">
+                            <h3>Inclusions:</h3>
                             {!! $tour->incluidos !!}
                         </div>
                     </div>
                     <div class="col-12">
-                        <div id="fechas" style="padding-top: 4rem">
+                        <div id="dates" style="padding-top: 4rem">
                             <h3>Next dates with offers:</h3>
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -189,21 +256,59 @@
                                                 <td class="align-middle">
                                                     <del>U${{ $tour->precioPublicado }}.00</del><br>U${{ $fecha->precio }}
                                                 </td>
-                                                <td class="align-middle"><a href="" class="btnReserva">Book</a></td>
+                                                <td class="align-middle"><a href="" class="btnReserva">Book</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </div>
+                    <div class="col-lg-12">
+                        <div id="hotels" style="padding-top: 4rem">
+                            <h3>Hotels:</h3>
+                            @foreach ($tour->hoteles as $hotel)
+                                <div class="row mt-3">
+                                    <div class="col-5">
+                                        <img src="{{ asset($hotel->img) }}" width="100%" alt="">
+                                    </div>
+                                    <div class="col-7">
+                                        <h5>{{ $hotel->nombre }}</h5>
+                                        <p><i class="fa fa-map-marker"></i> {{ $hotel->ubicacion }}</p>
+                                        <p class="card-text">{{ $hotel->descripcion }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div id="importante" style="padding-top: 4rem">
+                            <h3>Essential trip info:</h3>
+                            <p>
+                                {!! $tour->importante !!}
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+        <script>
+            const bookBtn = document.getElementById('bookBtn');
+            const bookPopup = document.getElementById('bookPopup');
+            const closeBtn = document.getElementById('closeBtn');
+            bookBtn.addEventListener('click', () => {
+                bookPopup.style.display = 'flex';
+            });
+            closeBtn.addEventListener('click', () => {
+                bookPopup.style.display = 'none';
+            });
+            bookPopup.addEventListener('click', (event) => {
+                if (!event.target.closest('.popup-content')) {
+                    bookPopup.style.display = 'none';
+                }
+            });
+        </script>
     </div>
-
-    <section>
-
-    </section>
 @endsection
