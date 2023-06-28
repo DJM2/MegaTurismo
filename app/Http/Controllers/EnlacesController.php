@@ -27,4 +27,9 @@ class EnlacesController extends Controller
         $tours = Tours::all();
         return view('spiritual', compact('tours'));
     }
+    public function blogen()
+    {
+        $tours = Tours::all();
+        return view('blog.index', compact('tours'));
+    }
 }

@@ -67,7 +67,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{route('adventures')}}">Peru Adventure</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('gastronomy')}}">Peru Gastronomy</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('spiritual')}}">Spiritual</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('blogen')}}">Blog</a></li>
                 </ul>
                 <form action="#" class="searchMenu">
                     <input type="text" placeholder="Search">

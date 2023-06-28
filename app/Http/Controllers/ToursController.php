@@ -150,13 +150,6 @@ class ToursController extends Controller
         return view('admin.tours.tours.edit', compact('tour', 'fechas', 'hoteles', 'categorias'));
     }
 
-    /* public function edit($id)
-    {
-        $tour = Tours::findOrFail($id);
-        $categorias = Categorias::query()->pluck('nombre', 'id');
-        return view('admin.tours.tours.edit', compact('tour', 'categorias'));
-    } */
-
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -181,11 +174,11 @@ class ToursController extends Controller
             'fechas.*.fecha' => 'required|date',
             'fechas.*.precio' => 'required|numeric',
 
-            /* 'hoteles' => 'nullable|array',
+            'hoteles' => 'nullable|array',
             'hoteles.*.nombre' => 'required',
             'hoteles.*.ubicacion' => 'required',
             'hoteles.*.descripcion' => 'required',
-            'hoteles.*.img' => 'nullable|image', */
+            'hoteles.*.img' => 'required|image',
         ]);
 
         $tour = Tours::findOrFail($id);
@@ -248,7 +241,7 @@ class ToursController extends Controller
             $tour->fechas()->save($fecha);
         }
 
-        /* $hotel = $request->input('hoteles');
+        $hotel = $request->input('hoteles');
 
         $tour->hoteles()->delete();
 
@@ -268,7 +261,7 @@ class ToursController extends Controller
                 $hotel->tour_id = $tour->id;
                 $hotel->save();
             }
-        } */
+        }
 
 
 

@@ -201,7 +201,6 @@
                             </div>
                         @endforeach
                     </div>
-
                     <script>
                         document.getElementById('fechas').addEventListener('input', function() {
                             var cantidadFechas = parseInt(this.value);
@@ -286,7 +285,7 @@
                                     <input type="file" name="hoteles[{{ $index }}][img]" accept="image/*" class="form-control-file"
                                         onchange="prevImgHotel(this, 'imgPrevisualizacion{{ $index }}', 'imgInput{{ $index }}')">
                                     <img id="imgPrevisualizacion{{ $index }}" src="{{ asset($hotel['img']) }}" style="width: 100%; height: 100px; object-fit: cover;">
-                                    <input id="imgInput{{ $index }}" type="hidden" name="hoteles[{{ $index }}][img_prev]"
+                                    <input id="imgInput{{ $index }}" type="hidden" name="hoteles[{{ $index }}][img]"
                                         value="{{ $hotel['img'] }}">
                                     @if (!isset($hotel['img']))
                                         <input type="hidden" name="hoteles[{{ $index }}][img]" value="default-image-url">

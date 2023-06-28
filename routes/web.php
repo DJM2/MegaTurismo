@@ -14,6 +14,9 @@ Route::get('/peru-adventures',[EnlacesController::class, 'adventures'])->name('a
 Route::get('/peru-gastronomy',[EnlacesController::class, 'gastronomy'])->name('gastronomy');
 Route::get('/spiritual',[EnlacesController::class, 'spiritual'])->name('spiritual');
 
+//Blog
+Route::get('/peru-blog',[EnlacesController::class, 'blogen'])->name('blogen');
+
 
 Route::get('/tour/{slug}', [ToursController::class, 'show'])->name('tour.show');
 Route::middleware('auth')->prefix('admin')->group(function () {

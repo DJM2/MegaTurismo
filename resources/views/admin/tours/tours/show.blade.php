@@ -30,10 +30,11 @@
                 <a href="#dates" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
                 <a class="book" id="bookBtn"><i class="fa fa-pencil"></i> Book</a>
             </span>
-            <div class="popup" id="bookPopup">
+            <div class="popup modal lg" id="bookPopup">
                 <div class="popup-content container">
                     <h3 class="text-center">Reserve trip</h3>
-                    <form>
+                    <form method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -60,6 +61,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="tipoViaje">Tour:</label>
+                                    <input type="text" id="tour" name="tour" value="{{$tour->nombre}} → {{ $tour->dias }} days" readonly class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <label for="cantidadAdultos">Adults:</label>
                                     <input type="number" id="cantidadAdultos" name="cantidadAdultos"
                                         class="form-control form-control-sm" min="1" required>
@@ -71,21 +78,10 @@
                                     <input type="number" id="cantidadAdultos" name="cantidadAdultos"
                                         class="form-control form-control-sm" min="1" required>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="tipoViaje">Trip kind:</label>
-                                    <select id="tipoViaje" name="tipoViaje" class="form-control form-control-sm" required>
-                                        <option value="familia">Familia</option>
-                                        <option value="enPareja">En Pareja</option>
-                                        <option value="amigos">Amigos</option>
-                                        <option value="enGrupo">En Grupo</option>
-                                    </select>
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="form-group">
-                            <label for="mensaje">Mensaje:</label>
+                            <label for="mensaje">Menssage:</label>
                             <textarea id="mensaje" name="mensaje" class="form-control form-control-sm" rows="4" required></textarea>
                         </div>
                         <div class="text-center">
@@ -94,7 +90,7 @@
                     </form>
                     <button class="close close-btn" id="closeBtn"><i class="fa fa-times"></i></button>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
     <!-- Modal -->
@@ -115,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row mt-4">
             <div class="col-lg-3">
                 <div class="sticky">
@@ -133,6 +129,7 @@
                         <a href="#dates"><i class="fa fa-calendar"></i> Dates & Availability</a>
                         <a href="#hotels"><i class="fa fa-hotel"></i> Hotels</a>
                         <a href="#important"><i class="fa fa-exclamation"></i> Essential trip info</a>
+                        <a id="bookBtn2" style="cursor:pointer"><i class="fa fa-pencil"></i> Book this tour</a>
                     </div>
                 </div>
             </div>
@@ -190,33 +187,6 @@
                         </div>
                     </div>
 
-                    {{--  <div id="galeria" class="carousel slide" data-ride="carousel">
-                        <!-- Indicadores -->
-                        <ol class="carousel-indicators">
-                            @foreach (explode(',', $tour->galeria) as $index => $imagen)
-                                <li data-target="#galeria" data-slide-to="{{ $index }}"
-                                    class="{{ $loop->first ? 'active' : '' }}"></li>
-                            @endforeach
-                        </ol>
-                        <!-- Imágenes -->
-                        <div class="carousel-inner" style="height:300px;">
-                            @foreach (explode(',', $tour->galeria) as $index => $imagen)
-                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                    <img src="{{ asset($imagen) }}" alt="Galería" width="100%"
-                                        style="object-fit: cover">
-                                </div>
-                            @endforeach
-                        </div>
-                        <!-- Controles -->
-                        <a class="carousel-control-prev" href="#galeria" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="carousel-control-next" href="#galeria" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Siguiente</span>
-                        </a>
-                    </div> --}}
                     <div class="col-12">
                         <div class="itinerary" style="padding-top: 5rem" id="itinerary">
                             <h3>Itinerary:</h3>
@@ -254,7 +224,7 @@
                                                     {{ date('M d, Y', strtotime($fechaFinal)) }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    <del>U${{ $tour->precioPublicado }}.00</del><br>U${{ $fecha->precio }}
+                                                    <del>U${{ $tour->precioPublicado }}.00</del><br><span class="precioTour">U${{ $fecha->precio }}</span>
                                                 </td>
                                                 <td class="align-middle"><a href="" class="btnReserva">Book</a>
                                                 </td>
@@ -296,19 +266,28 @@
         </div>
         <script>
             const bookBtn = document.getElementById('bookBtn');
+            const bookBtn2 = document.getElementById('bookBtn2');
             const bookPopup = document.getElementById('bookPopup');
             const closeBtn = document.getElementById('closeBtn');
-            bookBtn.addEventListener('click', () => {
+
+            function openPopup() {
                 bookPopup.style.display = 'flex';
-            });
-            closeBtn.addEventListener('click', () => {
+            }
+
+            function closePopup() {
                 bookPopup.style.display = 'none';
-            });
+            }
+
+            bookBtn.addEventListener('click', openPopup);
+            bookBtn2.addEventListener('click', openPopup);
+            closeBtn.addEventListener('click', closePopup);
+
             bookPopup.addEventListener('click', (event) => {
                 if (!event.target.closest('.popup-content')) {
-                    bookPopup.style.display = 'none';
+                    closePopup();
                 }
             });
         </script>
+
     </div>
 @endsection
