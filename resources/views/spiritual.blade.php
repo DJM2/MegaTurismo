@@ -1,170 +1,73 @@
 @extends('layouts.app')
 @section('titulo', 'Inicio')
 @section('contenido')
-    <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
-        <div class="carousel-inner" style="height: 70vh">
-            <div class="carousel-item active">
-                <img class="d-block zoom-in-image" src="{{ asset('img/sacsayhuaman-yoga-panoramic.webp') }}" alt="First slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>Este es un texto ejemplas</h5>
-                    <p>Este es un parrafo ejemplar</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block zoom-in-image" src="{{ asset('img/Qeswachaka-inca-bridge-Cusco.webp') }}"
-                    alt="Third slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>h5 de ejemplo</h5>
-                    <p>Parrafo de ejemplo</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block zoom-in-image" src="{{ asset('img/panoramic-view-of-machu-picchu.webp') }}"
-                    alt="Third slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>h5 de ejemplo</h5>
-                    <p>Parrafo de ejemplo</p>
-                </div>
-            </div>
-        </div>
-        <!-- Flechas de navegación -->
-        <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
-            <span class="prev" aria-hidden="true">
-                < <span class="sr-only">Previous
-            </span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
-            <span class="next" aria-hidden="true">></span>
-            <span class="sr-only">Next</span>
-        </a>
-        <!-- Puntos indicadores -->
-        <ol class="carousel-indicators">
-            <!-- Indicadores del carousel -->
-        </ol>
+    <div class="custom-container-2">
+        <img src="{{ asset('img/fondos/luxury-spiritual-shamanic-peru.jpg') }}" alt="Peru Mega Turismo">
+        <h1>Spiritual</h1>
     </div>
-    <section class="pt-3 pb-5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach ($gruposTours as $grupo)
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        @foreach ($grupo as $tour)
-                                            <div class="col-md-3 mb-3">
-                                                <div class="card">
-                                                    <a href="{{ route('tour.show', $tour->slug) }}">
-                                                        <img alt="" src="{{ $tour->imgThumb }}">
-                                                    </a>
-                                                    <div class="cardMin">
-                                                        <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
-                                                        <span><i class="fa fa-map-marker"></i> {{ $tour->lugarInicio }} →
-                                                            {{ $tour->lugarFin }} </span>
-                                                        <span><i class="fa fa-calendar"></i> {{ $tour->dias }} days</span>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">{{ $tour->nombre }}</h4>
-                                                        <p class="card-text">{{ $tour->descripcion }}</p>
-                                                        <a class="cardBtn" href="{{ route('tour.show', $tour->slug) }}"
-                                                            class="btn btn-primary">View details</a>
-                                                    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-justify">
+                <p>
+                    Full of mystery and culture dating back millennia, Peru is an indomitable land of deserts etched with
+                    ancient geoglyphs, rainforests teeming with wildlife, and soaring peaks harbouring secret cities.
+                </p>
+                <p>
+                    While many travellers come to visit one of South America's most famous sites, the ruins of Machu Picchu,
+                    the real Peru lies within its warm, proud inhabitants – many of whom can trace their bloodlines back to
+                    the Incas. What you might not expect is the foodie bonanza found in Lima or the adventures that await
+                    you in the ancient capital of Cusco. Whether you’re exploring the cobbled streets of Arequipa, bobbing
+                    on the floating islands of Lake Titicaca or uncovering mummies in Nazca, our Peru tours will have you
+                    feeling like a modern-day Indiana Jones. Just don’t forget to pack your fedora.
+                </p>
+            </div>
+            <div class="col-12">
+                <h2>Top Peru travel deals</h2>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Thumb</th>
+                            <th>Trip</th>
+                            <th>Route</th>
+                            <th>Days</th>
+                            <th>From</th>
+                            <th>Visit Tour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tours as $tour)
+                            <tr>
+                                <td class="align-middle"><img src="{{ asset($tour->imgThumb) }}" width="150px" alt="{{$tour->nombre}}"></td>
+                                <td class="align-middle"><strong>{{ $tour->nombre }}</strong> <br> {{ $tour->lugarInicio }} → {{ $tour->lugarFin }}</td>
+                                <td class="align-middle">                    
+                                    <div class="modal fade" id="imageModal{{ $tour->id }}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h4 class="text-center">{{ $tour->nombre }}</h4>
+                                                    <img src="{{ asset($tour->mapa) }}" alt="{{ $tour->nombre }}" width="100%">
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 text-center">
-                    <a class="btn-slide mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                        <i class="fa fa-circle"></i>
-                    </a>
-                    <a class="btn-slide mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-                        <i class="fa fa-circle"></i>
-                    </a>
-                </div>
+                                    <img src="{{ asset($tour->mapa) }}" alt="{{ $tour->nombre }}" width="150px" data-toggle="modal" data-target="#imageModal{{ $tour->id }}">
+                                </td>
+                                <td class="align-middle">{{ $tour->dias }}</td>
+                                <td class="align-middle">{{ $tour->precioReal}}<br> {{$tour->precioPublicado}}</td>
+                                <td class="align-middle"><a href="{{$tour->slug}}">View tour ⮞</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
             </div>
         </div>
-    </section>
+    </div>
+
 
     <div class="container-fluid containerReviews">
-
         <div class="row">
             <div class="col-lg-12 mb-4">
                 <h2 class="text-center">Top Reviews</h2>
@@ -179,8 +82,7 @@
                                     <div class="row cardReview ml-1 mr-1">
                                         <div class="col-4">
                                             <div class="circulo">
-                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
-                                                    alt="">
+                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%" alt="">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -190,7 +92,7 @@
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            
+
                                             <p>Texto de muestra del comentario...</p>
                                         </div>
                                     </div>
@@ -250,7 +152,7 @@
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            
+
                                             <p>Texto de muestra del comentario...</p>
                                         </div>
                                     </div>

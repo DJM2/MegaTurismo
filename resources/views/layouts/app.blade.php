@@ -63,10 +63,10 @@
                             <a class="dropdown-item" href="#">Page 4</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Peru Packages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Peru Adventure</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Peru Gastronomy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Spiritual</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('packages')}}">Peru Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('adventures')}}">Peru Adventure</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('gastronomy')}}">Peru Gastronomy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('spiritual')}}">Spiritual</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
                 </ul>
                 <form action="#" class="searchMenu">
