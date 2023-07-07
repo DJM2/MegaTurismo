@@ -283,21 +283,21 @@
                     </script>
 
                     <div class="col-lg-12 mt-3">
-                        <label for="contenido">Contenido</label>
+                        <label for="contenido">Contenido:</label>
                         <textarea name="contenido" id="contenido" class="ckeditor form-control" required>{{ old('contenido', isset($tour) ? $tour->contenido : '') }}</textarea>
                         @error('contenido')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-lg-12 mt-3">
-                        <label for="resumen">Resumen</label>
+                        <label for="resumen">Resumen:</label>
                         <textarea name="resumen" id="resumen" class="ckeditor form-control" required>{{ old('resumen', isset($tour) ? $tour->resumen : '') }}</textarea>
                         @error('resumen')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-lg-12 mt-3">
-                        <label for="detallado">Detallado</label>
+                        <label for="detallado">itinerario:</label>
                         <textarea name="detallado" class="ckeditor form-control" id="detallado" required>{{ old('detallado', isset($tour) ? $tour->detallado : '') }}</textarea>
                         @error('detallado')
                             <div>{{ $message }}</div>

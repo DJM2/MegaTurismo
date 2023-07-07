@@ -16,9 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
     </script>
@@ -53,21 +50,49 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle-split" href="#" id="dropdownDestinations"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations <span
-                                class="fa fa-caret-down caret"></span></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownDestinations">
-                            <a class="dropdown-item" href="#">Page 1</a>
-                            <a class="dropdown-item" href="#">Page 2</a>
-                            <a class="dropdown-item" href="#">Page 3</a>
-                            <a class="dropdown-item" href="#">Page 4</a>
-                        </div>
+                        {{-- <a class="nav-link dropdown-toggle-split" href="{{ route('destinies') }}"
+                            id="dropdownDestinations" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Destinations <span class="fa fa-caret-down caret"></span>
+                        </a> --}}
+                        <a class="nav-link dropdown-toggle-split" href="{{ route('destinies') }}"
+                        id="dropdownDestinations" onmouseover="toggleDropdown(true)" onclick="redirect()">
+                        Destinations <span class="fa fa-caret-down caret"></span>
+                     </a>
+                     
+                     <div class="dropdown-menu" aria-labelledby="dropdownDestinations" onmouseover="toggleDropdown(true)" onmouseout="toggleDropdown(false)">
+                        @foreach ($destinos as $destino)
+                           <a class="dropdown-item" href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                        @endforeach
+                     </div>                    
+                     
+                     <script>
+                        var dropdownOpen = false;
+                     
+                        function toggleDropdown(isOpen) {
+                           var dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
+                           if (isOpen) {
+                              dropdownMenu.classList.add('show');
+                              dropdownOpen = true;
+                           } else if (!isOpen && !dropdownMenu.matches(':hover')) {
+                              dropdownMenu.classList.remove('show');
+                              dropdownOpen = false;
+                           }
+                        }
+                     
+                        function redirect() {
+                           if (!dropdownOpen) {
+                              window.location.href = "{{ route('destinies') }}";
+                           }
+                        }
+                     </script>
+                     
+
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('packages')}}">Peru Packages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('adventures')}}">Peru Adventure</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('gastronomy')}}">Peru Gastronomy</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('spiritual')}}">Spiritual</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('blogen')}}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('packages') }}">Peru Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('adventures') }}">Peru Adventure</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gastronomy') }}">Peru Gastronomy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('spiritual') }}">Spiritual</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('blogen') }}">Blog</a></li>
                 </ul>
                 <form action="#" class="searchMenu">
                     <input type="text" placeholder="Search">

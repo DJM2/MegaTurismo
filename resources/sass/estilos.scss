@@ -171,9 +171,10 @@ body {
     &:hover {
       color: $secundario;
     }
-  }  
+  }
 }
-.precioTour{
+
+.precioTour {
   color: $secundario;
   font-weight: bold;
   font-size: 22px;
@@ -333,6 +334,30 @@ body {
 
 }
 
+.dropdown-menu {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 0px!important;
+
+  .dropdown-item:hover {
+    background: $principal2;
+    color: #fff;
+  }
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 .carousel-caption h5 {
   color: #fff;
@@ -638,6 +663,7 @@ body {
     text-align: center;
   }
 
+
   .popup {
     position: fixed;
     top: 0;
@@ -688,6 +714,34 @@ body {
   }
 }
 
+.card {
+  .card-header {
+    background: #ebebeb;
+    padding: 0.4em;
+
+    button {
+      color: #000;
+
+      &:hover {
+        text-decoration: none;
+        color: $secundario;
+      }
+
+      &:focus {
+        color: $secundario;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .collapse {
+    p {
+      padding: 1em !important;
+      text-align: justify;
+      transition: 0.2s ease;
+    }
+  }
+}
 
 .card {
   .card-title {

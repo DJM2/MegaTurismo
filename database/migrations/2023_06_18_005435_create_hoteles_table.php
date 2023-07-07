@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('nombre');
             $table->string('ubicacion');
             $table->text('descripcion');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->unsignedBigInteger('tour_id');
             $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
             $table->timestamps();

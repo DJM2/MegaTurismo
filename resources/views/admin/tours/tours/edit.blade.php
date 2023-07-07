@@ -191,12 +191,18 @@
                                 <div class="col-5">
                                     <input type="date" name="fechas[{{ $index }}][fecha]"
                                         value="{{ $fecha->fecha }}" required class="form-control form-control-sm">
+                                    @error("fechas.$index.fecha")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-5">
                                     <input type="number" name="fechas[{{ $index }}][precio]" step="0.01"
                                         value="{{ $fecha->precio }}" required
                                         placeholder="Agregar precio {{ $index + 1 }}"
                                         class="form-control form-control-sm">
+                                    @error("fechas.$index.precio")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         @endforeach
@@ -269,50 +275,112 @@
                                 <div class="col-2">
                                     <input type="text" name="hoteles[{{ $index }}][nombre]"
                                         value="{{ $hotel['nombre'] }}" required class="form-control form-control-sm">
+                                    @error("hoteles.$index.nombre")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-3">
                                     <input type="text" name="hoteles[{{ $index }}][ubicacion]" step="0.01"
                                         value="{{ $hotel['ubicacion'] }}" required
                                         placeholder="Ubicación {{ $index + 1 }}" class="form-control form-control-sm">
+                                    @error("hoteles.$index.ubicacion")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-3">
                                     <input type="text" name="hoteles[{{ $index }}][descripcion]"
-                                        step="0.01" value="{{ $hotel['descripcion'] }}" required
+                                        value="{{ $hotel['descripcion'] }}" required
                                         placeholder="Descripción {{ $index + 1 }}"
                                         class="form-control form-control-sm">
+                                    @error("hoteles.$index.descripcion")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-3">
-                                    <input type="file" name="hoteles[{{ $index }}][img]" accept="image/*" class="form-control-file"
-                                        onchange="prevImgHotel(this, 'imgPrevisualizacion{{ $index }}', 'imgInput{{ $index }}')">
-                                    <img id="imgPrevisualizacion{{ $index }}" src="{{ asset($hotel['img']) }}" style="width: 100%; height: 100px; object-fit: cover;">
-                                    <input id="imgInput{{ $index }}" type="hidden" name="hoteles[{{ $index }}][img]"
-                                        value="{{ $hotel['img'] }}">
-                                    @if (!isset($hotel['img']))
-                                        <input type="hidden" name="hoteles[{{ $index }}][img]" value="default-image-url">
+                                    <input type="file" name="hoteles[{{ $index }}][img]" accept="image/*" class="form-control-file">
+                                    @if (isset($hotel['img']))
+                                        <img id="imgPrevisualizacion{{ $index }}" src="{{ asset($hotel['img']) }}" style="width: 100%; height: 100px; object-fit: cover;">
+                                    @else
+                                        <img id="imgPrevisualizacion{{ $index }}" src="" style="width: 100%; height: 100px; object-fit: cover;">
                                     @endif
+                                    @error("hoteles.$index.img")
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <script>
-                        function prevImgHotel(input, imgId, inputId) {
-                            const archivo = input.files[0];
-                            const imagenPrevisualizacion = document.getElementById(imgId);
-                            const inputCampo = document.getElementById(inputId);      
-                            if (archivo) {
-                                const lector = new FileReader();
-                                lector.onload = function(e) {
-                                    imagenPrevisualizacion.src = e.target.result;
-                                    inputCampo.value = e.target.result;
-                                };
-                                lector.readAsDataURL(archivo);
-                            } else {
-                                imagenPrevisualizacion.src = "";
-                                inputCampo.value = "";
+                        document.getElementById('hoteles').addEventListener('input', function() {
+                            var cantidadHoteles = parseInt(this.value);
+                            var hotelesContainer = document.getElementById('hoteles-container');
+                            hotelesContainer.innerHTML = '';
+                            for (var i = 1; i <= cantidadHoteles; i++) {
+                                var hotelRow = document.createElement('div');
+                                hotelRow.classList.add('row', 'mb-3');
+
+                                var colWrapper1 = document.createElement('div');
+                                colWrapper1.classList.add('col-1');
+
+                                var label = document.createElement('label');
+                                label.textContent = 'Hotel ' + i + ':';
+                                label.classList.add('font-weight-bold','align-middle');
+                                colWrapper1.appendChild(label);
+                                hotelRow.appendChild(colWrapper1);
+                                var colWrapper2 = document.createElement('div');
+                                colWrapper2.classList.add('col-2');
+
+                                var hotelNameInput = document.createElement('input');
+                                hotelNameInput.type = 'text';
+                                hotelNameInput.name = 'hoteles[' + i + '][nombre]';
+                                hotelNameInput.required = true;
+                                hotelNameInput.placeholder = 'Nombre del hotel ' + i;
+                                hotelNameInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper2.appendChild(hotelNameInput);
+
+                                hotelRow.appendChild(colWrapper2);
+
+                                var colWrapper3 = document.createElement('div');
+                                colWrapper3.classList.add('col-2');
+
+                                var hotelLocationInput = document.createElement('input');
+                                hotelLocationInput.type = 'text';
+                                hotelLocationInput.name = 'hoteles[' + i + '][ubicacion]';
+                                hotelLocationInput.required = true;
+                                hotelLocationInput.placeholder = 'Ubicación del hotel ' + i;
+                                hotelLocationInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper3.appendChild(hotelLocationInput);
+
+                                hotelRow.appendChild(colWrapper3);
+
+                                var colWrapper4 = document.createElement('div');
+                                colWrapper4.classList.add('col-4');
+
+                                var hotelDescriptionInput = document.createElement('textarea');
+                                hotelDescriptionInput.name = 'hoteles[' + i + '][descripcion]';
+                                hotelDescriptionInput.required = true;
+                                hotelDescriptionInput.placeholder = 'Descripción del hotel ' + i;
+                                hotelDescriptionInput.classList.add('form-control', 'form-control-sm');
+                                colWrapper4.appendChild(hotelDescriptionInput);
+                                hotelRow.appendChild(colWrapper4);
+                                var colWrapper5 = document.createElement('div');
+                                colWrapper5.classList.add('col-2');
+                                var hotelImageInput = document.createElement('input');
+                                hotelImageInput.type = 'file';
+                                hotelImageInput.name = 'hoteles[' + i + '][img]';
+                                hotelImageInput.required = true;
+                                hotelImageInput.accept = 'image/*';
+                                hotelImageInput.classList.add('form-control-file');
+                                colWrapper5.appendChild(hotelImageInput);
+
+                                hotelRow.appendChild(colWrapper5);
+
+                                hotelesContainer.appendChild(hotelRow);
                             }
-                        }
+                        });
                     </script>
                     
+
 
 
                     <div class="col-lg-6 mt-3">
@@ -332,7 +400,7 @@
                     </div>
 
                     <div class="col-lg-12 mt-3">
-                        <label for="detallado">Detallado</label>
+                        <label for="detallado">Itinerario:</label>
                         <textarea name="detallado" class="ckeditor form-control" id="detallado" required>{{ old('detallado', $tour->detallado) }}</textarea>
                         @error('detallado')
                             <div>{{ $message }}</div>

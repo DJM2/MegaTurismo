@@ -8,7 +8,7 @@
     <meta name="robots" content="nofollow">
     <title>@yield('titulo')</title>
     <link rel="shortcut icon" href="#">
-    <link rel="icon" href="{{asset('img/icono-mega-turismo.png')}}" type="image/png">
+    <link rel="icon" href="{{ asset('img/icono-mega-turismo.png') }}" type="image/png">
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ asset('img/thumb/favicon-admin.png') }}" />
@@ -18,31 +18,93 @@
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion mb-4" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/" target="_blank">
-                <img src="{{asset('img/logo-mega-turismo-blanco.png')}}" width="30%" alt="">
+                <img src="{{ asset('img/logo-mega-turismo-blanco.png') }}" width="30%" alt="">
             </a>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
-                Idiomas
+                Inglés
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#espanol" aria-expanded="false" aria-controls="espanol">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ingles"
+                    aria-expanded="false" aria-controls="ingles">
                     <i class="fas fa-fw fa-language"></i>
-                    <span>Tours</span>
+                    <span>Tours EN</span>
                 </a>
-                <div id="espanol" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+                <div id="ingles" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
+                    style="">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('cats.index')}}">
-                            Categorias Tours Español
+                        <a class="collapse-item" href="{{ route('cats.index') }}">
+                            Categorias Tours Inglés
                         </a>
-                        <a class="collapse-item" href="{{route('tours.index')}}">
-                            Tours español
-                           </a>
+                        <a class="collapse-item" href="{{ route('tours.index') }}">
+                            Tours inglés
+                        </a>
+                        <a class="collapse-item" href="{{route('destinies.index')}}">
+                            Destinos EN
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#engblogs"
+                    aria-expanded="false" aria-controls="engblogs">
+                    <i class="fas fa-fw fa-pen"></i>
+                    <span>Blogs EN</span>
+                </a>
+                <div id="engblogs" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
+                    style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('entags.index') }}">
+                            Tags
+                        </a>
+                        <a class="collapse-item" href="{{ route('enblogs.index') }}">
+                            Blogs
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <div class="sidebar-heading">
+                Español
+            </div>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#espanol"
+                    aria-expanded="false" aria-controls="espanol">
+                    <i class="fas fa-fw fa-language"></i>
+                    <span>Tours ES</span>
+                </a>
+                <div id="espanol" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
+                    style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('cats.index') }}">
+                            Categorias Tours Inglés
+                        </a>
+                        <a class="collapse-item" href="{{ route('tours.index') }}">
+                            Tours inglés
+                        </a>
+                        <a class="collapse-item" href="">
+                            Destinos ES
+                        </a>
                     </div>
                 </div>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('images.index') }}">
+                    <i class="fas fa-fw fa-image"></i>
+                    <span>Imagenes</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Home</span>
                 </a>
@@ -134,7 +196,7 @@
 
     <script src="//cdn.ckeditor.com/4.14.1/plugins/youtube/plugin.js"></script>
     <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
-    
+
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

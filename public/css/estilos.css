@@ -270,6 +270,28 @@ body {
   margin-left: 1em;
 }
 
+.dropdown-menu {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 0px !important;
+}
+.dropdown-menu .dropdown-item:hover {
+  background: #15c9c9;
+  color: #fff;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .carousel-caption h5 {
   color: #fff;
   font-weight: bold;
@@ -576,6 +598,27 @@ body {
   margin-top: 0.5em;
   border: 1px solid #000;
   cursor: pointer;
+}
+
+.card .card-header {
+  background: #ebebeb;
+  padding: 0.4em;
+}
+.card .card-header button {
+  color: #000;
+}
+.card .card-header button:hover {
+  text-decoration: none;
+  color: #f24a6e;
+}
+.card .card-header button:focus {
+  color: #f24a6e;
+  text-decoration: none;
+}
+.card .collapse p {
+  padding: 1em !important;
+  text-align: justify;
+  transition: 0.2s ease;
 }
 
 .card .card-title {

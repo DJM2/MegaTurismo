@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorias;
+use App\Models\Destino;
 use App\Models\Fecha;
 use App\Models\Hotel;
 use App\Models\Tours;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ToursController extends Controller
 {
@@ -19,7 +21,8 @@ class ToursController extends Controller
     {
         $tours = Tours::all();
         $gruposTours = $tours->chunk(4);
-        return view('welcome', compact('gruposTours'));
+        $destinos = Destino::all();
+        return view('welcome', compact('gruposTours', 'destinos'));
     }
 
     public function create()
@@ -31,22 +34,25 @@ class ToursController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nombre' => 'required',
+            'nombre' => 'required|unique:tours',
             'descripcion' => 'required',
-            'precioReal' => 'required',
-            'precioPublicado' => 'required',
-            'dias' => 'required',
-            'dificultad' => 'required',
-            'imgThumb' => 'required|image',
-            'img' => 'required|image',
-            'galeria' => 'nullable|array',
-            'galeria.*' => 'image',
             'contenido' => 'required',
             'resumen' => 'required',
             'detallado' => 'required',
             'incluidos' => 'required',
+            'importante' => 'nullable',
+            'lugarInicio' => 'nullable',
+            'lugarFin' => 'nullable',
+            'precioReal' => 'required|integer',
+            'precioPublicado' => 'required|integer',
+            'dias' => 'required|integer',
+            'dificultad' => 'required',
+            'imgThumb' => 'required',
+            'img' => 'required',
+            'mapa' => 'nullable',
             'keywords' => 'required',
             'slug' => 'required|unique:tours',
+            'galeria' => 'nullable|max:10240',
 
             'fechas' => 'nullable|array',
             'fechas.*.fecha' => 'required|date',
@@ -139,7 +145,8 @@ class ToursController extends Controller
     public function show($slug)
     {
         $tour = Tours::where('slug', $slug)->firstOrFail();
-        return view('admin.tours.tours.show', compact('tour'));
+        $destinos = Destino::all();
+        return view('admin.tours.tours.show', compact('tour', 'destinos'));
     }
     public function edit($id)
     {
@@ -153,22 +160,31 @@ class ToursController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nombre' => 'required',
+            'nombre' => [
+                'required',
+                Rule::unique('tours')->ignore($id),
+            ],
             'descripcion' => 'required',
-            'precioReal' => 'required',
-            'precioPublicado' => 'required',
-            'dias' => 'required',
-            'dificultad' => 'required',
-            'imgThumb' => 'image',
-            'img' => 'image',
-            'galeria' => 'nullable|array',
-            'galeria.*' => 'image',
             'contenido' => 'required',
             'resumen' => 'required',
             'detallado' => 'required',
             'incluidos' => 'required',
+            'importante' => 'nullable',
+            'lugarInicio' => 'nullable',
+            'lugarFin' => 'nullable',
+            'precioReal' => 'required|integer',
+            'precioPublicado' => 'required|integer',
+            'dias' => 'required|integer',
+            'dificultad' => 'required',
+            'imgThumb' => 'nullable',
+            'img' => 'nullable',
+            'mapa' => 'nullable',
             'keywords' => 'required',
-            'slug' => 'required|unique:tours,slug,' . $id,
+            'slug' => [
+                'required',
+                Rule::unique('tours')->ignore($id),
+            ],
+            'galeria' => 'nullable|max:10240',
 
             'fechas' => 'nullable|array',
             'fechas.*.fecha' => 'required|date',
@@ -178,23 +194,24 @@ class ToursController extends Controller
             'hoteles.*.nombre' => 'required',
             'hoteles.*.ubicacion' => 'required',
             'hoteles.*.descripcion' => 'required',
-            'hoteles.*.img' => 'required|image',
+            'hoteles.*.img' => 'nullable|image',
         ]);
+
 
         $tour = Tours::findOrFail($id);
         $tour->nombre = $validated['nombre'];
         $tour->descripcion = $validated['descripcion'];
-        $tour->precioReal = $validated['precioReal'];
-        $tour->precioPublicado = $validated['precioPublicado'];
-        $tour->dias = $validated['dias'];
-        $tour->dificultad = $validated['dificultad'];
-        $tour->lugarInicio = $request->input('lugarInicio');
-        $tour->lugarFin = $request->input('lugarFin');
         $tour->contenido = $request->input('contenido');
         $tour->resumen = $request->input('resumen');
         $tour->detallado = $request->input('detallado');
         $tour->incluidos = $request->input('incluidos');
         $tour->importante = $request->input('importante');
+        $tour->lugarInicio = $request->input('lugarInicio');
+        $tour->lugarFin = $request->input('lugarFin');
+        $tour->precioReal = $validated['precioReal'];
+        $tour->precioPublicado = $validated['precioPublicado'];
+        $tour->dias = $validated['dias'];
+        $tour->dificultad = $validated['dificultad'];
         $tour->keywords = $validated['keywords'];
         $tour->slug = $validated['slug'];
 
@@ -241,29 +258,61 @@ class ToursController extends Controller
             $tour->fechas()->save($fecha);
         }
 
-        $hotel = $request->input('hoteles');
-
-        $tour->hoteles()->delete();
-
         if ($request->has('hoteles')) {
+            foreach ($validated['hoteles'] as $hotelData) {
+                $nombreHotel = $hotelData['nombre'];
+                $hotel = Hotel::where('nombre', $nombreHotel)->where('tour_id', $tour->id)->first();
+
+                if (!$hotel) {
+                    // Si el hotel no existe, crea un nuevo modelo
+                    $hotel = new Hotel();
+                    $hotel->nombre = $nombreHotel;
+                    $hotel->tour_id = $tour->id;
+                }
+
+                // Actualiza los valores del hotel según sea necesario
+                $hotel->ubicacion = $hotelData['ubicacion'];
+                $hotel->descripcion = $hotelData['descripcion'];
+
+                if (isset($hotelData['img'])) {
+                    $img = $hotelData['img'];
+                    if ($img) {
+                        $imgName = $img->getClientOriginalName();
+                        $img->move('img/hoteles/', $imgName);
+                        $hotel->img = 'img/hoteles/' . $imgName;
+                    }
+                }
+
+                $hotel->save();
+            }
+        }
+
+
+
+
+        /* if ($request->has('hoteles')) {
             foreach ($validated['hoteles'] as $hotelData) {
                 $hotel = new Hotel();
                 $hotel->nombre = $hotelData['nombre'];
                 $hotel->ubicacion = $hotelData['ubicacion'];
                 $hotel->descripcion = $hotelData['descripcion'];
 
-                if (isset($hotelData['img']) && $hotelData['img']) {
-                    $imgName = $hotelData['img']->getClientOriginalName();
-                    $hotelData['img']->move('img/hoteles/', $imgName);
-                    $hotel->img = 'img/hoteles/' . $imgName;
+                if (isset($hotelData['img'])) {
+                    $img = $hotelData['img'];
+                    if ($img) {
+                        $imgName = $img->getClientOriginalName();
+                        $img->move('img/hoteles/', $imgName);
+                        $hotel->img = 'img/hoteles/' . $imgName;
+                    }
+                }  else {
+                    $hotel->img = $hotel->img ?: '';                 
                 }
 
                 $hotel->tour_id = $tour->id;
                 $hotel->save();
+                dd($hotel);
             }
-        }
-
-
+        } */
 
         $tour->save();
         return redirect()->route('tours.index');

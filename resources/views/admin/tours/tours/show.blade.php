@@ -1,12 +1,20 @@
 @extends('layouts.app')
-@section('titulo', 'Inicio')
+@section('titulo', $tour->nombre)
 @section('contenido')
     <div class="container-fluid custom-container">
         <img src="{{ asset($tour->img) }}" alt="{{ $tour->nombre }}">
         <h1 class="title">{{ $tour->nombre }}</h1>
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
     </div>
     <div class="mensaje d-flex align-items-center justify-content-center">
-        <p>Texto de muestra generado automaticametne</p>
+        <p>Texto de muestra generado automaticamente</p>
     </div>
     <div class="container-fluid toursDetails">
         <div class="row">
@@ -24,7 +32,7 @@
                 </span>
             </span>
             <span>Price: <br>
-                <span class="resaltado">USD{{ $tour->precioPublicado }}</span>
+                <span class="resaltado">U${{ $tour->precioPublicado }}.00</span>
             </span>
             <span>
                 <a href="#dates" class="dates"><i class="fa fa-calendar"></i> Go to dates</a>
@@ -33,20 +41,27 @@
             <div class="popup modal lg" id="bookPopup">
                 <div class="popup-content container">
                     <h3 class="text-center">Reserve trip</h3>
-                    <form method="POST">
+                    <form method="POST" action="{{ route('reservas') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nombre">Name:</label>
                                     <input type="text" id="nombre" name="nombre" class="form-control form-control-sm"
                                         required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="telefono">Phone:</label>
                                     <input type="tel" id="telefono" name="telefono"
+                                        class="form-control form-control-sm" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="tel" id="email" name="email"
                                         class="form-control form-control-sm" required>
                                 </div>
                             </div>
@@ -56,29 +71,31 @@
                                 <div class="form-group">
                                     <label for="fechaViaje">Fecha de Viaje:</label>
                                     <input type="date" id="fechaViaje" name="fechaViaje"
-                                        class="form-control form-control-sm" required>
+                                        class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tipoViaje">Tour:</label>
-                                    <input type="text" id="tour" name="tour" value="{{$tour->nombre}} → {{ $tour->dias }} days" readonly class="form-control form-control-sm">
+                                    <input type="text" id="tour" name="tour"
+                                        value="{{ $tour->nombre }} → {{ $tour->dias }} days" readonly
+                                        class="form-control form-control-sm">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cantidadAdultos">Adults:</label>
                                     <input type="number" id="cantidadAdultos" name="cantidadAdultos"
-                                        class="form-control form-control-sm" min="1" required>
+                                        class="form-control form-control-sm" min="1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="cantidadAdultos">Children:</label>
                                     <input type="number" id="cantidadAdultos" name="cantidadAdultos"
-                                        class="form-control form-control-sm" min="1" required>
+                                        class="form-control form-control-sm" min="1">
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="mensaje">Menssage:</label>
@@ -186,13 +203,86 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="col-12">
-                        <div class="itinerary" style="padding-top: 5rem" id="itinerary">
+                        <div class="itinerary" style="padding-top: 5rem;" id="itinerary">
                             <h3>Itinerary:</h3>
-                            {!! $tour->detallado !!}
                         </div>
                     </div>
+                    <script>
+                        const detalladoContent = `{!! $tour->detallado !!}`;
+
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const itineraryContainer = document.getElementById("itinerary");
+                            const h3Element = itineraryContainer.querySelector("h3");
+
+                            const detalladoDiv = document.createElement("div");
+                            detalladoDiv.innerHTML = detalladoContent;
+
+                            const h2Elements = detalladoDiv.querySelectorAll("h2");
+
+                            h2Elements.forEach(function(h2, index) {
+                                const content = getNextNodesUntilNextH2(h2);
+                                const accordionId = `accordion-${index}`;
+                                const collapseId = `collapse-${index}`;
+
+                                // Create accordion card
+                                const card = document.createElement("div");
+                                card.classList.add("card");
+
+                                // Create card header
+                                const cardHeader = document.createElement("div");
+                                cardHeader.classList.add("card-header");
+                                cardHeader.id = accordionId;
+
+                                // Create collapse button
+                                const collapseButton = document.createElement("button");
+                                collapseButton.classList.add("btn", "btn-link");
+                                collapseButton.setAttribute("type", "button");
+                                collapseButton.setAttribute("data-toggle", "collapse");
+                                collapseButton.setAttribute("data-target", `#${collapseId}`);
+                                collapseButton.setAttribute("aria-expanded", "true");
+                                collapseButton.setAttribute("aria-controls", collapseId);
+                                collapseButton.textContent = h2.textContent;
+
+                                // Append collapse button to card header
+                                cardHeader.appendChild(collapseButton);
+
+                                // Create card body
+                                const cardBody = document.createElement("div");
+                                cardBody.classList.add("collapse");
+                                cardBody.id = collapseId;
+                                cardBody.setAttribute("aria-labelledby", accordionId);
+                                cardBody.setAttribute("data-parent", "#itinerary");
+                                cardBody.innerHTML = content;
+
+                                // Append card header and body to card
+                                card.appendChild(cardHeader);
+                                card.appendChild(cardBody);
+
+                                // Append card to itineraryContainer
+                                itineraryContainer.appendChild(card);
+                            });
+                        });
+
+                        // Function to get the content between current h2 and the next h2
+                        function getNextNodesUntilNextH2(currentH2) {
+                            const contentNodes = [];
+                            let currentNode = currentH2.nextSibling;
+
+                            while (currentNode && currentNode.tagName !== "H2") {
+                                contentNodes.push(currentNode);
+                                currentNode = currentNode.nextSibling;
+                            }
+
+                            const wrapperDiv = document.createElement("div");
+                            contentNodes.forEach(function(node) {
+                                wrapperDiv.appendChild(node.cloneNode(true));
+                            });
+
+                            return wrapperDiv.innerHTML;
+                        }
+                    </script>
+
                     <div class="col-12">
                         <div id="includes" style="padding-top: 4rem">
                             <h3>Inclusions:</h3>
@@ -224,7 +314,8 @@
                                                     {{ date('M d, Y', strtotime($fechaFinal)) }}
                                                 </td>
                                                 <td class="align-middle">
-                                                    <del>U${{ $tour->precioPublicado }}.00</del><br><span class="precioTour">U${{ $fecha->precio }}</span>
+                                                    <del>U${{ $tour->precioPublicado }}.00</del><br><span
+                                                        class="precioTour">U${{ $fecha->precio }}</span>
                                                 </td>
                                                 <td class="align-middle"><a href="" class="btnReserva">Book</a>
                                                 </td>
@@ -260,7 +351,6 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

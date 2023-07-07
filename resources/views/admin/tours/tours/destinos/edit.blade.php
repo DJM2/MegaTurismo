@@ -1,0 +1,112 @@
+@extends('admin.admin')
+@section('titulo', 'Editar Destino en Inglés')
+@section('contenido')
+    <div class="row">
+        <div class="col-12 mt-2">
+            <div class="row">
+                <div class="col-6 float-left">
+                    <h3>Editar Destino en Inglés:</h3>
+                </div>
+                <div class="col-6">
+                    <a href="{{ route('destinies.index') }}" class="btn btn-primary btn-sm float-right mr-2">Cancelar</a>
+                </div>
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        @if (session('status'))
+                            <div class="text-success">
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="{{ route('destinies.update', $destino->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" name="nombre" class="form-control form-control-sm" value="{{ $destino->nombre }}"
+                        required>
+                    @error('nombre')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="img">Imagen:</label>
+                            <input type="file" name="img" accept="image/*" class="form-control form-control-sm"
+                                id="imgInput">
+                            @error('img')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <div class="mt-2">
+                                @if ($destino->img)
+                                    <img src="{{ asset('img/destinos/' . $destino->img) }}" alt="Imagen Destino"
+                                        style="max-width: 100%; height: 200px; object-fit: cover;">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="imgThumb">Imagen Thumbnail:</label>
+                            <input type="file" name="imgThumb" accept="image/*" class="form-control form-control-sm"
+                                id="imgThumbInput">
+                            @error('imgThumb')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <div class="mt-2">
+                                @if ($destino->imgThumb)
+                                    <img src="{{ asset('img/destinos/thumbs/' . $destino->imgThumb) }}"
+                                        alt="Imagen Thumbnail" style="max-width: 100%; height: 200px; object-fit: cover;">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea name="descripcion" class="ckeditor form-control form-control-sm" required>{{ $destino->descripcion }}</textarea>
+                    @error('descripcion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="slug">Slug:</label>
+                    <input type="text" name="slug" id="slugInput" class="form-control form-control-sm"
+                        value="{{ $destino->slug }}" required>
+                    @error('slug')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const slugInput = document.getElementById('slugInput');
+
+        slugInput.addEventListener('keyup', function(event) {
+            const previousValue = this.value;
+            const newValue = previousValue.replace(/\s+/g, '-');
+            this.value = newValue;
+        });
+    </script>
+@endsection
