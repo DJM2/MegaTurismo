@@ -46,10 +46,10 @@
         </div>
 
         <div class="form-group">
-            <label for="keywords">Keywords:</label>
-            <input type="text" name="keywords" id="keywords" class="form-control{{ $errors->has('keywords') ? ' is-invalid' : '' }}" value="{{ old('keywords', $blog->keywords ?? '') }}" placeholder="Keywords">
-            @if ($errors->has('keywords'))
-                <div class="invalid-feedback">{{ $errors->first('keywords') }}</div>
+            <label for="keyword">Keywords:</label>
+            <input type="text" name="keyword" id="keyword" class="form-control{{ $errors->has('keyword') ? ' is-invalid' : '' }}" value="{{ old('keyword', $blog->keyword ?? '') }}" placeholder="Keywords">
+            @if ($errors->has('keyword'))
+                <div class="invalid-feedback">{{ $errors->first('keyword') }}</div>
             @endif
         </div>
 

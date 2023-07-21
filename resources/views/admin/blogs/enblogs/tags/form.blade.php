@@ -31,7 +31,7 @@
         </script>
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary btn-sm">Crear</button>
+        <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
         <a href="{{ route('entags.index') }}" class="btn btn-danger btn-sm float-right">Cancelar</a>
     </div>
 </div>

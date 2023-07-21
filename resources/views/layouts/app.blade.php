@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -50,42 +50,37 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active dropdown">
-                        {{-- <a class="nav-link dropdown-toggle-split" href="{{ route('destinies') }}"
-                            id="dropdownDestinations" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">Destinations <span class="fa fa-caret-down caret"></span>
-                        </a> --}}
                         <a class="nav-link dropdown-toggle-split" href="{{ route('destinies') }}"
-                        id="dropdownDestinations" onmouseover="toggleDropdown(true)" onclick="redirect()">
-                        Destinations <span class="fa fa-caret-down caret"></span>
-                     </a>
-                     
-                     <div class="dropdown-menu" aria-labelledby="dropdownDestinations" onmouseover="toggleDropdown(true)" onmouseout="toggleDropdown(false)">
-                        @foreach ($destinos as $destino)
-                           <a class="dropdown-item" href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
-                        @endforeach
-                     </div>                    
-                     
-                     <script>
-                        var dropdownOpen = false;
-                     
-                        function toggleDropdown(isOpen) {
-                           var dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
-                           if (isOpen) {
-                              dropdownMenu.classList.add('show');
-                              dropdownOpen = true;
-                           } else if (!isOpen && !dropdownMenu.matches(':hover')) {
-                              dropdownMenu.classList.remove('show');
-                              dropdownOpen = false;
-                           }
-                        }
-                     
-                        function redirect() {
-                           if (!dropdownOpen) {
-                              window.location.href = "{{ route('destinies') }}";
-                           }
-                        }
-                     </script>
-                     
+                            id="dropdownDestinations" onmouseover="toggleDropdown(true)" onclick="redirect()">
+                            Destinations <span class="fa fa-caret-down caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownDestinations"
+                            onmouseover="toggleDropdown(true)" onmouseout="toggleDropdown(false)">
+                            @foreach ($destinos as $destino)
+                                <a class="dropdown-item"
+                                    href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                            @endforeach
+                        </div>
+                        <script>
+                            var dropdownOpen = false;
+
+                            function toggleDropdown(isOpen) {
+                                var dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
+                                if (isOpen) {
+                                    dropdownMenu.classList.add('show');
+                                    dropdownOpen = true;
+                                } else if (!isOpen && !dropdownMenu.matches(':hover')) {
+                                    dropdownMenu.classList.remove('show');
+                                    dropdownOpen = false;
+                                }
+                            }
+
+                            function redirect() {
+                                if (!dropdownOpen) {
+                                    window.location.href = "{{ route('destinies') }}";
+                                }
+                            }
+                        </script>
 
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('packages') }}">Peru Packages</a></li>
@@ -93,14 +88,14 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('gastronomy') }}">Peru Gastronomy</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('spiritual') }}">Spiritual</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('blogen') }}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href=""><img src="{{ asset('img/es.webp') }}" width="25px" alt="Bandera español" title="Español"></a></li>
                 </ul>
                 <form action="#" class="searchMenu">
-                    <input type="text" placeholder="Search">
+                    <input type="text" placeholder="Search" class="input">
                     <button class="fa fa-search " type="submit">
                     </button>
+                </form>
             </div>
-            </form>
-        </div>
         </div>
     </nav>
 

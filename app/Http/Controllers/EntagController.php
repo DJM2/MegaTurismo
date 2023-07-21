@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Destino;
 use App\Models\Entag;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,13 @@ class EntagController extends Controller
         $tag->save();
 
         return redirect()->route('entags.index')->with('success', 'Tag en ingles actualizado correctamente!');
+    }
+
+    public function show($tag)
+    {
+        $destinos=Destino::all();
+        $tag = Entag::where('slug', $tag)->first();
+        return view('admin.blogs.enblogs.tags.show', compact('tag', 'destinos'));
     }
 
     public function destroy($id)

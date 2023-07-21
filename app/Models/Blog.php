@@ -19,6 +19,6 @@ class Blog extends Model
     ];
     public function tags()
     {
-        return $this->belongsToMany(Entag::class, 'entags', 'blog_id', 'entag_id');
+        return $this->belongsToMany(Entag::class, 'enblog_tags', 'blog_id', 'categoria_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Destino;
 use App\Models\Tours;
 use Illuminate\Http\Request;
@@ -36,9 +37,14 @@ class EnlacesController extends Controller
     {
         $tours = Tours::all();
         $destinos = Destino::all();
-        return view('blog.index', compact('tours', 'destinos'));
+        $blogsHead = Blog::take(4)->get();
+        $blogsIdsToSkip = Blog::latest()->take(2)->pluck('id');
+        $blogs = Blog::with('tags')->latest()->take(2)->get();
+        $blogsCards = Blog::with('tags')->whereNotIn('id', $blogsIdsToSkip)->latest()->get();
+        return view('blog.index', compact('tours', 'destinos', 'blogs', 'blogsCards', 'blogsHead'));
     }
-    public function destinies(){
+    public function destinies()
+    {
         $destinos = Destino::all();
         return view('destinies', compact('destinos'));
     }

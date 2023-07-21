@@ -51,14 +51,14 @@
                                             <td>{{ $blog->id }}</td>
                                             <td>{{ $blog->nombre }}</td>
                                             <td>{{ $blog->resumen }}</td>
-                                            <td>{!! $blog->descripcion !!}</td>
-                                            <td><img src="{{ $blog->imgThumb }}" width="100px"></td>
-                                            <td><img src="{{ $blog->imgBig }}" width="100px"></td>
-                                            <td>{{ $blog->keywords }}</td>
+                                            <td>{!! $limitedDescriptions[$blog->id] !!}</td>
+                                            <td><img src="{{ asset('img/blogs/thumbs/'.$blog->imgThumb) }}" width="100px"></td>
+                                            <td><img src="{{ asset('img/blogs/'.$blog->imgBig) }}" width="100px"></td>
+                                            <td>{{ $blog->keyword }}</td>
                                             <td>{{ $blog->slug }}</td>
                                             <td>
                                                 @foreach ($blog->tags as $tag)
-                                                    <li> {{ $tag->nombre }}</li>
+                                                ⮞{{ $tag->nombre }}<br>
                                                 @endforeach
                                             </td>
 

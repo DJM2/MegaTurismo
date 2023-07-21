@@ -43,10 +43,10 @@
                                             <td>{{ $tag->slug }}</td>
                                             <td>
                                                 <form action="{{ route('entags.destroy', $tag->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('entags.show', $tag->slug) }}"
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('entag.show', $tag->slug) }}"
                                                         target="_blank"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('entags.edit', $tag->id) }}"><i
+                                                        href="{{ route('entags.edit', $tag->id) }}"><i 
                                                             class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')

@@ -2,32 +2,19 @@
 @section('titulo', 'Inicio')
 @section('contenido')
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
-        <div class="carousel-inner" style="height: 70vh">
-            <div class="carousel-item active">
-                <img class="d-block zoom-in-image" src="{{ asset('img/sacsayhuaman-yoga-panoramic.webp') }}" alt="First slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>Este es un texto ejemplas</h5>
-                    <p>Este es un parrafo ejemplar</p>
+        <div class="carousel-inner" style="height: 450px">
+            @foreach ($tours as $key => $tour)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="height: 100%">
+                    <img class="d-block zoom-in-image" src="{{ asset($tour->img) }}" alt="Slide {{ $key }}"
+                        style="width:100%; object-fit: cover; height: 100%">
+                    <div class="carousel-caption d-md-block">
+                        <h5>{{ $tour->nombre }}</h5>
+                        <p>{{ $tour->descripcion }}</p>
+                        <a class="cardBtn" href="{{ route('tour.show', ['slug' => $tour->slug]) }}">View details</a>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block zoom-in-image" src="{{ asset('img/Qeswachaka-inca-bridge-Cusco.webp') }}"
-                    alt="Third slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>h5 de ejemplo</h5>
-                    <p>Parrafo de ejemplo</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block zoom-in-image" src="{{ asset('img/panoramic-view-of-machu-picchu.webp') }}"
-                    alt="Third slide">
-                <div class="carousel-caption d-md-block">
-                    <h5>h5 de ejemplo</h5>
-                    <p>Parrafo de ejemplo</p>
-                </div>
-            </div>
+            @endforeach
         </div>
-        <!-- Flechas de navegación -->
         <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
             <span class="prev" aria-hidden="true">
                 < <span class="sr-only">Previous
@@ -37,9 +24,7 @@
             <span class="next" aria-hidden="true">></span>
             <span class="sr-only">Next</span>
         </a>
-        <!-- Puntos indicadores -->
         <ol class="carousel-indicators">
-            <!-- Indicadores del carousel -->
         </ol>
     </div>
     <section class="pt-3 pb-5">
@@ -61,13 +46,14 @@
                                                         <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
                                                         <span><i class="fa fa-map-marker"></i> {{ $tour->lugarInicio }} →
                                                             {{ $tour->lugarFin }} </span>
-                                                        <span><i class="fa fa-calendar"></i> {{ $tour->dias }} days</span>
+                                                        <span><i class="fa fa-calendar"></i> {{ $tour->dias }}
+                                                            days</span>
                                                     </div>
                                                     <div class="card-body">
                                                         <h4 class="card-title">{{ $tour->nombre }}</h4>
                                                         <p class="card-text">{{ $tour->descripcion }}</p>
-                                                        <a class="cardBtn" href="{{ route('tour.show', $tour->slug) }}"
-                                                            class="btn btn-primary">View details</a>
+                                                        <a class="cardBtn"
+                                                            href="{{ route('tour.show', $tour->slug) }}">View details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,7 +150,6 @@
     </section>
 
     <div class="container-fluid containerReviews">
-
         <div class="row">
             <div class="col-lg-12 mb-4">
                 <h2 class="text-center">Top Reviews</h2>
@@ -190,7 +175,7 @@
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            
+
                                             <p>Texto de muestra del comentario...</p>
                                         </div>
                                     </div>
@@ -250,7 +235,6 @@
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
                                             <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            
                                             <p>Texto de muestra del comentario...</p>
                                         </div>
                                     </div>

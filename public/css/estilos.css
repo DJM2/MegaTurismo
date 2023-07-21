@@ -1,5 +1,10 @@
+@charset "UTF-8";
 body {
   font-family: Poppins, sans-serif;
+}
+
+.colorPrincipal {
+  color: #08e5e5;
 }
 
 .sticky-top {
@@ -40,25 +45,130 @@ body {
   transition: width 0.8s;
 }
 
-.searchMenu input {
-  border: 1px solid #9f9f9f !important;
+.searchMenu .input {
+  border: 1px solid #9f9f9f;
   border-radius: 4px;
   margin: 0em 0em 0em 1em;
 }
-.searchMenu input:focus-visible {
-  border: 1px solid #08e5e5 !important;
+.searchMenu .input:focus {
+  border: 1px solid #08e5e5;
+  box-shadow: 0 0 0 0.2rem rgba(18, 151, 151, 0.103);
+}
+.searchMenu .input.focus-visible {
+  border: 1px solid #08e5e5;
+  box-shadow: 0 0 0 0.2rem rgba(18, 151, 151, 0.103);
 }
 .searchMenu button {
   border: none;
   padding: 0.4em;
   border-radius: 5px;
   transition: 0.4s;
-  background: transparent;
+  background: #08e5e5;
+  color: #fff;
+  cursor: pointer;
 }
 .searchMenu button:hover {
   background: #15c9c9;
   color: #fff;
   transition: 0.4s;
+}
+
+.lineaBlog2 {
+  width: 30px;
+  height: 3px;
+  background: #f24a6e;
+  margin-bottom: 1em;
+}
+
+.lineaBlog {
+  width: 30px;
+  height: 3px;
+  background: #15c9c9;
+  margin-bottom: 1em;
+}
+
+#blogCarousel {
+  height: 400px;
+  width: 100%;
+}
+#blogCarousel .carousel-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 400px;
+}
+#blogCarousel .carousel-item h5 {
+  text-shadow: 3px 3px 1px rgb(0, 0, 0);
+}
+#blogCarousel .carousel-item p {
+  font-size: 20px;
+  margin-top: 2em;
+  text-shadow: 3px 3px 1px rgb(0, 0, 0);
+}
+
+.tagsRelacionados {
+  margin-top: 1.5em;
+}
+.tagsRelacionados .tag {
+  background: #15c9c9;
+  padding: 0.3em;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+}
+.tagsRelacionados .tag:hover {
+  text-decoration: none;
+}
+.tagsRelacionados .related {
+  margin-bottom: 0.6em;
+}
+.tagsRelacionados .related:hover {
+  background: rgba(233, 229, 229, 0.7725490196);
+  transition: 0.4s ease;
+}
+.tagsRelacionados .related img {
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+}
+.tagsRelacionados .related h5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  float: left;
+  color: #15c9c9;
+  font-size: 18px;
+  margin-left: -1em;
+}
+
+.principalBlogs {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+.share .btn-social {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  background: #f24a6e;
+  color: #fff;
+  border-radius: 17px;
+  text-align: center;
+  margin-left: 1em;
+  transition: 0.6s;
+  border: 1px solid #f24a6e;
+  transition: top 0.3s ease;
+}
+.share .btn-social:hover {
+  position: relative;
+  top: -3px;
+  transition: top 0.3s ease;
+}
+.share .btn-social i {
+  display: inline-block;
+  line-height: 32px;
+  vertical-align: middle;
 }
 
 .custom-container {
@@ -82,6 +192,17 @@ body {
   font-weight: bold;
   padding: 0.2em;
   border-radius: 11px;
+}
+
+.form-row #name:focus {
+  border: 1px solid #08e5e5;
+  box-shadow: 0 0 0 0.2rem rgba(21, 185, 185, 0.055);
+}
+.form-row .botonBlog {
+  background: #15c9c9;
+  color: white;
+  border: none;
+  font-size: 13px;
 }
 
 .custom-container-2 {
@@ -225,8 +346,8 @@ body {
   margin-bottom: 4em;
 }
 .containerReviews .carousel-inner .circulo {
-  width: 100%;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   overflow: hidden;
   border-radius: 50%;
 }
@@ -297,6 +418,28 @@ body {
   font-weight: bold;
   font-family: Poppins;
   font-size: 70px;
+  text-shadow: 4px 3px 5px rgba(0, 0, 0, 0.34);
+  position: relative;
+}
+
+.carousel-caption h5::after {
+  content: "";
+  display: block;
+  background-color: #08e5e5;
+  width: 90px;
+  height: 3px;
+  position: absolute;
+  bottom: 8px;
+  /* Ajustar la posición vertical del after */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centrar horizontalmente el after */
+}
+
+.carousel-caption p {
+  font-size: 20px;
+  margin-top: 0em;
+  text-shadow: 4px 3px 5px rgba(0, 0, 0, 0.34);
 }
 
 .prev {
@@ -334,6 +477,7 @@ body {
 }
 
 .zoom-in-image {
+  width: 100%;
   animation-name: zoom-in;
   animation-duration: 9s;
   animation-timing-function: ease-in-out;
@@ -482,7 +626,7 @@ body {
 
 .sticky {
   position: sticky;
-  top: 3em;
+  top: 4em;
 }
 .sticky .image-container {
   position: relative;
@@ -630,7 +774,8 @@ body {
   height: 200px;
   object-fit: cover;
 }
-.card .cardBtn {
+
+.cardBtn {
   font-size: 14px;
   text-align: center;
   background: #15c9c9;
@@ -642,7 +787,7 @@ body {
   overflow: hidden;
   z-index: 1;
 }
-.card .cardBtn:hover {
+.cardBtn:hover {
   color: #fff;
   background: linear-gradient(to left, #15c9c9 50%, transparent 50%);
   background-size: 200% 100%;
@@ -650,12 +795,12 @@ body {
   transition: background-position 0.3s ease-in-out;
   border: none;
 }
-.card .cardBtn:active {
+.cardBtn:active {
   color: #fff !important;
   background-color: #15c9c9 !important;
   border-color: #15c9c9 !important;
 }
-.card .cardBtn:focus {
+.cardBtn:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }

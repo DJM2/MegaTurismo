@@ -62,6 +62,12 @@
                         </a>
                     </div>
                 </div>
+            </li>          
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('enreviews.index') }}">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Comments</span>
+                </a>
             </li>
             <div class="sidebar-heading">
                 Español

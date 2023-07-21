@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnlacesController;
+use App\Http\Controllers\EnreviewController;
 use App\Http\Controllers\EntagController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ToursController;
@@ -25,6 +26,8 @@ Route::post('/reservas',[EmailController::class, 'tourEmail'])->name('reservas')
 Route::get('/peru-blog',[EnlacesController::class, 'blogen'])->name('blogen');
 Route::get('/destinies',[EnlacesController::class, 'destinies'])->name('destinies');
 Route::get('/tour/{slug}', [ToursController::class, 'show'])->name('tour.show');
+Route::get('en-tag/{tag}', [EntagController::class, 'show'])->name('entag.show');
+
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('tours', ToursController::class)->names('tours');
@@ -34,5 +37,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('destinies', DestinoController::class)->names('destinies');
     Route::resource('en-blogs', BlogController::class)->names('enblogs');
     Route::resource('tagsIngles', EntagController::class)->names('entags');
+    Route::resource('comentario-en-ingles', EnreviewController::class)->names('enreviews');
 });
 Route::get('destiny/{slug}', [DestinoController::class, 'show'])->name('destinies.show');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('enblogs.show');
+
+

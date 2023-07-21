@@ -22,7 +22,7 @@ class ToursController extends Controller
         $tours = Tours::all();
         $gruposTours = $tours->chunk(4);
         $destinos = Destino::all();
-        return view('welcome', compact('gruposTours', 'destinos'));
+        return view('welcome', compact('gruposTours', 'destinos', 'tours'));
     }
 
     public function create()

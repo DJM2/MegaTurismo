@@ -6,6 +6,10 @@ body {
   font-family: Poppins, sans-serif;
 }
 
+.colorPrincipal {
+  color: $colorPrincipal;
+}
+
 .sticky-top {
   background: #fff;
 }
@@ -53,13 +57,19 @@ body {
 }
 
 .searchMenu {
-  input {
-    border: 1px solid #9f9f9f !important;
+  .input {
+    border: 1px solid #9f9f9f;
     border-radius: 4px;
     margin: 0em 0em 0em 1em;
 
-    &:focus-visible {
-      border: 1px solid $colorPrincipal !important;
+    &:focus {
+      border: 1px solid #08e5e5;
+      box-shadow: 0 0 0 0.2rem rgba(18, 151, 151, 0.103);
+    }
+
+    &.focus-visible {
+      border: 1px solid #08e5e5;
+      box-shadow: 0 0 0 0.2rem rgba(18, 151, 151, 0.103);
     }
   }
 
@@ -68,13 +78,128 @@ body {
     padding: 0.4em;
     border-radius: 5px;
     transition: 0.4s;
-    background: transparent;
+    background: $colorPrincipal;
+    color: #fff;
+    cursor: pointer;
 
     &:hover {
       background: $principal2;
       color: #fff;
 
       transition: 0.4s;
+    }
+  }
+}
+
+.lineaBlog2 {
+  width: 30px;
+  height: 3px;
+  background: $secundario;
+  margin-bottom: 1em;
+}
+
+.lineaBlog {
+  width: 30px;
+  height: 3px;
+  background: $principal2;
+  margin-bottom: 1em;
+}
+
+#blogCarousel {
+  height: 400px;
+  width: 100%;
+
+  .carousel-item {
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 400px;
+    }
+
+    h5 {
+      text-shadow: 3px 3px 1px rgb(0, 0, 0);
+    }
+
+    p {
+      font-size: 20px;
+      margin-top: 2em;
+      text-shadow: 3px 3px 1px rgb(0, 0, 0);
+    }
+  }
+}
+
+.tagsRelacionados {
+  margin-top: 1.5em;
+
+  .tag {
+    background: #15c9c9;
+    padding: 0.3em;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .related {
+    margin-bottom: 0.6em;
+
+    &:hover {
+      background: #e9e5e5c5;
+      transition: 0.4s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 60px;
+      object-fit: cover;
+    }
+
+    h5 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      float: left;
+      color: $principal2;
+      font-size: 18px;
+      margin-left: -1em;
+    }
+  }
+}
+
+.principalBlogs {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+.share {
+  .btn-social {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    background: $secundario;
+    color: #fff;
+    border-radius: 17px;
+    text-align: center;
+    margin-left: 1em;
+    transition: 0.6s;
+    border: 1px solid $secundario;
+    transition: top 0.3s ease;
+
+    &:hover {
+      position: relative;
+      top: -3px;
+      transition: top 0.3s ease;
+    }
+
+    i {
+      display: inline-block;
+      line-height: 32px;
+      vertical-align: middle;
     }
   }
 }
@@ -104,6 +229,22 @@ body {
   }
 }
 
+.form-row {
+  #name {
+    &:focus {
+      border: 1px solid $colorPrincipal;
+      box-shadow: 0 0 0 0.2rem rgba(21, 185, 185, 0.055);
+    }
+  }
+
+  .botonBlog {
+    background: #15c9c9;
+    color: white;
+    border: none;
+    font-size: 13px;
+  }
+}
+
 .custom-container-2 {
   padding: 0;
   margin: 0;
@@ -121,6 +262,7 @@ body {
     height: 400px;
     object-fit: cover;
   }
+
 
   h1 {
     position: absolute;
@@ -272,8 +414,8 @@ body {
 
   .carousel-inner {
     .circulo {
-      width: 100%;
-      height: 110px;
+      width: 130px;
+      height: 130px;
       overflow: hidden;
       border-radius: 50%;
     }
@@ -337,7 +479,7 @@ body {
 .dropdown-menu {
   display: none;
   animation: fadeIn 0.3s ease-in-out;
-  padding: 0px!important;
+  padding: 0px !important;
 
   .dropdown-item:hover {
     background: $principal2;
@@ -364,6 +506,28 @@ body {
   font-weight: bold;
   font-family: Poppins;
   font-size: 70px;
+  text-shadow: 4px 3px 5px rgb(0 0 0 / 34%);
+  position: relative;
+}
+
+.carousel-caption h5::after {
+  content: '';
+  display: block;
+  background-color: #08e5e5;
+  width: 90px;
+  height: 3px;
+  position: absolute;
+  bottom: 8px;
+  /* Ajustar la posición vertical del after */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Centrar horizontalmente el after */
+}
+
+.carousel-caption p {
+  font-size: 20px;
+  margin-top: 0em;
+  text-shadow: 4px 3px 5px rgb(0 0 0 / 34%);
 }
 
 .prev {
@@ -405,6 +569,7 @@ body {
 }
 
 .zoom-in-image {
+  width: 100%;
   animation-name: zoom-in;
   animation-duration: 9s;
   animation-timing-function: ease-in-out;
@@ -576,7 +741,7 @@ body {
 
 .sticky {
   position: sticky;
-  top: 3em;
+  top: 4em;
 
   .image-container {
     position: relative;
@@ -754,38 +919,38 @@ body {
     height: 200px;
     object-fit: cover;
   }
+}
 
-  .cardBtn {
-    font-size: 14px;
-    text-align: center;
-    background: $principal2;
-    border: 1px solid $principal2;
+.cardBtn {
+  font-size: 14px;
+  text-align: center;
+  background: $principal2;
+  border: 1px solid $principal2;
+  color: #fff;
+  border-radius: 3px;
+  padding: 0.2em 1em;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:hover {
     color: #fff;
-    border-radius: 3px;
-    padding: 0.2em 1em;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    background: linear-gradient(to left, $principal2 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    transition: background-position 0.3s ease-in-out;
+    border: none;
+  }
 
-    &:hover {
-      color: #fff;
-      background: linear-gradient(to left, $principal2 50%, transparent 50%);
-      background-size: 200% 100%;
-      background-position: right;
-      transition: background-position 0.3s ease-in-out;
-      border: none;
-    }
+  &:active {
+    color: #fff !important;
+    background-color: $principal2 !important;
+    border-color: $principal2 !important;
+  }
 
-    &:active {
-      color: #fff !important;
-      background-color: $principal2 !important;
-      border-color: $principal2 !important;
-    }
-
-    &:focus {
-      -webkit-box-shadow: none;
-      box-shadow: none;
-    }
+  &:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
 }
 
@@ -813,4 +978,5 @@ body {
   .responsive {
     display: none;
   }
+
 }

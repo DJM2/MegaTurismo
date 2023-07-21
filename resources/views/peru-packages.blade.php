@@ -25,49 +25,54 @@
                 <h2>Top Peru travel deals</h2>
             </div>
             <div class="col-lg-12 mt-3">
-                <table class="table table-hover tableMega">
-                    <thead>
-                        <tr>
-                            <th>Thumb</th>
-                            <th>Trip</th>
-                            <th>Route</th>
-                            <th>Days</th>
-                            <th>From</th>
-                            <th>Visit Tour</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($tours as $tour)
-                        <tr>
-                            <td class="align-middle"><img src="{{ asset($tour->imgThumb) }}" alt="{{ $tour->nombre }}">
-                            </td>
-                            <td class="align-middle"><strong>{{ $tour->nombre }}</strong> <br> {{ $tour->lugarInicio }}
-                                → {{ $tour->lugarFin }}</td>
-                            <td class="align-middle">
-                                <div class="modal fade" id="imageModal{{ $tour->id }}" tabindex="-1" role="dialog"
-                                    aria-labelledby="imageModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <h4 class="text-center">{{ $tour->nombre }}</h4>
-                                                <img class="imgPopup" src="{{ asset($tour->mapa) }}"
-                                                    alt="{{ $tour->nombre }}" width="100%">
+                <div class="table-responsive">
+                    <table class="table table-hover tableMega">
+                        <thead>
+                            <tr>
+                                <th>Thumb</th>
+                                <th>Trip</th>
+                                <th>Route</th>
+                                <th>Days</th>
+                                <th>From</th>
+                                <th>Visit Tour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tours as $tour)
+                                <tr>
+                                    <td class="align-middle"><img src="{{ asset($tour->imgThumb) }}"
+                                            alt="{{ $tour->nombre }}">
+                                    </td>
+                                    <td class="align-middle"><strong>{{ $tour->nombre }}</strong> <br>
+                                        {{ $tour->lugarInicio }}
+                                        → {{ $tour->lugarFin }}</td>
+                                    <td class="align-middle">
+                                        <div class="modal fade" id="imageModal{{ $tour->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h4 class="text-center">{{ $tour->nombre }}</h4>
+                                                        <img class="imgPopup" src="{{ asset($tour->mapa) }}"
+                                                            alt="{{ $tour->nombre }}" width="100%">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <img src="{{ asset($tour->mapa) }}" alt="{{ $tour->nombre }}" data-toggle="modal"
-                                    data-target="#imageModal{{ $tour->id }}">
-                            </td>
-                            <td class="align-middle">{{ $tour->dias }}</td>
-                            <td class="align-middle"><del>U${{ $tour->precioReal }}.00</del><br><span
-                                    class="precioTour"> U${{ $tour->precioPublicado }}.00</span></td>
-                            <td class="align-middle"><a href="{{ route('tour.show', ['slug' => $tour->slug]) }}">View
-                                    tour ⮞</a></td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                                        <img src="{{ asset($tour->mapa) }}" alt="{{ $tour->nombre }}" data-toggle="modal"
+                                            data-target="#imageModal{{ $tour->id }}">
+                                    </td>
+                                    <td class="align-middle">{{ $tour->dias }}</td>
+                                    <td class="align-middle"><del>U${{ $tour->precioReal }}.00</del><br><span
+                                            class="precioTour"> U${{ $tour->precioPublicado }}.00</span></td>
+                                    <td class="align-middle"><a
+                                            href="{{ route('tour.show', ['slug' => $tour->slug]) }}">View
+                                            tour ⮞</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
