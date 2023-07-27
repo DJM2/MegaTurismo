@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorias;
 use App\Models\Destino;
+use App\Models\Enreview;
 use App\Models\Fecha;
 use App\Models\Hotel;
 use App\Models\Tours;
@@ -14,7 +15,7 @@ class ToursController extends Controller
 {
     public function index()
     {
-        $tours = Tours::with('categorias')->get();
+        $tours = Tours::with('categorias')->get();        
         return view('admin.tours.tours.index', compact('tours'));
     }
     public function mostrar()
@@ -22,7 +23,8 @@ class ToursController extends Controller
         $tours = Tours::all();
         $gruposTours = $tours->chunk(4);
         $destinos = Destino::all();
-        return view('welcome', compact('gruposTours', 'destinos', 'tours'));
+        $reviews = Enreview::all()->chunk(3); 
+        return view('welcome', compact('gruposTours', 'destinos', 'tours', 'reviews'));
     }
 
     public function create()

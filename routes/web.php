@@ -7,13 +7,16 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnlacesController;
 use App\Http\Controllers\EnreviewController;
 use App\Http\Controllers\EntagController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MenuEnController;
 use App\Http\Controllers\ToursController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ToursController::class, 'mostrar'])->name('index');
+Route::get('login', [HomeController::class, 'login'])->name('login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/peru-packages',[EnlacesController::class, 'packages'])->name('packages');
@@ -38,6 +41,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('en-blogs', BlogController::class)->names('enblogs');
     Route::resource('tagsIngles', EntagController::class)->names('entags');
     Route::resource('comentario-en-ingles', EnreviewController::class)->names('enreviews');
+    Route::resource('menuen', MenuEnController::class)->names('menuen');
 });
 Route::get('destiny/{slug}', [DestinoController::class, 'show'])->name('destinies.show');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('enblogs.show');

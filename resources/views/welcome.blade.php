@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <div class="carousel-item">
+                            {{-- <div class="carousel-item">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <div class="card">
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                 <p class="text-center">Esta es una lista de los comentarios de nuestros pasajeros del año 2023</p>
             </div>
             <div class="col-lg-12">
-                <div id="commentCarousel" class="carousel slide" data-ride="carousel">
+                {{-- <div id="commentCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row">
@@ -277,9 +277,44 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Añade más "carousel-item" si tienes más comentarios -->
                     </div>
-                    <!-- Controles de navegación -->
+                    <div class="col-12 text-center mt-4">
+                        <a class="btn-slide mb-3 mr-1" href="#commentCarousel" role="button" data-slide="prev">
+                            <i class="fa fa-circle"></i>
+                        </a>
+                        <a class="btn-slide mb-3" href="#commentCarousel" role="button" data-slide="next">
+                            <i class="fa fa-circle"></i>
+                        </a>
+                    </div>
+                </div> --}}
+                <div id="commentCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($reviews as $index => $grupoReviews)
+                            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @foreach ($grupoReviews as $review)
+                                        <div class="col-lg-4 mb-3">
+                                            <div class="row cardReview ml-1 mr-1">
+                                                <div class="col-lg-4">
+                                                    <div class="circulo">
+                                                        <img src="{{ $review->img }}"
+                                                            alt="{{ $review->nombre }}" loading="lazy">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <h5>{{ $review->nombre }}</h5>
+                                                    @for ($i = 0; $i < $review->calificacion; $i++)
+                                                        <i class="fa fa-star" style="color: #08e5e5"></i>
+                                                    @endfor
+                                                    <p>{{ $review->comentario }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                     <div class="col-12 text-center mt-4">
                         <a class="btn-slide mb-3 mr-1" href="#commentCarousel" role="button" data-slide="prev">
                             <i class="fa fa-circle"></i>
@@ -292,9 +327,6 @@
             </div>
         </div>
     </div>
-
-
-
     <section>
         <div class="container">
             <div class="row">
@@ -399,5 +431,4 @@
             </div>
         </div>
     </section>
-
 @endsection

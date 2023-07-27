@@ -34,17 +34,22 @@
                     style="">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('cats.index') }}">
-                            Categorias Tours Inglés
+                            Categorias
                         </a>
                         <a class="collapse-item" href="{{ route('tours.index') }}">
                             Tours inglés
                         </a>
-                        <a class="collapse-item" href="{{route('destinies.index')}}">
-                            Destinos EN
-                        </a>
                     </div>
                 </div>
             </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('destinies.index')}}">
+                    <i class="fas fa-fw fa-map"></i>
+                    <span>Destinies</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#engblogs"
                     aria-expanded="false" aria-controls="engblogs">
@@ -62,13 +67,40 @@
                         </a>
                     </div>
                 </div>
-            </li>          
+            </li>              
+            <hr class="sidebar-divider d-none d-md-block">      
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('enreviews.index') }}">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>Comments</span>
+                <a class="nav-link" href="{{ route('menuen.index') }}">
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Menu</span>
                 </a>
             </li>
+            <hr class="sidebar-divider d-none d-md-block"> 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#enmenu"
+                    aria-expanded="false" aria-controls="engblogs">
+                    <i class="fas fa-fw fa-list-ol"></i>
+                    <span>Foot</span>
+                </a>
+                <div id="enmenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
+                    style="">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('entags.index') }}">
+                           About Us
+                        </a>
+                        <a class="collapse-item" href="{{ route('entags.index') }}">
+                            Terms & Conditions
+                         </a>
+                         <a class="collapse-item" href="{{ route('entags.index') }}">
+                            Contact Us
+                         </a>
+                         <a class="collapse-item" href="{{ route('entags.index') }}">
+                            Reviews
+                         </a>
+                    </div>
+                </div>
+            </li>    
+            
             <div class="sidebar-heading">
                 Español
             </div>
@@ -83,7 +115,7 @@
                     style="">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('cats.index') }}">
-                            Categorias Tours Inglés
+                            Categorias
                         </a>
                         <a class="collapse-item" href="{{ route('tours.index') }}">
                             Tours inglés
@@ -93,6 +125,13 @@
                         </a>
                     </div>
                 </div>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('enreviews.index') }}">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Comments</span>
+                </a>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">

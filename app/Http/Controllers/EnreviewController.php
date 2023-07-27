@@ -65,8 +65,6 @@ class EnreviewController extends Controller
             $imgName = $img->getClientOriginalName();
             $img->move('img/comentarios/', $imgName);
             $imgPath = 'img/comentarios/' . $imgName;
-
-            // Eliminar la imagen anterior si existe
             if ($comment->img && file_exists(public_path($comment->img))) {
                 unlink(public_path($comment->img));
             }
