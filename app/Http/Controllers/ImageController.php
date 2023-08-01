@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 class ImageController extends Controller
@@ -26,11 +27,15 @@ class ImageController extends Controller
         ]);
 
         $image = $request->file('img');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('img/imagenes/'), $imageName);
+        $originalName = $image->getClientOriginalName();
+        $imageName = Str::slug(pathinfo($originalName, PATHINFO_FILENAME), '-');
+        $extension = $image->getClientOriginalExtension();
+        $newImageName = $imageName . '.' . $extension;
+
+        $image->move(public_path('img/imagenes/'), $newImageName);
 
         Image::create([
-            'img' => $imageName,
+            'img' => $newImageName,
         ]);
 
         return redirect()->route('images.index')->with('success', 'Imagen subida correctamente!');
@@ -55,15 +60,17 @@ class ImageController extends Controller
         if (File::exists($previousImagePath)) {
             File::delete($previousImagePath);
         }
-        // Guardar la nueva imagen
         $newImage = $request->file('img');
         $newImageName = $newImage->getClientOriginalName();
-        $newImage->move(public_path('img/imagenes/'), $newImageName);
+        $ImageName = Str::slug(pathinfo($newImageName, PATHINFO_FILENAME), '-');
+        $extension = $image->getClientOriginalExtension();
+        $newNameImage = $ImageName . '.' . $extension;
+        $newImage->move(public_path('img/imagenes/'), $newNameImage);
 
-        // Actualizar el nombre de la imagen en la base de datos
         $image->update([
-            'img' => $newImageName,
-        ]);
+            'img' => $newNameImage,
+        ]);        
+
         return redirect()->route('images.index')->with('success', 'Imagen actualizada correctamente!');
     }
 

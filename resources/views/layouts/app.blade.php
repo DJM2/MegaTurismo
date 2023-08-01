@@ -41,7 +41,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('index') }}">
-                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="" id="logo-image">
+                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="Logo Mega Turismo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('gastronomy') }}">Peru Gastronomy</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('spiritual') }}">Spiritual</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('blogen') }}">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href=""><img src="{{ asset('img/es.webp') }}" width="25px" alt="Bandera español" title="Español"></a></li>
+                    <li class="nav-item"><a class="nav-link" href=""><img src="{{ asset('img/es.webp') }}"
+                                width="25px" alt="Bandera español" title="Español"></a></li>
                 </ul>
                 <form action="#" class="searchMenu">
                     <input type="text" placeholder="Search" class="input">
@@ -137,54 +138,84 @@
     </nav> --}}
 
     @yield('contenido')
-
     <div class="container-fluid bg-dark">
         <div class="container">
             <div class="row links">
                 <div class="col-lg-3">
                     <img src="{{ asset('img/logo-mega-turismo-blanco.png') }}" width="120px"
                         alt="Logo Mega Turismo blanco" loading="lazy">
-                    <ul class="mt-3">
-                        <li><a href="">● About Us</a></li>
-                        <li><a href="">● Terms And Conditions</a></li>
-                        <li><a href="">● Contact Us</a></li>
-                        <li><a href="">● Reviews</a></li>
-                    </ul>
+                    <p class="mt-3">
+                        {{ $footerText->text }}
+                    </p>
+                    <div class="sociales">
+                        <a href=""><span class="fa fa-whatsapp redes"></span></a>
+                        <a href=""><span class="fa fa-pinterest redes"></span></a>
+                        <a href=""><span class="fa fa-tripadvisor redes"></span></a>
+                        <a href=""><span class=" fa fa-instagram redes"></span></a>
+                        <a href=""><span class="fa fa-facebook redes"></span></a>
+                    </div>
                 </div>
                 <div class="col-lg-3">
-                    <h4>Perú Tours</h4>
-                    <ul>
-                        <li><span>➤</span><a href="">Cusco 4 dias</a></li>
-                        <li><span>➤</span><a href="">Peru for 9 days</a></li>
-                        <li><span>➤</span><a href="">Peru opackage 6 days</a> </li>
-                        <li><span>➤</span><a href="">Peru and Machu Picchu</a> </li>
-                        <li><span>➤</span><a href="">Peru for 9 days</a> </li>
-                        <li><span>➤</span><a href="">Peru opackage 6 days</a> </li>
-                    </ul>
+                    <h4>Destinies</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                @foreach ($destinos->take(6) as $destino)
+                                    <li><span>➤</span><a
+                                            href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                @foreach ($destinos->skip(6)->take(6) as $destino)
+                                    <li><span>➤</span><a
+                                            href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-3">
-                    <h4>Inca trail Tours</h4>
+                    <h4>Query</h4>
                     <ul>
-                        <li><span class="flechaPie">➤</span><a href="">Cusco 4 dias</a> </li>
-                        <li><span class="flechaPie">➤</span><a href="">Peru for 9 days</a> </li>
-                        <li><span class="flechaPie">➤</span><a href="">Peru opackage 6 days</a> </li>
-                        <li><span class="flechaPie">➤</span><a href="">Peru and Machu Picchu</a> </li>
-                        <li><span class="flechaPie">➤</span><a href="">Cusco 4 dias</a> </li>
-                        <li><span class="flechaPie">➤</span><a href="">Peru for 9 days</a> </li>
+                        @foreach ($vistas as $vista)
+                            <li><span class="flechaPie">➤</span>
+                                <a href="{{ route('nosotros.show', $vista->id) }}">
+                                    {{ $vista->nombre }}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-3 sociales">
-                    <h4>Follow Us</h4>
-                    <a href=""><span class="fa fa-whatsapp redes"></span></a>
-                    <a href=""><span class="fa fa-pinterest redes"></span></a>
-                    <a href=""><span class="fa fa-tripadvisor redes"></span></a>
-                    <a href=""><span class=" fa fa-instagram redes"></span></a>
-                    <a href=""><span class="fa fa-facebook redes"></span></a>
-                    <h4 class="mt-3">Contact Us</h4>
+                    <h4>Contact Us</h4>
                     <ul class="contact">
-                        <li> <a href=""><i class="fa fa-envelope"></i> info@megaturismo.com </a> </li>
-                        <li> <a href=""><i class="fa fa-whatsapp"></i> +51 958 986 458 </a> </li>
-                        <li> <a href=""><i class="fa fa-map-marker"></i> Dirección A4-2, Cusco - Perú</a> </li>
+                        @if (!empty($contacto->correo1))
+                            <li><i class="fa fa-envelope"></i> {{ $contacto->correo1 }}</li>
+                        @endif
+
+                        @if (!empty($contacto->correo2))
+                            <li><i class="fa fa-envelope"></i> {{ $contacto->correo2 }}</li>
+                        @endif
+
+                        @if (!empty($contacto->telefono1))
+                            <li><i class="fa fa-whatsapp"></i> {{ $contacto->telefono1 }}</li>
+                        @endif
+
+                        @if (!empty($contacto->telefono2))
+                            <li><i class="fa fa-whatsapp"></i> {{ $contacto->telefono2 }}</li>
+                        @endif
+
+                        @if (!empty($contacto->address))
+                            <li><i class="fa fa-map-marker"></i> {{ $contacto->address }}</li>
+                        @endif
+
+                        @if (!empty($contacto->address2))
+                            <li><i class="fa fa-map-marker"></i> {{ $contacto->address2 }}</li>
+                        @endif
                     </ul>
                 </div>
             </div>

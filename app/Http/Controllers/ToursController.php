@@ -6,10 +6,12 @@ use App\Models\Categorias;
 use App\Models\Destino;
 use App\Models\Enreview;
 use App\Models\Fecha;
+use App\Models\FooterText;
 use App\Models\Hotel;
 use App\Models\Tours;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+
 
 class ToursController extends Controller
 {

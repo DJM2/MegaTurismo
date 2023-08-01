@@ -35,7 +35,7 @@
                             <td><img src="{{ asset('img/imagenes/' . $image->img) }}" alt="Image" width="120px"></td>
                             <td>{{ asset('img/imagenes/' . $image->img) }}
                                 <button class="btn btn-info btn-sm copy-url-btn"
-                                    data-url="{{ asset('images/' . $image->img) }}">
+                                    data-url="{{ asset('img/imagenes/' . $image->img) }}">
                                     Copiar URL
                                 </button>
                             </td>

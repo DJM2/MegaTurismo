@@ -11,6 +11,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <input type="file" id="imageInput" name="img" accept="image/*" required>
+                        @error('img')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>                    
                     <div class="col-lg-4 mt-3">
                         <div id="imagePreview">                            

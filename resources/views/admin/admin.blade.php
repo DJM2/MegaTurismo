@@ -85,17 +85,14 @@
                 <div id="enmenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"
                     style="">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('entags.index') }}">
-                           About Us
+                        <a class="collapse-item" href="{{ route('edit.footer.text') }}">
+                            Texto pie de página
+                         </a>
+                        <a class="collapse-item" href="{{ route('nosotros.index') }}">
+                           Nosotros
                         </a>
-                        <a class="collapse-item" href="{{ route('entags.index') }}">
-                            Terms & Conditions
-                         </a>
-                         <a class="collapse-item" href="{{ route('entags.index') }}">
-                            Contact Us
-                         </a>
-                         <a class="collapse-item" href="{{ route('entags.index') }}">
-                            Reviews
+                        <a class="collapse-item" href="{{ route('aboutus.index') }}">
+                            Contacto
                          </a>
                     </div>
                 </div>
