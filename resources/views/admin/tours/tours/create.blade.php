@@ -29,7 +29,7 @@
                             value="{{ old('nombre', isset($tour) ? $tour->nombre : '') }}" required>
                         @error('nombre')
                             <div>{{ $message }}</div>
-                        @enderror
+                        @enderror 
 
                     </div>
                     <div class="col-lg-8 mt-3">
@@ -326,20 +326,29 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-lg-12">
                         <label for="slug">Slug</label>
                         <input type="text" name="slug" class="form-control form-control-sm" id="slug"
-                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required>
+                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required
+                            oninput="replaceSpaces(this)">
                         @error('slug')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
+                    
+                    <script>
+                        function replaceSpaces(input) {
+                            var value = input.value;
+                            var replaced = value.replace(/ /g, '-').replace(/[-]{2,}/g, '-');
+                            input.value = replaced;
+                        }
+                    </script>
                     <a href="{{ route('tours.index') }}" class="btn btn-secondary mt-4">Cancelar</a>
                     <button class="btn btn-primary mt-4 ml-4" type="submit">Guardar</button>
             </form>
         </div>
     </div>
+    
     <script type="text/javascript">
         CKEDITOR.replace('.ckeditor', {
             extraPlugins: 'youtube',

@@ -40,7 +40,8 @@
                                             <div class="col-md-3 mb-3">
                                                 <div class="card">
                                                     <a href="{{ route('tour.show', $tour->slug) }}">
-                                                        <img alt="" src="{{ $tour->imgThumb }}">
+                                                        <img alt="" src="{{ $tour->imgThumb }}" width="100%"
+                                                            style="height: 260px; object-fit: cover;">
                                                     </a>
                                                     <div class="cardMin">
                                                         <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
@@ -297,8 +298,8 @@
                                             <div class="row cardReview ml-1 mr-1">
                                                 <div class="col-lg-4">
                                                     <div class="circulo">
-                                                        <img src="{{ $review->img }}"
-                                                            alt="{{ $review->nombre }}" loading="lazy">
+                                                        <img src="{{ $review->img }}" alt="{{ $review->nombre }}"
+                                                            loading="lazy">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-8">
@@ -336,7 +337,7 @@
                     <p class="text-center">Our tour packages include the essentials for an unforgettable trip.</p>
                     <div class="row">
                         <div class="col-lg-3 text-center">
-                            <img src="{{ asset('img/restaurant.PNG') }}" width="100px" alt="Peruvian restaurants">
+                            <img src="{{ asset('img/Restaurant.png') }}" width="100px" alt="Peruvian restaurants">
                             <h4 class="text-center">Restaurants</h4>
                             <p class="text-center">The best options for enjoy peruvian food.</p>
                         </div>

@@ -434,11 +434,18 @@
                     <div class="col-lg-12">
                         <label for="slug">Slug</label>
                         <input type="text" name="slug" class="form-control" id="slug"
-                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required>
+                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required oninput="replaceSpaces(this)">
                         @error('slug')
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
+                    <script>
+                        function replaceSpaces(input) {
+                            var value = input.value;
+                            var replaced = value.replace(/ /g, '-').replace(/[-]{2,}/g, '-');
+                            input.value = replaced;
+                        }
+                    </script>
 
                     <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
                 </div>

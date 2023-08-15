@@ -73,6 +73,20 @@ body {
   transition: 0.4s;
 }
 
+.itinerary .card button {
+  width: 100%;
+  text-align: left;
+  position: relative;
+  padding-right: 25px;
+}
+.itinerary .card button::after {
+  content: "⮟";
+  position: absolute;
+  top: 0;
+  right: 5px;
+  transform: translateY(25%);
+}
+
 .lineaBlog2 {
   width: 30px;
   height: 3px;
@@ -244,6 +258,12 @@ body {
   box-shadow: 3px 3px 1px rgb(0, 0, 0);
 }
 
+.tableMega img:nth-child(1) {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .tableMega img {
   width: 180px;
   height: 140px;
@@ -476,6 +496,12 @@ body {
   color: #fff;
   background: #08e5e5;
   transition: 0.4s;
+}
+
+.hotel img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
 }
 
 .carousel {
@@ -750,35 +776,58 @@ body {
   cursor: pointer;
 }
 
-.card .card-header {
+.itinerary .card {
+  border: none !important;
+}
+.itinerary .card img {
+  width: 100%;
+  object-fit: cover;
+}
+.itinerary .card .card-header {
   background: #ebebeb;
   padding: 0.4em;
 }
-.card .card-header button {
+.itinerary .card .card-header button {
   color: #000;
 }
-.card .card-header button:hover {
+.itinerary .card .card-header button:hover {
   text-decoration: none;
   color: #f24a6e;
 }
-.card .card-header button:focus {
+.itinerary .card .card-header button:focus {
   color: #f24a6e;
   text-decoration: none;
 }
-.card .collapse p {
-  padding: 1em !important;
-  text-align: justify;
-  transition: 0.2s ease;
+.itinerary .card .show {
+  padding-top: 1em;
+  transition: 0.1s ease;
+}
+
+.cardDestino img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.cardDestino h5 {
+  color: #000;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  position: relative;
+  padding-bottom: 5px;
+}
+.cardDestino h5::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  height: 3px;
+  background-color: #15c9c9;
 }
 
 .card .card-title {
   font-size: 16px;
   font-weight: bold;
-}
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
 }
 
 .cardBtn {
@@ -788,7 +837,7 @@ body {
   border: 1px solid #15c9c9;
   color: #fff;
   border-radius: 3px;
-  padding: 0.2em 1em;
+  padding: 0.4em 1em;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -818,6 +867,41 @@ body {
   color: #fff;
 }
 
+.popupBook {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.popupBookContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.closeBookContent {
+  top: 0px;
+  position: absolute;
+  right: 0px;
+  font-size: 18px;
+  cursor: pointer;
+  background: red;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+
 @media only screen and (max-width: 600px) {
   .info .infoMail {
     margin-left: 0px;
@@ -831,8 +915,19 @@ body {
   .redesContent {
     margin-bottom: 0.6em;
   }
+  .custom-container h1 {
+    text-align: center;
+    margin-bottom: 1em;
+    margin-left: 0;
+  }
   .responsive {
     display: none;
+  }
+  .hotel {
+    margin-bottom: 1em;
+  }
+  .hotel img {
+    height: 220px;
   }
 }
 

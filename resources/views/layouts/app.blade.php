@@ -25,8 +25,14 @@
     <div class="container-fluid">
         <div class="row info align-items-center">
             <div class="col-lg-6 text-center">
-                <span class="infoMail">info@megaturismo.com</span> <span class="responsive">|</span> <span
-                    class="infoMail2">reserve@megatusimo.com</span>
+                @if (!empty($contacto->correo1))
+                <span class="infoMail"> {{ $contacto->correo1 }}</span>
+            @endif
+            <span class="responsive">|</span>
+            @if (!empty($contacto->correo2))
+            <span
+            class="infoMail2"> {{ $contacto->correo2 }}</>
+            @endif
             </div>
             <div class="col-lg-6 redesContent">
                 <span class="fa fa-whatsapp redes"></span>
@@ -41,7 +47,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('index') }}">
-                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="Logo Mega Turismo">
+                <img src="{{ asset('img/logo-mega-turismo-2.png') }}" width="120px" id="logo-image" alt="Logo Mega Turismo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -238,9 +244,9 @@
                         'transition': 'width 0.6s'
                     });
             } else {
-                $('#logo-image').attr('src', '{{ asset('img/logo-mega-turismo.png') }}')
+                $('#logo-image').attr('src', '{{ asset('img/logo-mega-turismo-2.png') }}')
                     .css({
-                        'width': '90px',
+                        'width': '120px',
                         'transition': 'width 0.6s'
                     });
             }

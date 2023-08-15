@@ -42,7 +42,7 @@ class ToursController extends Controller
             'descripcion' => 'required',
             'contenido' => 'required',
             'resumen' => 'required',
-            'detallado' => 'required',
+            'detallado' => 'required', 
             'incluidos' => 'required',
             'importante' => 'nullable',
             'lugarInicio' => 'nullable',

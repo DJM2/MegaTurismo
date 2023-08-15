@@ -16,4 +16,8 @@
 <file name="2023_07_06_192925_create_entags_table.php" server="15.204.142.117" local="133331453787353819" remote="133332563400000000" Dst="0" />
 <file name="2023_07_06_193027_create_enblog_tags_table.php" server="15.204.142.117" local="133333052147647686" remote="133348719600000000" Dst="0" />
 <file name="2023_07_20_192125_create_enreviews_table.php" server="15.204.142.117" local="133343589440170481" remote="133344412800000000" Dst="0" />
+<file name="2023_07_27_210049_create_menuen_table.php" server="15.204.142.117" local="133349654747305483" remote="133355002200000000" Dst="0" />
+<file name="2023_08_01_192333_create_aboutus_table.php" server="15.204.142.117" local="133353935895932190" remote="133355002200000000" Dst="0" />
+<file name="2023_08_01_180726_create_nosotros_table.php" server="15.204.142.117" local="133353873166712171" remote="133355002200000000" Dst="0" />
+<file name="2023_08_01_172346_create_foo_text_table.php" server="15.204.142.117" local="133353858842253251" remote="133355002200000000" Dst="0" />
 </dwsync>

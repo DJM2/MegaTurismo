@@ -31,7 +31,7 @@
                     @endforeach
                 </span>
             </span>
-            <span>Price: <br>
+            <span>Price: <del style="font-size: 14px">U${{ $tour->precioReal }}.00</del> <br>
                 <span class="resaltado">U${{ $tour->precioPublicado }}.00</span>
             </span>
             <span>
@@ -61,8 +61,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="tel" id="email" name="email"
-                                        class="form-control form-control-sm" required>
+                                    <input type="tel" id="email" name="email" class="form-control form-control-sm"
+                                        required>
                                 </div>
                             </div>
                         </div>
@@ -296,10 +296,10 @@
                                 <table class="table table-hover">
                                     <thead class="thead thead-dark">
                                         <tr>
-                                            <th>Data de início</th>
-                                            <th>Data final</th>
-                                            <th>Preço</th>
-                                            <th>Reservar</th>
+                                            <th>Start date</th>
+                                            <th>Final date</th>
+                                            <th>Price</th>
+                                            <th>Reserve</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -317,30 +317,166 @@
                                                     <del>U${{ $tour->precioPublicado }}.00</del><br><span
                                                         class="precioTour">U${{ $fecha->precio }}</span>
                                                 </td>
-                                                <td class="align-middle"><a href="" class="btnReserva">Book</a>
+                                                <!-- Popup -->
+                                                @php
+                                                    $popupId = 'popupBook_' . $loop->iteration;
+                                                @endphp
+                                                <td class="align-middle">
+                                                    <a href="#" class="btnReserva"
+                                                        data-popup="{{ $popupId }}">Book</a>
                                                 </td>
+                                                <div class="popupBook" id="{{ $popupId }}">
+                                                    <div class="popupBookContent">
+                                                        <span class="closeBookContent"
+                                                            data-popup="{{ $popupId }}">&times;</span>
+                                                        <h3 class="text-center mb-4">Reserve this trip</h3>
+                                                        <form method="POST" action="{{ route('reservas') }}">
+                                                            @csrf
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="tipoViaje">Tour:</label>
+                                                                        <input type="text" id="tour"
+                                                                            name="tour"
+                                                                            value="{{ $tour->nombre }} → {{ $tour->dias }} days"
+                                                                            readonly class="form-control form-control-sm">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="precio">Price:</label>
+                                                                        <input type="text" id="precio"
+                                                                            name="precio" readonly
+                                                                            class="form-control form-control-sm"
+                                                                            value="USD ${{ $fecha->precio }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="fechaViaje">Date start trip:</label>
+                                                                        <input type="text" id="fechaViaje"
+                                                                            name="fechaViaje" readonly
+                                                                            class="form-control form-control-sm" value="{{ date(' d M, Y', strtotime($fecha->fecha)) }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="nombre">Name:</label>
+                                                                        <input type="text" id="nombre"
+                                                                            name="nombre"
+                                                                            class="form-control form-control-sm" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="telefono">Phone:</label>
+                                                                        <input type="tel" id="telefono"
+                                                                            name="telefono"
+                                                                            class="form-control form-control-sm" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-group">
+                                                                        <label for="email">Email:</label>
+                                                                        <input type="tel" id="email"
+                                                                            name="email"
+                                                                            class="form-control form-control-sm" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">                                                              
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="cantidadAdultos">Adults:</label>
+                                                                        <input type="number" id="cantidadAdultos"
+                                                                            name="cantidadAdultos"
+                                                                            class="form-control form-control-sm"
+                                                                            min="1">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="cantidadAdultos">Children:</label>
+                                                                        <input type="number" id="cantidadAdultos"
+                                                                            name="cantidadAdultos"
+                                                                            class="form-control form-control-sm"
+                                                                            min="1">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="mensaje">Menssage:</label>
+                                                                <textarea id="mensaje" name="mensaje" class="form-control form-control-sm" rows="4" required></textarea>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary btn-sm">Enviar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const buttons = document.querySelectorAll('.btnReserva');
+                                        const popups = document.querySelectorAll('.popupBook');
+
+                                        // Función para abrir el popup correspondiente al botón clickeado
+                                        function openPopup(event) {
+                                            event.preventDefault();
+                                            const popupId = this.getAttribute('data-popup');
+                                            const popup = document.getElementById(popupId);
+                                            popup.style.display = 'block';
+
+                                            // Agregar evento de clic al botón de cierre para cerrar el popup
+                                            const closeBtn = popup.querySelector('.closeBookContent');
+                                            closeBtn.addEventListener('click', closePopup);
+                                        }
+
+                                        // Función para cerrar el popup
+                                        function closePopup(event) {
+                                            event.preventDefault();
+                                            const popupId = this.getAttribute('data-popup');
+                                            const popup = document.getElementById(popupId);
+                                            popup.style.display = 'none';
+
+                                            // Eliminar el evento de clic al botón de cierre
+                                            const closeBtn = popup.querySelector('.closeBookContent');
+                                            closeBtn.removeEventListener('click', closePopup);
+                                        }
+
+                                        // Agregar evento de clic a cada botón para abrir el popup correspondiente
+                                        buttons.forEach(button => {
+                                            button.addEventListener('click', openPopup);
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div id="hotels" style="padding-top: 4rem">
                             <h3>Hotels:</h3>
-                            @foreach ($tour->hoteles as $hotel)
-                                <div class="row mt-3">
-                                    <div class="col-5">
-                                        <img src="{{ asset($hotel->img) }}" width="100%" alt="">
+                            <div class="row mt-3">
+                                @foreach ($tour->hoteles as $hotel)
+                                    <div class="col-lg-6 hotel">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <img src="{{ asset($hotel->img) }}" width="100%"
+                                                    alt="{{ $hotel->nombre }}" loading="lazy">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <h5>{{ $hotel->nombre }}</h5>
+                                                <p><i class="fa fa-map-marker"></i> {{ $hotel->ubicacion }}</p>
+                                                <p class="card-text">{{ $hotel->descripcion }}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-7">
-                                        <h5>{{ $hotel->nombre }}</h5>
-                                        <p><i class="fa fa-map-marker"></i> {{ $hotel->ubicacion }}</p>
-                                        <p class="card-text">{{ $hotel->descripcion }}</p>
-                                    </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-12">

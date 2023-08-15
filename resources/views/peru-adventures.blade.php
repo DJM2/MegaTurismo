@@ -39,7 +39,7 @@
                     <tbody>
                         @foreach ($tours as $tour)
                         <tr>
-                            <td class="align-middle"><img src="{{ asset($tour->imgThumb) }}" alt="{{ $tour->nombre }}">
+                            <td><img src="{{ asset($tour->imgThumb) }}" alt="{{ $tour->nombre }}">
                             </td>
                             <td class="align-middle"><strong>{{ $tour->nombre }}</strong> <br> {{ $tour->lugarInicio }}
                                 → {{ $tour->lugarFin }}</td>
