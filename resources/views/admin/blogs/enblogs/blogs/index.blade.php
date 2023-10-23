@@ -51,7 +51,7 @@
                                             <td>{{ $blog->id }}</td>
                                             <td>{{ $blog->nombre }}</td>
                                             <td>{{ $blog->resumen }}</td>
-                                            <td>{!! $limitedDescriptions[$blog->id] !!}</td>
+                                            <td></td>
                                             <td><img src="{{ asset('img/blogs/thumbs/'.$blog->imgThumb) }}" width="100px"></td>
                                             <td><img src="{{ asset('img/blogs/'.$blog->imgBig) }}" width="100px"></td>
                                             <td>{{ $blog->keyword }}</td>

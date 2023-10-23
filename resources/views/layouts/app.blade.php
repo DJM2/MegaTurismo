@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    {{-- <link rel="stylesheet" href="css/style.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
@@ -26,13 +26,12 @@
         <div class="row info align-items-center">
             <div class="col-lg-6 text-center">
                 @if (!empty($contacto->correo1))
-                <span class="infoMail"> {{ $contacto->correo1 }}</span>
-            @endif
-            <span class="responsive">|</span>
-            @if (!empty($contacto->correo2))
-            <span
-            class="infoMail2"> {{ $contacto->correo2 }}</>
-            @endif
+                    <span class="infoMail"> {{ $contacto->correo1 }}</span>
+                @endif
+                <span class="responsive">|</span>
+                @if (!empty($contacto->correo2))
+                    <span class="infoMail2"> {{ $contacto->correo2 }}</>
+                @endif
             </div>
             <div class="col-lg-6 redesContent">
                 <span class="fa fa-whatsapp redes"></span>
@@ -47,7 +46,8 @@
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('index') }}">
-                <img src="{{ asset('img/logo-mega-turismo-2.png') }}" width="120px" id="logo-image" alt="Logo Mega Turismo">
+                <img src="{{ asset('img/logo-mega-turismo-2.png') }}" width="120px" id="logo-image"
+                    alt="Logo Mega Turismo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,6 @@
                         </div>
                         <script>
                             var dropdownOpen = false;
-
                             function toggleDropdown(isOpen) {
                                 var dropdownMenu = document.getElementsByClassName('dropdown-menu')[0];
                                 if (isOpen) {
@@ -80,7 +79,6 @@
                                     dropdownOpen = false;
                                 }
                             }
-
                             function redirect() {
                                 if (!dropdownOpen) {
                                     window.location.href = "{{ route('destinies') }}";
@@ -97,8 +95,8 @@
                     <li class="nav-item"><a class="nav-link" href=""><img src="{{ asset('img/es.webp') }}"
                                 width="25px" alt="Bandera español" title="Español"></a></li>
                 </ul>
-                <form action="#" class="searchMenu">
-                    <input type="text" placeholder="Search" class="input">
+                <form action="{{ route('search') }}" class="searchMenu" method="GET">
+                    <input type="text" name="searchTerm" placeholder="Search tour" class="input">
                     <button class="fa fa-search " type="submit">
                     </button>
                 </form>
@@ -106,52 +104,17 @@
         </div>
     </nav>
 
-    {{-- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light sticky-top" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand logo-scroll" href="index.html">
-                <img src="{{ asset('img/logo-mega-turismo.png') }}" width="90px" alt="" id="logo-image">
-            </a>
-            <form action="#" class="searchform order-sm-start order-lg-last">
-                <div class="form-group d-flex">
-                    <button type="submit" placeholder="" class="form-control search"><span
-                            class="fa fa-search"></span></button>
-                </div>
-            </form>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse navMega">
-                <ul class="navbar-nav m-auto">
-                    <li class="nav-item active dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">Destinations</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Page 1</a>
-                            <a class="dropdown-item" href="#">Page 2</a>
-                            <a class="dropdown-item" href="#">Page 3</a>
-                            <a class="dropdown-item" href="#">Page 4</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Peru Packages</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Peru Adventure </a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Peru Gastronomy</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Spiritual</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav> --}}
-
     @yield('contenido')
     <div class="container-fluid bg-dark">
         <div class="container">
             <div class="row links">
                 <div class="col-lg-3">
-                    <img src="{{ asset('img/logo-mega-turismo-blanco.png') }}" width="120px"
-                        alt="Logo Mega Turismo blanco" loading="lazy">
+                    <div class="text-center">
+                        <img src="{{ asset('img/logo-mega-turismo-blanco.png') }}" width="100px"
+                            alt="Logo Mega Turismo blanco" loading="lazy">
+                    </div>
                     <p class="mt-3">
-                        {{ $footerText->text }}
+                        {!! $footerText->text !!}
                     </p>
                     <div class="sociales">
                         <a href=""><span class="fa fa-whatsapp redes"></span></a>
@@ -167,8 +130,8 @@
                         <div class="col-md-6">
                             <ul>
                                 @foreach ($destinos->take(6) as $destino)
-                                    <li><span>➤</span><a
-                                            href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                                    <li><span>·</span><a href="{{ route('destinies.show', $destino->slug) }}">
+                                            {{ $destino->nombre }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -176,8 +139,8 @@
                         <div class="col-md-6">
                             <ul>
                                 @foreach ($destinos->skip(6)->take(6) as $destino)
-                                    <li><span>➤</span><a
-                                            href="{{ route('destinies.show', $destino->slug) }}">{{ $destino->nombre }}</a>
+                                    <li><span>·</span><a href="{{ route('destinies.show', $destino->slug) }}">
+                                            {{ $destino->nombre }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -187,9 +150,9 @@
                 <div class="col-lg-3">
                     <h4>Query</h4>
                     <ul>
-                        @foreach ($vistas as $vista)
-                            <li><span class="flechaPie">➤</span>
-                                <a href="{{ route('nosotros.show', $vista->id) }}">
+                        @foreach ($vistas as $vista) 
+                            <li><span>·</span>
+                                <a href="{{ route('query.show', $vista->slug) }}">
                                     {{ $vista->nombre }}
                                 </a>
                             </li>
@@ -227,8 +190,8 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center derechos">
-                    <p>Todos los derechos reservados © | MegaTurismo 2023 | Creado por <a href="#"
-                            class="djm2">DJM2</a></p>
+                    <p>Todos los derechos reservados © | MegaTurismo 2023 | Creado por <a href="https://www.facebook.com/DjmWebMaster"
+                            class="djm2" target="_blank" rel="noopener noreferrer">DJM2</a></p>
                 </div>
             </div>
         </div>

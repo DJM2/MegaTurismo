@@ -135,9 +135,9 @@ body {
 .tagsRelacionados .related {
   margin-bottom: 0.6em;
 }
-.tagsRelacionados .related:hover {
-  background: rgba(233, 229, 229, 0.7725490196);
-  transition: 0.4s ease;
+.tagsRelacionados .related:hover .col-8 {
+  border-bottom: 1px dashed #15c9c9;
+  transition: 0.8s ease;
 }
 .tagsRelacionados .related img {
   width: 100%;
@@ -150,9 +150,14 @@ body {
   justify-content: center;
   height: 100%;
   float: left;
-  color: #15c9c9;
+  color: #414141;
   font-size: 18px;
   margin-left: -1em;
+  transition: 0.4s ease;
+}
+.tagsRelacionados .related h5:hover {
+  color: #15c9c9;
+  transition: 0.4s ease;
 }
 
 .principalBlogs {
@@ -313,7 +318,7 @@ body {
 }
 .bg-dark .links ul {
   list-style: none;
-  margin-left: -2em;
+  margin-left: -2.5em;
 }
 .bg-dark .links ul li {
   font-size: 14px;
@@ -324,7 +329,6 @@ body {
   color: #15c9c9;
 }
 .bg-dark .links ul li span {
-  visibility: hidden;
   transition: 0.2s ease;
   color: #15c9c9;
 }
@@ -346,6 +350,8 @@ body {
 }
 .bg-dark .derechos {
   font-size: 13px;
+  border-top: 1px solid grey;
+  padding-top: 2em;
 }
 
 .btnReserva {
@@ -364,6 +370,13 @@ body {
 .containerReviews {
   margin-top: 4em;
   margin-bottom: 4em;
+  padding-top: 4em;
+  padding-bottom: 2em;
+  background: linear-gradient(rgba(14, 14, 14, 0.26), rgba(6, 120, 137, 0.45)), url(../img/fondos/Nevado-Huascaran-Peru.webp) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .containerReviews .carousel-inner .circulo {
   width: 130px;
@@ -446,14 +459,33 @@ body {
   font-size: 70px;
   text-shadow: 4px 3px 5px rgba(0, 0, 0, 0.34);
   position: relative;
+  padding-bottom: 0.2em;
+}
+
+.btnTag {
+  color: #007bff;
+  transition: 0.4s ease;
+  font-size: 14px;
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 0.4em 0.4em;
+  border: 1px solid transparent;
+}
+.btnTag:hover {
+  color: #007bff;
+  text-decoration: none;
+  transition: 0.4s ease;
+  border: 1px solid rgba(128, 128, 128, 0.4196078431);
+  background: #fff;
+  transition: 0.4s ease;
 }
 
 .carousel-caption h5::after {
   content: "";
   display: block;
   background-color: #08e5e5;
-  width: 90px;
-  height: 3px;
+  width: 70px;
+  height: 4px;
   position: absolute;
   bottom: 8px;
   /* Ajustar la posición vertical del after */
@@ -526,6 +558,25 @@ body {
   color: #08e5e5;
 }
 
+.botonEdicion {
+  position: fixed;
+  top: 50vh;
+  z-index: 2;
+  background: #f24a6e;
+  color: #fff;
+  padding: 0.5em 0.4em;
+  padding-left: 0.5em;
+  border-radius: 8px;
+  margin-left: -2em;
+  transition: 0.4s ease;
+}
+.botonEdicion:hover {
+  text-decoration: none;
+  color: #fff;
+  margin-left: -0.2em;
+  transition: 0.4s ease;
+}
+
 .cursiva {
   font-family: Satisfy, cursive;
   text-align: center;
@@ -552,6 +603,17 @@ body {
   position: relative;
   height: 470px;
 }
+.custom .custom-col .tituloBlog {
+  position: absolute;
+  top: 50%;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: #1b1e1e 2px 0px 2px;
+}
 .custom .custom-col img {
   width: 100%;
   height: 470px;
@@ -559,15 +621,21 @@ body {
 }
 .custom .custom-col .card-hover {
   text-align: center;
-  background: #08e5e5;
+  background: #15c9c9;
   color: #fff;
   position: inherit;
-  padding-bottom: 1.8em;
+  padding: 0.8em;
+  padding-bottom: 5em;
   transition: 0.6s ease;
 }
 .custom .custom-col .card-hover h4 {
   padding-top: 0.8em;
   color: #fff;
+  font-size: 20px;
+}
+.custom .custom-col .card-hover p {
+  padding: 0.2em;
+  font-size: 14px;
 }
 .custom .custom-col .card-hover a {
   background: #fff;
@@ -584,9 +652,13 @@ body {
   transition: 0.6s ease;
 }
 .custom .custom-col:hover .card-hover {
-  margin-top: -10em;
+  margin-top: -12em;
   transition: 0.6s ease;
   position: inherit;
+}
+.custom .custom-col:hover .tituloBlog {
+  top: 70%;
+  transition: 1s ease;
 }
 
 .circulares .circular {
@@ -595,7 +667,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 330px;
+  height: 250px;
   border-radius: 50%;
   background-color: #f1f1f1;
   overflow: hidden;
@@ -609,7 +681,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 92%;
+  width: 90%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.274);
   opacity: 0;
@@ -617,6 +689,7 @@ body {
   border-radius: 50%;
   margin-left: 15px;
   transition: 1s ease;
+  z-index: 2;
 }
 .circulares .circular:hover::before {
   opacity: 1;
@@ -624,14 +697,14 @@ body {
 }
 .circulares .circular img {
   display: block;
-  width: 142%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   transition: 1s ease;
+  object-fit: cover;
 }
 .circulares .circular:hover img {
-  width: 150%;
-  height: auto;
-  transition: 1s ease;
+  transform: scale(1.1);
+  transition: 0.6s ease;
 }
 .circulares .circular h3 {
   color: #fff;
@@ -644,6 +717,7 @@ body {
   padding: 0;
   font-family: Satisfy, cursive;
   font-size: 35px;
+  z-index: 3;
 }
 
 .migas a {
@@ -828,6 +902,17 @@ body {
 .card .card-title {
   font-size: 16px;
   font-weight: bold;
+  position: relative;
+  padding-bottom: 0.4em;
+}
+.card .card-title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  background: #15c9c9;
 }
 
 .cardBtn {
@@ -849,6 +934,7 @@ body {
   background-position: right;
   transition: background-position 0.3s ease-in-out;
   border: none;
+  text-decoration: none;
 }
 .cardBtn:active {
   color: #fff !important;
@@ -906,8 +992,22 @@ body {
   .info .infoMail {
     margin-left: 0px;
   }
+  .carousel-caption h5 {
+    font-size: 30px;
+    padding-bottom: 0.6em;
+  }
+  .containerReviews {
+    background: linear-gradient(rgba(14, 14, 14, 0.26), rgba(6, 120, 137, 0.45)), url(../img/fondos/Nevado-Huascaran-Peru-thumb.webp) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
   .containerReviews .cardReview {
     text-align: center;
+  }
+  .circulares .circular {
+    height: 340px;
   }
   .info .infoMail2 {
     text-align: center;

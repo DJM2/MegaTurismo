@@ -15,7 +15,8 @@ class EnreviewController extends Controller
 
     public function create()
     {
-        return view('admin.tours.comentarios.create');
+        $comment = null; 
+        return view('admin.tours.comentarios.create', compact('comment'));
     }
     public function store(Request $request)
     {

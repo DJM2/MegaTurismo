@@ -32,8 +32,10 @@ Route::get('/peru-blog', [EnlacesController::class, 'blogen'])->name('blogen');
 Route::get('/destinies', [EnlacesController::class, 'destinies'])->name('destinies');
 Route::get('/tour/{slug}', [ToursController::class, 'show'])->name('tour.show');
 Route::get('en-tag/{tag}', [EntagController::class, 'show'])->name('entag.show');
-Route::get('queries', [NosotrosController::class, 'show'])->name('query');
-
+/* Route::get('queries', [NosotrosController::class, 'show'])->name('query'); */
+Route::get('query/{slug}', [NosotrosController::class, 'show'])->name('query.show');
+Route::get('search', [ToursController::class, 'search'])->name('search');
+Route::get('search-en-Blog', [BlogController::class, 'search'])->name('blogSearch');
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('tours', ToursController::class)->names('tours');
@@ -49,7 +51,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('update-footer-text', [EnlacesController::class, 'updateFooterText'])->name('update.footer.text');
     Route::resource('vistas-pie', NosotrosController::class)->names('nosotros');
     Route::resource('aboutus', AboutUsController::class)->names('aboutus');
-
 });
+
 Route::get('destiny/{slug}', [DestinoController::class, 'show'])->name('destinies.show');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('enblogs.show');

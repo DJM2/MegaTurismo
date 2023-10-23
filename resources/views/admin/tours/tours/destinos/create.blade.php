@@ -10,6 +10,17 @@
                 <div class="col-6">
                     <a href="{{ route('destinies.index') }}" class="btn btn-primary btn-sm float-right mr-2">Cancelar</a>
                 </div>
+                <div class="col-12">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -19,7 +30,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" name="nombre" class="form-control form-control-sm" required>
+                    <input type="text" name="nombre" class="form-control form-control-sm" required value="{{ old('nombre') }}">
                     @error('nombre')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,7 +41,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="img">Imagen:</label>
-                            <input type="file" name="img" accept="image/*" class="form-control form-control-sm"
+                            <input type="file" name="img" class="form-control form-control-sm"
                                 required id="imgInput">
                             @error('img')
                                 <span class="invalid-feedback" role="alert">
@@ -45,7 +56,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="imgThumb">Imagen Thumbnail:</label>
-                            <input type="file" name="imgThumb" accept="image/*" class="form-control form-control-sm"
+                            <input type="file" name="imgThumb" class="form-control form-control-sm"
                                 required id="imgThumbInput">
                             @error('imgThumb')
                                 <span class="invalid-feedback" role="alert">
@@ -60,7 +71,7 @@
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción:</label>
-                    <textarea name="descripcion" class="ckeditor form-control form-control-sm" required></textarea>
+                    <textarea name="descripcion" class="ckeditor form-control form-control-sm" required value="{{ old('descripcion') }}"></textarea>
                     @error('descripcion')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -69,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <label for="slug">Slug:</label>
-                    <input type="text" name="slug" id="slugInput" class="form-control form-control-sm" required>
+                    <input type="text" name="slug" id="slugInput" class="form-control form-control-sm" required value="{{ old('slug') }}">
                     @error('slug')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -82,7 +93,7 @@
     </div>
     <script>
         const slugInput = document.getElementById('slugInput');
-    
+
         slugInput.addEventListener('keyup', function(event) {
             const previousValue = this.value;
             const newValue = previousValue.replace(/\s+/g, '-');
@@ -100,8 +111,7 @@
 
                 var img = document.createElement('img');
                 img.src = e.target.result;
-                img.style.width = '100%';
-                img.style.height = '230px';
+                img.style.maxWidth= '100%';
                 img.style.objectFit = 'cover';
 
                 imagePreview.appendChild(img);
@@ -120,8 +130,7 @@
 
                 var img = document.createElement('img');
                 img.src = e.target.result;
-                img.style.width = '100%';
-                img.style.height = '230px';
+                img.style.maxWidth = '100%';
                 img.style.objectFit = 'cover';
 
                 imageThumbPreview.appendChild(img);

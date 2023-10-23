@@ -46,9 +46,10 @@ class NosotrosController extends Controller
 
         return redirect()->route('nosotros.index')->with('success', 'Página actualizada correctamente');
     }
-    public function show($id)
+    public function show($slug)
     {
-        $vista = Nosotros::findOrFail($id);
+        /* $vista = Nosotros::findOrFail($slug); */
+        $vista = Nosotros::where('slug', $slug)->firstOrFail();
         return view('admin.foot.show', compact('vista'));
     }
     public function destroy($id)

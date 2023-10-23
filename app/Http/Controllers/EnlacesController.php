@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Destino;
+use App\Models\Enreview;
 use App\Models\Tours;
 use App\Models\FooterText;
 use Illuminate\Support\Facades\View;
@@ -38,22 +39,30 @@ class EnlacesController extends Controller
     public function packages()
     {
         $tours = Tours::all();
-        return view('peru-packages', compact('tours'));
+        $blogs = Blog::take(4)->latest()->get();
+        $reviews = Enreview::all()->chunk(3);
+        return view('peru-packages', compact('tours', 'blogs', 'reviews'));
     }
     public function adventures()
     {
         $tours = Tours::all();
-        return view('peru-adventures', compact('tours'));
+        $blogs = Blog::take(4)->latest()->get();
+        $reviews = Enreview::all()->chunk(3);
+        return view('peru-adventures', compact('tours', 'blogs', 'reviews'));
     }
     public function gastronomy()
     {
         $tours = Tours::all();
-        return view('gastronomy', compact('tours'));
+        $blogs = Blog::take(4)->latest()->get();
+        $reviews = Enreview::all()->chunk(3);
+        return view('gastronomy', compact('tours', 'blogs', 'reviews'));
     }
     public function spiritual()
     {
         $tours = Tours::all();
-        return view('spiritual', compact('tours'));
+        $blogs = Blog::take(4)->latest()->get();
+        $reviews = Enreview::all()->chunk(3);
+        return view('spiritual', compact('tours', 'blogs', 'reviews'));
     }
     public function blogen()
     {

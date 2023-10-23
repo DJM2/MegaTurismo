@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Destino;
 use App\Models\Entag;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class EntagController extends Controller
             'nombre' => 'required',
             'slug' => 'required|unique:entags,slug,' . $id,
         ]);
-        
+
         $tag = Entag::findOrFail($id);
         $tag->nombre = $request->nombre;
         $tag->slug = $request->slug;
@@ -55,17 +56,21 @@ class EntagController extends Controller
 
     public function show($tag)
     {
-        $destinos=Destino::all();
+        
         $tag = Entag::where('slug', $tag)->first();
-        return view('admin.blogs.enblogs.tags.show', compact('tag', 'destinos'));
+        if ($tag) {
+            $blogs = $tag->blogs()->get();
+        } else {
+            $blogs = collect();
+        }
+        return view('admin.blogs.enblogs.tags.show', compact('tag', 'blogs'));
     }
 
     public function destroy($id)
     {
         $tag = Entag::findOrFail($id);
         $tag->delete();
-    
+
         return redirect()->route('entags.index')->with('success', 'Tag eliminado correctamente.');
     }
-    
 }

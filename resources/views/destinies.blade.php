@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo', 'Inicio')
+@section('titulo', 'Find the best destinations to visit Peru, a land full of history, gastronomy, culture and adventure!')
 @section('contenido')
     <div class="custom-container-2">
         <img src="{{ asset('img/fondos/destinies-peru.webp') }}" alt="Peru Mega Turismo">
@@ -16,8 +16,8 @@
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ $destiny->nombre }}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                                the card's content.</p>
+                            <p class="card-text text-justify">{!! \Illuminate\Support\Str::words(strip_tags($destiny->descripcion), 25, '...') !!}</p>
+
                             <a href="{{ route('destinies.show', $destiny->slug) }}" class="cardBtn">View
                                 destiny</a>
                         </div>

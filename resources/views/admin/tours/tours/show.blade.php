@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('titulo', $tour->nombre)
 @section('contenido')
+@auth
+    <a href="{{ route('tours.edit', $tour->id) }}" target="_blank" class="botonEdicion">Editar Tour</a>
+@endauth
     <div class="container-fluid custom-container">
         <img src="{{ asset($tour->img) }}" alt="{{ $tour->nombre }}">
         <h1 class="title">{{ $tour->nombre }}</h1>
@@ -165,7 +168,7 @@
                     <div class="col-12">
                         <div id="overview" style="padding-top: 4rem">
                             <h3>Overview:</h3>
-                            <p class="mt-4">{!! $tour->contenido !!}</p>
+                            <p class="mt-4">{!! $tour->resumen !!}</p>
                         </div>
                     </div>
                     <div class="col-12">
@@ -181,11 +184,13 @@
                             <!-- Imágenes -->
                             <div class="carousel-inner" style="height: 300px;">
                                 @foreach (array_chunk(explode(',', $tour->galeria), 2) as $index => $imagenes)
-                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                        <div class="row">
+                                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="height: 100%">
+                                        <div class="row" style="height: 100%">
                                             @foreach ($imagenes as $imagen)
-                                                <div class="col-md-6">
-                                                    <img src="{{ asset($imagen) }}" alt="Galería">
+                                                <div class="col-md-6" style="padding: 0px">
+                                                    <img src="{{ asset($imagen) }}" alt="Galería {{ $tour->nombre }}"
+                                                        loading="lazy"
+                                                        style="width: 100%;  height:100%; object-fit: cover">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -356,7 +361,8 @@
                                                                         <label for="fechaViaje">Date start trip:</label>
                                                                         <input type="text" id="fechaViaje"
                                                                             name="fechaViaje" readonly
-                                                                            class="form-control form-control-sm" value="{{ date(' d M, Y', strtotime($fecha->fecha)) }}">
+                                                                            class="form-control form-control-sm"
+                                                                            value="{{ date(' d M, Y', strtotime($fecha->fecha)) }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -384,7 +390,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">                                                              
+                                                            <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="cantidadAdultos">Adults:</label>

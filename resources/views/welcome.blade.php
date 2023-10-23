@@ -7,9 +7,13 @@
                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}" style="height: 100%">
                     <img class="d-block zoom-in-image" src="{{ asset($tour->img) }}" alt="Slide {{ $key }}"
                         style="width:100%; object-fit: cover; height: 100%">
-                    <div class="carousel-caption d-md-block">
+                    <div class="carousel-caption d-md-block" style="padding-bottom: 6%">
                         <h5>{{ $tour->nombre }}</h5>
-                        <p>{{ $tour->descripcion }}</p>
+                        {{-- <p>{{ $tour->descripcion }}</p> --}}
+                        <p>
+                            <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}.00 </span> &nbsp;&nbsp;&nbsp;
+                            <span> <i class="fa fa-calendar"></i> {{ $tour->dias }} days </span>
+                        </p>
                         <a class="cardBtn" href="{{ route('tour.show', ['slug' => $tour->slug]) }}">View details</a>
                     </div>
                 </div>
@@ -27,267 +31,79 @@
         <ol class="carousel-indicators">
         </ol>
     </div>
-    <section class="pt-3 pb-5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach ($gruposTours as $grupo)
-                                <div class="carousel-item active">
-                                    <div class="row">
-                                        @foreach ($grupo as $tour)
-                                            <div class="col-md-3 mb-3">
-                                                <div class="card">
-                                                    <a href="{{ route('tour.show', $tour->slug) }}">
-                                                        <img alt="" src="{{ $tour->imgThumb }}" width="100%"
-                                                            style="height: 260px; object-fit: cover;">
-                                                    </a>
-                                                    <div class="cardMin">
-                                                        <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
-                                                        <span><i class="fa fa-map-marker"></i> {{ $tour->lugarInicio }} →
-                                                            {{ $tour->lugarFin }} </span>
-                                                        <span><i class="fa fa-calendar"></i> {{ $tour->dias }}
-                                                            days</span>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">{{ $tour->nombre }}</h4>
-                                                        <p class="card-text">{{ $tour->descripcion }}</p>
-                                                        <a class="cardBtn"
-                                                            href="{{ route('tour.show', $tour->slug) }}">View details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
+    <div id="tourCarousel" class="carousel slide mt-3" data-ride="carousel">
+        <div class="carousel-inner">
+            @php
+                $active = 'active';
+            @endphp
+            @foreach ($gruposTours as $grupo)
+                <div class="carousel-item {{ $active }}">
+                    <div class="row">
+                        @foreach ($grupo as $tour)
+                            <div class="col-md-3 mb-3">
+                                <div class="card">
+                                    <a href="{{ route('tour.show', $tour->slug) }}">
+                                        <img alt="{{ $tour->nombre }}" src="{{ $tour->imgThumb }}" width="100%"
+                                            style="height: 260px; object-fit: cover;">
+                                    </a>
+                                    <div class="cardMin">
+                                        <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>
+                                        <span><i class="fa fa-map-marker"></i> {{ $tour->lugarInicio }} →
+                                            {{ $tour->lugarFin }} </span>
+                                        <span><i class="fa fa-calendar"></i> {{ $tour->dias }}
+                                            days</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{ $tour->nombre }}</h4>
+                                        <p class="card-text">{{ $tour->descripcion }}</p>
+                                        <a class="cardBtn" href="{{ route('tour.show', $tour->slug) }}">View details</a>
                                     </div>
                                 </div>
-                            @endforeach
-                            {{-- <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=ee8417f0ea2a50d53a12665820b54e23">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532777946373-b6783242f211?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=8ac55cf3a68785643998730839663129">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <div class="card">
-                                            <img class="img-fluid" alt="100%x280"
-                                                src="https://images.unsplash.com/photo-1532763303805-529d595877c5?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjMyMDc0fQ&amp;s=5ee4fd5d19b40f93eadb21871757eda6">
-                                            <div class="cardMin">
-                                                <span><i class="fa fa-dollar"></i> 340.00</span>
-                                                <span><i class="fa fa-map-marker"></i> Cusco</span>
-                                                <span><i class="fa fa-calendar"></i> 2 days</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Special title treatment</h4>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-                                                <a href="">Ver tour</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-                <div class="col-12 text-center">
-                    <a class="btn-slide mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                        <i class="fa fa-circle"></i>
-                    </a>
-                    <a class="btn-slide mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
-                        <i class="fa fa-circle"></i>
-                    </a>
+                @php
+                    $active = '';
+                @endphp
+            @endforeach
+        </div>
+        <div class="col-12 text-center">
+            <a class="btn-slide mb-3 mr-1" href="#tourCarousel" role="button" data-slide="prev">
+                <i class="fa fa-circle"></i>
+            </a>
+            <a class="btn-slide mb-3 " href="#tourCarousel" role="button" data-slide="next">
+                <i class="fa fa-circle"></i>
+            </a>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="cursiva">Top places</h2>
+                    <p class="text-center">Best places to visit in Perú</p>
                 </div>
-
+                @foreach ($destinos->take(4) as $destino)
+                    <div class="col-lg-3 circulares mt-3">
+                        <a href="{{ route('destinies.show', $destino->slug) }}" target="_blank">
+                            <div class="circular">
+                                <img src="{{ asset('img/destinos/thumbs/' . $destino->imgThumb) }}"
+                                    alt="{{ $destino->nombre }}" loading="lazy">
+                                <h3>{{ $destino->nombre }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
-
     <div class="container-fluid containerReviews">
         <div class="row">
             <div class="col-lg-12 mb-4">
-                <h2 class="text-center">Top Reviews</h2>
-                <p class="text-center">Esta es una lista de los comentarios de nuestros pasajeros del año 2023</p>
+                <h2 class="cursiva">Reviews</h2>
             </div>
             <div class="col-lg-12">
-                {{-- <div id="commentCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/chica-02.jpg') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>Nombre Muestra</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/thumb/user-img-1.PNG') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>Nombre Muestra</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/thumb/user-img-2.PNG') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>Nombre Muestra</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/thumb/user-img-3.PNG') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>David Miranda</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/thumb/user-img-4.PNG') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>Gabriela Durand</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="row cardReview ml-1 mr-1">
-                                        <div class="col-4">
-                                            <div class="circulo">
-                                                <img src="{{ asset('img/thumb/user-img-5.PNG') }}" width="100%"
-                                                    alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-8">
-                                            <h5>Kelly Pérez</h5>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <i class="fa fa-star" style="color: #08e5e5"></i>
-                                            <p>Texto de muestra del comentario...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 text-center mt-4">
-                        <a class="btn-slide mb-3 mr-1" href="#commentCarousel" role="button" data-slide="prev">
-                            <i class="fa fa-circle"></i>
-                        </a>
-                        <a class="btn-slide mb-3" href="#commentCarousel" role="button" data-slide="next">
-                            <i class="fa fa-circle"></i>
-                        </a>
-                    </div>
-                </div> --}}
                 <div id="commentCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @foreach ($reviews as $index => $grupoReviews)
@@ -363,72 +179,21 @@
         </div>
         <div class="custom mt-5">
             <div class="row" style="margin-left:0px; margin-right:0px">
-                <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/tour-cusco-peru.jpg') }}" alt="" width="100%">
-                    <div class="card-hover">
-                        <h4>Muestra</h4>
-                        <p>Texto de muestra dirigido</p>
-                        <a href="">Boton de muestra</a>
-                    </div>
+                <div class="col-12 mb-5">
+                    <h2 class="cursiva">Blogs Perú</h2>
                 </div>
-                <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/chica-01.jpg') }}" alt="" width="100%">
-                    <div class="card-hover">
-                        <h4>Muestra</h4>
-                        <p>Texto de muestra dirigido</p>
-                        <a href="">Boton de muestra</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/chica-02.jpg') }}" alt="" width="100%">
-                    <div class="card-hover">
-                        <h4>Muestra</h4>
-                        <p>Texto de muestra dirigido</p>
-                        <a href="">Boton de muestra</a>
-                    </div>
-                </div>
-                <div class="col-lg-3 custom-col">
-                    <img src="{{ asset('img/chica-03.jpg') }}" alt="" width="100%">
-                    <div class="card-hover">
-                        <h4>Muestra</h4>
-                        <p>Texto de muestra dirigido</p>
-                        <a href="">Boton de muestra</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container mt-5 mb-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="cursiva">Enjoy your</h2>
-                    <p class="text-center">Best places to visit in Perú</p>
-                </div>
-                <div class="col-lg-4 circulares mt-3">
-                    <a href="">
-                        <div class="circular">
-                            <img src="{{ asset('img/galeriaTours/condor-arequipa.webp') }}" alt="">
-                            <h3>Machu Picchu</h3>
+                @foreach ($blogs as $blog)
+                    <div class="col-lg-3 custom-col">
+                        <img src="{{ asset('img/blogs/thumbs/' . $blog->imgThumb) }}" width="100%"
+                            alt="{{ $blog->titulo }}" loading="lazy">
+                        <p class="tituloBlog">{{ $blog->nombre }}</p>
+                        <div class="card-hover">
+                            <h4>{{ $blog->nombre }}</h4>
+                            <p>{{ $blog->resumen }}</p>
+                            <a href="{{ route('enblogs.show', $blog->slug) }}" target="_blank">Leer blog</a>
                         </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 circulares mt-3">
-                    <a href="">
-                        <div class="circular">
-                            <img src="{{ asset('img/galeria/arequipa-city-tour.webp') }}" alt="">
-                            <h3>Cusco</h3>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-4 circulares mt-3">
-                    <a href="">
-                        <div class="circular">
-                            <img src="{{ asset('img/galeria/calle-sevilla-Arequipa.webp') }}" alt="">
-                            <h3>Camino Inca</h3>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

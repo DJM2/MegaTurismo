@@ -159,15 +159,15 @@ body {
 
     &:hover {
       text-decoration: none;
-    }
+    }    
   }
 
   .related {
     margin-bottom: 0.6em;
 
-    &:hover {
-      background: #e9e5e5c5;
-      transition: 0.4s ease;
+    &:hover .col-8{
+      border-bottom: 1px dashed $principal2;
+      transition: 0.8s ease;
     }
 
     img {
@@ -182,9 +182,14 @@ body {
       justify-content: center;
       height: 100%;
       float: left;
-      color: $principal2;
+      color: #414141;
       font-size: 18px;
       margin-left: -1em;
+      transition: 0.4s ease;
+      &:hover{
+        color: $principal2;
+        transition: 0.4s ease;
+      }
     }
   }
 }
@@ -371,7 +376,7 @@ body {
 
     ul {
       list-style: none;
-      margin-left: -2em;
+      margin-left: -2.5em;
 
       li {
         font-size: 14px;
@@ -383,7 +388,6 @@ body {
         }
 
         span {
-          visibility: hidden;
           transition: 0.2s ease;
           color: $principal2;
         }
@@ -417,6 +421,8 @@ body {
 
   .derechos {
     font-size: 13px;
+    border-top: 1px solid grey;
+    padding-top: 2em;
   }
 }
 
@@ -437,6 +443,13 @@ body {
 .containerReviews {
   margin-top: 4em;
   margin-bottom: 4em;
+  padding-top: 4em;
+  padding-bottom: 2em;
+  background: linear-gradient(rgb(14 14 14 / 26%), rgb(6 120 137 / 45%)), url(../img/fondos/Nevado-Huascaran-Peru.webp) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
   .carousel-inner {
     .circulo {
@@ -540,14 +553,34 @@ body {
   font-size: 70px;
   text-shadow: 4px 3px 5px rgb(0 0 0 / 34%);
   position: relative;
+  padding-bottom: 0.2em;
+}
+
+.btnTag {
+  color: #007bff;
+  transition: 0.4s ease;
+  font-size: 14px;
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 0.4em 0.4em;
+  border: 1px solid transparent;
+
+  &:hover {
+    color: #007bff;
+    text-decoration: none;
+    transition: 0.4s ease;
+    border: 1px solid #8080806b;
+    background: #fff;
+    transition: 0.4s ease;
+  }
 }
 
 .carousel-caption h5::after {
   content: '';
   display: block;
   background-color: #08e5e5;
-  width: 90px;
-  height: 3px;
+  width: 70px;
+  height: 4px;
   position: absolute;
   bottom: 8px;
   /* Ajustar la posición vertical del after */
@@ -625,6 +658,24 @@ body {
     color: $colorPrincipal;
   }
 }
+.botonEdicion{
+  position: fixed;
+  top: 50vh;
+  z-index: 2;
+  background: $secundario;
+  color: #fff;
+  padding: 0.5em 0.4em;
+  padding-left: 0.5em;
+  border-radius: 8px;
+  margin-left: -2em;
+  transition: 0.4s ease;
+  &:hover{
+    text-decoration: none;
+    color: #fff;
+    margin-left: -0.2em;
+    transition: 0.4s ease;
+  }
+}
 
 .cursiva {
   font-family: Satisfy, cursive;
@@ -654,6 +705,17 @@ body {
     overflow: hidden !important;
     position: relative;
     height: 470px;
+    .tituloBlog {
+      position: absolute;
+      top: 50%;
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: #1b1e1e 2px 0px 2px;
+  }
 
     img {
       width: 100%;
@@ -663,15 +725,22 @@ body {
 
     .card-hover {
       text-align: center;
-      background: $colorPrincipal;
+      background: $principal2;
       color: #fff;
       position: inherit;
-      padding-bottom: 1.8em;
+      padding: 0.8em;
+      padding-bottom: 5em;
       transition: 0.6s ease;
 
       h4 {
         padding-top: 0.8em;
         color: #fff;
+        font-size: 20px;
+      }
+
+      p {
+        padding: 0.2em;
+        font-size: 14px;
       }
 
       a {
@@ -692,22 +761,26 @@ body {
     }
 
     &:hover .card-hover {
-      margin-top: -10em;
+      margin-top: -12em;
       transition: 0.6s ease;
       position: inherit;
+    }
+    &:hover .tituloBlog{
+      top: 70%;
+      transition: 1s ease;
     }
   }
 }
 
-
 .circulares {
+
   .circular {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 330px;
+    height: 250px;
     border-radius: 50%;
     background-color: #f1f1f1;
     overflow: hidden;
@@ -722,7 +795,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      width: 92%;
+      width: 90%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.274);
       opacity: 0;
@@ -730,6 +803,7 @@ body {
       border-radius: 50%;
       margin-left: 15px;
       transition: 1s ease;
+      z-index: 2;
     }
 
     &:hover::before {
@@ -739,15 +813,15 @@ body {
 
     img {
       display: block;
-      width: 142%;
-      height: auto;
+      width: 100%;
+      height: 100%;
       transition: 1s ease;
+      object-fit: cover;
     }
 
     &:hover img {
-      width: 150%;
-      height: auto;
-      transition: 1s ease;
+      transform: scale(1.1);
+      transition: 0.6s ease;
     }
 
     h3 {
@@ -761,6 +835,7 @@ body {
       padding: 0;
       font-family: Satisfy, cursive;
       font-size: 35px;
+      z-index: 3;
     }
   }
 }
@@ -917,49 +992,56 @@ body {
     cursor: pointer;
   }
 }
-.itinerary{
+
+.itinerary {
   .card {
     img {
       width: 100%;
       object-fit: cover;
     }
-    border: none!important;
+
+    border: none !important;
+
     .card-header {
       background: #ebebeb;
       padding: 0.4em;
-  
+
       button {
         color: #000;
-  
+
         &:hover {
           text-decoration: none;
           color: $secundario;
         }
-  
+
         &:focus {
           color: $secundario;
           text-decoration: none;
         }
       }
     }
+
     .show {
       padding-top: 1em;
       transition: 0.1s ease;
     }
   }
 }
-.cardDestino{
-  img{
+
+.cardDestino {
+  img {
     width: 100%;
     height: 220px;
     object-fit: cover;
   }
-  h5{
+
+  h5 {
     color: #000;
-    font-size: 18px!important;
-    font-weight: 500!important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
     position: relative;
     padding-bottom: 5px;
+
     &::before {
       content: "";
       position: absolute;
@@ -968,7 +1050,7 @@ body {
       width: 18px;
       height: 3px;
       background-color: $principal2;
-  }
+    }
   }
 }
 
@@ -976,9 +1058,19 @@ body {
   .card-title {
     font-size: 16px;
     font-weight: bold;
-  }
+    position: relative;
+    padding-bottom: 0.4em;
 
-  
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30px;
+      height: 3px;
+      background: $principal2;
+    }
+  }
 }
 
 .cardBtn {
@@ -1000,6 +1092,7 @@ body {
     background-position: right;
     transition: background-position 0.3s ease-in-out;
     border: none;
+    text-decoration: none;
   }
 
   &:active {
@@ -1021,6 +1114,7 @@ body {
     color: #fff;
   }
 }
+
 .popupBook {
   display: none;
   position: fixed;
@@ -1060,10 +1154,26 @@ body {
   .info .infoMail {
     margin-left: 0px;
   }
+  .carousel-caption h5{
+    font-size: 30px;
+    padding-bottom:0.6em;
+  }
 
   .containerReviews {
+    background: linear-gradient(rgb(14 14 14 / 26%), rgb(6 120 137 / 45%)), url(../img/fondos/Nevado-Huascaran-Peru-thumb.webp) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
     .cardReview {
       text-align: center;
+    }
+  }
+  .circulares {
+
+    .circular {
+      height: 340px;
     }
   }
 
@@ -1074,8 +1184,8 @@ body {
   .redesContent {
     margin-bottom: 0.6em;
   }
-  .custom-container h1
-  {
+
+  .custom-container h1 {
     text-align: center;
     margin-bottom: 1em;
     margin-left: 0;

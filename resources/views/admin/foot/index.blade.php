@@ -17,7 +17,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Texto</th>
+                            <th>Texto</th> 
                             <th>Slug</th>
                             <th>Acciones</th>
                         </tr>
@@ -33,7 +33,7 @@
                                     <a href="{{ route('nosotros.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('nosotros.show', $item->id) }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('query.show', $item->slug) }}" target="_blank" class="btn btn-success btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     <form action="{{ route('nosotros.destroy', $item->id) }}" method="POST"

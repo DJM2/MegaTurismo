@@ -12,7 +12,6 @@ return new class extends Migration {
             $table->id();
             $table->string('nombre', 120)->unique();
             $table->string('descripcion', 250);
-            $table->text('contenido'); 
             $table->text('resumen'); 
             $table->string('dificultad');
             $table->text('detallado');

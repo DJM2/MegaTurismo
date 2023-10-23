@@ -3,11 +3,13 @@
 @section('contenido')
     <div class="row">
         <div class="col-lg-12">
-            @if (session('status'))
-                <div class="text-success">
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('status') }}
-                    </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
         </div>
@@ -17,25 +19,24 @@
                     <h4>Crear Nuevo Tour en español</h4>
                 </div>
                 <div class="col-lg-6">
-                    <a href="/tours" class="btn btn-primary float-right">Volver</a>
+                    <a href="{{route('tours.index')}}" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
             <form action="{{ route('tours.store') }}" method="post" enctype="multipart/form-data" class="bg-light">
                 @csrf
                 <div class="row">
-                    <div class="col-lg-4 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control form-control-sm" name="nombre" id="nombre"
                             value="{{ old('nombre', isset($tour) ? $tour->nombre : '') }}" required>
                         @error('nombre')
                             <div>{{ $message }}</div>
-                        @enderror 
-
+                        @enderror
                     </div>
-                    <div class="col-lg-8 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <label for="descripcion">Descripción</label>
                         <input type="text" name="descripcion" id="descripcion" class="form-control form-control-sm"
-                            value="{{ old('descripcion', isset($tour) ? $tour->descripcion : '') }}" required>
+                            value="{{ old('descripcion', isset($tour) ? $tour->descripcion : '') }}" required maxlength="150">
                         @error('descripcion')
                             <div>{{ $message }}</div>
                         @enderror
@@ -82,7 +83,6 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-
                     <div class="col-lg-4 mt-3">
                         <label for="categoria">Categoría:</label>
                         <select name="categoria_id" id="categoria" class="form-control form-control-sm" required>
@@ -116,7 +116,7 @@
                         @error('imgThumb')
                             <div>{{ $message }}</div>
                         @enderror
-                        <img id="imgThumbPrev" style="width:100%; height:200px; object-fit: cover;">
+                        <img id="imgThumbPrev" style="max-width:100%; object-fit: cover;">
                     </div>
                     <div class="col-lg-4 mt-3">
                         <label for="img">Imagen principal</label>
@@ -124,7 +124,7 @@
                         @error('img')
                             <div>{{ $message }}</div>
                         @enderror
-                        <img id="imgPrev" style="width:100%; height:200px; object-fit: cover;">
+                        <img id="imgPrev" style="max-width:100%; object-fit: cover;">
                     </div>
                     <div class="col-lg-4 mt-3">
                         <label for="mapa">Mapa</label>
@@ -132,7 +132,7 @@
                         @error('mapa')
                             <div>{{ $message }}</div>
                         @enderror
-                        <img id="imgMapaPrev" style="width:100%; height:200px; object-fit: cover;">
+                        <img id="imgMapaPrev" style="max-width:100%; object-fit: cover;">
                     </div>
                     <div class="form-group mt-3">
                         <label for="galeria">Imágenes de la galería:</label>
@@ -226,7 +226,7 @@
 
                                 var label = document.createElement('label');
                                 label.textContent = 'Hotel ' + i + ':';
-                                label.classList.add('font-weight-bold','align-middle');
+                                label.classList.add('font-weight-bold', 'align-middle');
                                 colWrapper1.appendChild(label);
                                 hotelRow.appendChild(colWrapper1);
                                 var colWrapper2 = document.createElement('div');
@@ -281,14 +281,6 @@
                             }
                         });
                     </script>
-
-                    <div class="col-lg-12 mt-3">
-                        <label for="contenido">Contenido:</label>
-                        <textarea name="contenido" id="contenido" class="ckeditor form-control" required>{{ old('contenido', isset($tour) ? $tour->contenido : '') }}</textarea>
-                        @error('contenido')
-                            <div>{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="col-lg-12 mt-3">
                         <label for="resumen">Resumen:</label>
                         <textarea name="resumen" id="resumen" class="ckeditor form-control" required>{{ old('resumen', isset($tour) ? $tour->resumen : '') }}</textarea>
@@ -335,7 +327,7 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     <script>
                         function replaceSpaces(input) {
                             var value = input.value;
@@ -348,7 +340,7 @@
             </form>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         CKEDITOR.replace('.ckeditor', {
             extraPlugins: 'youtube',

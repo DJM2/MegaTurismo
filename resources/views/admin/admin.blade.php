@@ -226,7 +226,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Made by DJM2</span>
+                        <span>Copyright &copy; Made by <a href="https://www.facebook.com/DjmWebMaster" target="_blank" rel="noopener noreferrer">DJM2</a></span>
                     </div>
                 </div>
             </footer>

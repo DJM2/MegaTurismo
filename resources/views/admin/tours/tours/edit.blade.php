@@ -14,17 +14,17 @@
         <div class="col-12 mt-2">
             <div class="row" style="padding: 1em; border-radius: 10px;">
                 <div class="col-lg-6 float-left">
-                    <h3>Crear Nuevo Tour en español</h3>
+                    <h3>Editar Tour en inglés: <strong>{{ $tour->nombre }}</strong></h3>
                 </div>
                 <div class="col-lg-6">
-                    <a href="/tours" class="btn btn-primary float-right">Volver</a>
+                    <a href="{{route('tours.index')}}" class="btn btn-primary float-right">Volver</a>
                 </div>
             </div>
             <form action="{{ route('tours.update', $tour->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
-                    <div class="col-lg-4 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control form-control-sm" name="nombre" id="nombre"
                             value="{{ old('nombre', isset($tour) ? $tour->nombre : '') }}" required>
@@ -32,7 +32,7 @@
                             <div>{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-lg-8 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <label for="descripcion">Descripción</label>
                         <input type="text" name="descripcion" id="descripcion" class="form-control form-control-sm"
                             value="{{ old('descripcion', isset($tour) ? $tour->descripcion : '') }}" required>
@@ -119,10 +119,9 @@
                         @enderror
                         @if (isset($tour) && $tour->imgThumb)
                             <img id="imgThumbPrev" src="{{ asset($tour->imgThumb) }}"
-                                style="width: 100%; height: 200px; object-fit: cover;">
+                                style="max-width: 100%; object-fit: cover;">
                         @endif
                     </div>
-
 
                     <div class="col-lg-4 mt-3">
                         <label for="img">Imagen principal</label>
@@ -131,8 +130,7 @@
                             <div>{{ $message }}</div>
                         @enderror
                         @if (isset($tour) && $tour->img)
-                            <img id="imgPrev" src="{{ asset($tour->img) }}"
-                                style="width: 100%; height: 200px; object-fit: cover;">
+                            <img id="imgPrev" src="{{ asset($tour->img) }}" style="max-width: 100%; object-fit: cover;">
                         @endif
                     </div>
 
@@ -144,7 +142,7 @@
                         @enderror
                         @if (isset($tour) && $tour->mapa)
                             <img id="imgMapaPrev" src="{{ asset($tour->mapa) }}"
-                                style="width: 100%; height: 200px; object-fit: cover;">
+                                style="max-width: 100%; object-fit: cover;">
                         @endif
                     </div>
                     <div class="col-lg-12 mt-3">
@@ -297,11 +295,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-3">
-                                    <input type="file" name="hoteles[{{ $index }}][img]" accept="image/*" class="form-control-file">
+                                    <input type="file" name="hoteles[{{ $index }}][img]"
+                                        class="form-control-file">
                                     @if (isset($hotel['img']))
-                                        <img id="imgPrevisualizacion{{ $index }}" src="{{ asset($hotel['img']) }}" style="width: 100%; height: 100px; object-fit: cover;">
+                                        <img id="imgPrevisualizacion{{ $index }}"
+                                            src="{{ asset($hotel['img']) }}"
+                                            style="width: 100%; object-fit: cover;">
                                     @else
-                                        <img id="imgPrevisualizacion{{ $index }}" src="" style="width: 100%; height: 100px; object-fit: cover;">
+                                        <img id="imgPrevisualizacion{{ $index }}" src=""
+                                            style="width: 100%; height: 100px; object-fit: cover;">
                                     @endif
                                     @error("hoteles.$index.img")
                                         <div class="text-danger">{{ $message }}</div>
@@ -324,7 +326,7 @@
 
                                 var label = document.createElement('label');
                                 label.textContent = 'Hotel ' + i + ':';
-                                label.classList.add('font-weight-bold','align-middle');
+                                label.classList.add('font-weight-bold', 'align-middle');
                                 colWrapper1.appendChild(label);
                                 hotelRow.appendChild(colWrapper1);
                                 var colWrapper2 = document.createElement('div');
@@ -337,9 +339,7 @@
                                 hotelNameInput.placeholder = 'Nombre del hotel ' + i;
                                 hotelNameInput.classList.add('form-control', 'form-control-sm');
                                 colWrapper2.appendChild(hotelNameInput);
-
                                 hotelRow.appendChild(colWrapper2);
-
                                 var colWrapper3 = document.createElement('div');
                                 colWrapper3.classList.add('col-2');
 
@@ -372,26 +372,13 @@
                                 hotelImageInput.accept = 'image/*';
                                 hotelImageInput.classList.add('form-control-file');
                                 colWrapper5.appendChild(hotelImageInput);
-
                                 hotelRow.appendChild(colWrapper5);
-
                                 hotelesContainer.appendChild(hotelRow);
                             }
                         });
                     </script>
-                    
 
-
-
-                    <div class="col-lg-6 mt-3">
-                        <label for="contenido">Contenido</label>
-                        <textarea name="contenido" class="ckeditor form-control" id="contenido" required>{{ old('contenido', $tour->contenido) }}</textarea>
-                        @error('contenido')
-                            <div>{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-lg-6 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <label for="resumen">Resumen</label>
                         <textarea name="resumen" class="ckeditor form-control" id="resumen" required>{{ old('resumen', $tour->resumen) }}</textarea>
                         @error('resumen')
@@ -434,7 +421,8 @@
                     <div class="col-lg-12">
                         <label for="slug">Slug</label>
                         <input type="text" name="slug" class="form-control" id="slug"
-                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required oninput="replaceSpaces(this)">
+                            value="{{ old('slug', isset($tour) ? $tour->slug : '') }}" required
+                            oninput="replaceSpaces(this)">
                         @error('slug')
                             <div>{{ $message }}</div>
                         @enderror

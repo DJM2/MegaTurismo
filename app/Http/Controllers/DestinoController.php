@@ -88,11 +88,10 @@ class DestinoController extends Controller
     public function show($slug)
     {
         $destino = Destino::where('slug', $slug)->first();
-        $tours = Tours::all();
-        $destinos = Destino::all();
-        return view('admin.tours.tours.destinos.show', compact('destino', 'tours', 'destinos'));
-    }
+        $tours = Tours::inRandomOrder()->take(4)->get();
 
+        return view('admin.tours.tours.destinos.show', compact('destino', 'tours'));
+    }
 
     public function destroy($id)
     {

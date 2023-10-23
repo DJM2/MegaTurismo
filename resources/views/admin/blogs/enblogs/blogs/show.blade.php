@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('titulo', $blog->nombre)
 @section('contenido')
+    @auth
+        <a href="{{ route('enblogs.edit', $blog->id) }}" target="_blank" class="botonEdicion">Editar Blog</a>
+    @endauth
     <div class="container">
         <div class="row">
             <div class="col-lg-12 mt-4 mb-4">
@@ -11,13 +14,17 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <p style="terxt-transform: uppercase">UPDATED ON {{ $blog->created_at->format('jS F Y') }}
-                </p>
+
             </div>
             <div class="col-lg-12 mb-5">
                 <div class="row">
                     <div class="col-lg-8">
                         <h1>{{ $blog->nombre }}</h1>
+                        <p style="terxt-transform: uppercase">Updated on:
+                            <span style="color: #15c9c9; font-weight: bold">
+                                {{ $blog->created_at->format('jS F Y') }}
+                            </span>
+                        </p>
                         <img src="{{ asset('img/blogs/' . $blog->imgBig) }}" class="principalBlogs"
                             alt="{{ $blog->nombre }}">
                         <div class="contenido mt-4 text-justify">
@@ -53,12 +60,12 @@
                     </div>
                     <div class="col-lg-4 mt-5">
                         <div class="sticky">
-                            <form action="" method="get">
+                            <form action="{{route('blogSearch')}}" method="get">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-outline">
-                                        <input type="text" id="name" name="name" class="form-control form-control-sm"
-                                            placeholder="Search blog..." required>
+                                        <input type="text" id="name" name="searchTerm"
+                                            class="form-control form-control-sm" placeholder="Search blog..." required>
                                     </div>
                                     <input type="submit" id="buscar" class="botonBlog" value="Search">
                                 </div>
@@ -77,8 +84,8 @@
                                     <div class="row related">
                                         <div class="col-4">
                                             <a href="{{ route('enblogs.show', $b->slug) }}">
-                                                <img src="{{ asset('img/blogs/thumbs/' . $b->imgThumb) }}" class="img-fluid"
-                                                    alt="{{ $b->nombre }}" loading="lazy">
+                                                <img src="{{ asset('img/blogs/thumbs/' . $b->imgThumb) }}"
+                                                    class="img-fluid" alt="{{ $b->nombre }}" loading="lazy">
                                             </a>
                                         </div>
                                         <div class="col-8">
@@ -91,7 +98,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -106,7 +112,8 @@
                     <div class="col-md-3 mb-3">
                         <div class="card">
                             <a href="{{ route('tour.show', $tour->slug) }}">
-                                <img alt="{{ $tour->nombre }}" src="{{asset( $tour->imgThumb) }}" loading="lazy">
+                                <img alt="{{ $tour->nombre }}" src="{{ asset($tour->imgThumb) }}" loading="lazy"
+                                    style="width: 100%; height:220px; object-fit: cover">
                             </a>
                             <div class="cardMin">
                                 <span><i class="fa fa-dollar"></i> {{ $tour->precioReal }}</span>

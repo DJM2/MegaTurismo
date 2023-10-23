@@ -15,16 +15,20 @@ class BlogController extends Controller
     {
         $blogs = Blog::all();
         $tags = Entag::all();
-        foreach ($blogs as $blog) {
-            $limitedDescriptions[$blog->id] = Str::limit($blog->descripcion, 70);
-        }
-        return view('admin.blogs.enblogs.blogs.index', compact('blogs', 'tags', 'limitedDescriptions'));
+        return view('admin.blogs.enblogs.blogs.index', compact('blogs', 'tags'));
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+        $results = Blog::where('nombre', 'like', '%' . $searchTerm . '%')->get();
+        return view('admin.blogs.enblogs.blogs.search', ['results' => $results, 'searchTerm' => $searchTerm]);
     }
     public function show($slug)
     {
         $blog = Blog::where('slug', $slug)->first();
         $destinos = Destino::all();
-        $tours = Tours::all();
+        $tours = Tours::inRandomOrder()->take(4)->get();
         $blogs = Blog::where('id', '!=', $blog->id)
             ->orderBy('created_at', 'desc')
             ->orderBy('updated_at', 'desc')

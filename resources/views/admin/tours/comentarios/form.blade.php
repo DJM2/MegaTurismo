@@ -9,13 +9,20 @@
 
 <div class="form-group">
     <label for="previewImg">Imagen:</label>
-    <input type="file" id="previewImg" name="img" class="form-control @error('img') is-invalid @enderror" accept="image/*">
+    <input type="file" id="previewImg" name="img" class="form-control @error('img') is-invalid @enderror">
     @error('img')
         <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
+<div class="mt-2">
+    @if ($comment && $comment->img)
+        <img id="imgPreview" src="{{ asset( $comment->img) }}" alt="Imagen" style="max-width: 100%; height: auto;">
+    @endif
+</div>
 <!-- Elemento para mostrar la imagen previsualizada -->
-<img id="imgPreview" src="#" alt="Previsualización de la imagen" style="width: 400px; height: 260px; object-fit: cover; display: none;">
+<img id="imgPreview" src="#" alt="Previsualización de la imagen"
+    style="width: 400px; height: 260px; object-fit: cover; display: none;">
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const previewImg = document.getElementById("previewImg");
@@ -76,6 +83,3 @@
 
 <button type="submit" class="btn btn-primary">Guardar</button>
 <a href="{{ route('enreviews.index') }}" class="btn btn-secondary">Cancelar</a>
-
-
-
